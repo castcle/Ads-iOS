@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Ads Manager View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AdsManagerViewController" id="Y6W-OH-hqX" customClass="AdsManagerViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k2J-II-9qf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="478"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZ0-Ep-rgB">
+                                <rect key="frame" x="20" y="498" width="280" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="B9q-X2-PDH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Boost Page"/>
+                                <connections>
+                                    <action selector="boostAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V1a-7m-5U2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aZ0-Ep-rgB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="GHL-oI-wJI"/>
+                            <constraint firstItem="k2J-II-9qf" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="cie-AA-T5d"/>
+                            <constraint firstItem="k2J-II-9qf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dsD-5h-TEx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aZ0-Ep-rgB" secondAttribute="trailing" constant="20" id="gwl-QU-z83"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aZ0-Ep-rgB" secondAttribute="bottom" constant="20" id="jKE-VD-l1P"/>
+                            <constraint firstItem="k2J-II-9qf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="u1P-Pr-pVF"/>
+                            <constraint firstItem="aZ0-Ep-rgB" firstAttribute="top" secondItem="k2J-II-9qf" secondAttribute="bottom" constant="20" id="xlb-da-jEa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="boostButton" destination="aZ0-Ep-rgB" id="T3p-V8-q4W"/>
+                        <outlet property="tableView" destination="k2J-II-9qf" id="1Ne-3D-1QV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="61.875" y="68.661971830985919"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

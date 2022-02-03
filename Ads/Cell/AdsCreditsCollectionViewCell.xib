@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AdsCreditsCollectionViewCell" customModule="Ads" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5J8-yM-9EI">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fP-ZU-diW">
+                                <rect key="frame" x="0.0" y="5" width="300" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads credit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJ2-pQ-YE6">
+                                        <rect key="frame" x="15" y="35" width="73.5" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.579" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eda-Zr-yV5">
+                                        <rect key="frame" x="203" y="32" width="57" height="26"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yOP-mo-VjU">
+                                        <rect key="frame" x="265" y="32.5" width="25" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="MEk-k4-WVa"/>
+                                            <constraint firstAttribute="height" constant="25" id="vSD-g8-HMB"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="TJ2-pQ-YE6" firstAttribute="leading" secondItem="8fP-ZU-diW" secondAttribute="leading" constant="15" id="5Uv-of-g4V"/>
+                                    <constraint firstItem="Eda-Zr-yV5" firstAttribute="centerY" secondItem="yOP-mo-VjU" secondAttribute="centerY" id="5sV-76-zZB"/>
+                                    <constraint firstItem="yOP-mo-VjU" firstAttribute="centerY" secondItem="8fP-ZU-diW" secondAttribute="centerY" id="77K-Eg-I0j"/>
+                                    <constraint firstAttribute="height" constant="90" id="RmT-v8-HZw"/>
+                                    <constraint firstItem="TJ2-pQ-YE6" firstAttribute="centerY" secondItem="8fP-ZU-diW" secondAttribute="centerY" id="X0f-sj-sdt"/>
+                                    <constraint firstItem="yOP-mo-VjU" firstAttribute="leading" secondItem="Eda-Zr-yV5" secondAttribute="trailing" constant="5" id="eYS-6O-PN7"/>
+                                    <constraint firstItem="Eda-Zr-yV5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TJ2-pQ-YE6" secondAttribute="trailing" constant="5" id="iCG-BU-KQn"/>
+                                    <constraint firstAttribute="trailing" secondItem="yOP-mo-VjU" secondAttribute="trailing" constant="10" id="n0s-Jy-qJG"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: Ad credits are valid for 14 days, or until 29/12/2021  Learn more" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CCt-Yg-4jO" customClass="ActiveLabel" customModule="ActiveLabel">
+                                <rect key="frame" x="0.0" y="110" width="300" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CCt-Yg-4jO" secondAttribute="trailing" id="7HZ-ja-orl"/>
+                            <constraint firstAttribute="trailing" secondItem="8fP-ZU-diW" secondAttribute="trailing" id="JBq-eW-pLL"/>
+                            <constraint firstItem="CCt-Yg-4jO" firstAttribute="top" secondItem="8fP-ZU-diW" secondAttribute="bottom" constant="15" id="Oe5-7V-j9B"/>
+                            <constraint firstItem="8fP-ZU-diW" firstAttribute="leading" secondItem="5J8-yM-9EI" secondAttribute="leading" id="d2r-iI-XRq"/>
+                            <constraint firstItem="8fP-ZU-diW" firstAttribute="top" secondItem="5J8-yM-9EI" secondAttribute="top" constant="5" id="uZG-Jl-CVQ"/>
+                            <constraint firstItem="CCt-Yg-4jO" firstAttribute="leading" secondItem="5J8-yM-9EI" secondAttribute="leading" id="ytO-8s-G7L"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="5J8-yM-9EI" secondAttribute="trailing" id="Ywp-25-m4G"/>
+                <constraint firstItem="5J8-yM-9EI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZBC-gd-Mcv"/>
+                <constraint firstItem="5J8-yM-9EI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bdZ-z0-BlQ"/>
+                <constraint firstAttribute="bottom" secondItem="5J8-yM-9EI" secondAttribute="bottom" id="pZz-Cx-Pw9"/>
+            </constraints>
+            <size key="customSize" width="300" height="180"/>
+            <connections>
+                <outlet property="balanceLabel" destination="Eda-Zr-yV5" id="dcF-1D-c6A"/>
+                <outlet property="balanceTitleLabel" destination="TJ2-pQ-YE6" id="xn6-jq-JOC"/>
+                <outlet property="balanceView" destination="8fP-ZU-diW" id="Eyh-A2-O1D"/>
+                <outlet property="coinImage" destination="yOP-mo-VjU" id="lLF-Jb-NgL"/>
+                <outlet property="noticLabel" destination="CCt-Yg-4jO" id="nEd-T4-rbv"/>
+            </connections>
+            <point key="canvasLocation" x="318.84057971014494" y="141.29464285714286"/>
+        </collectionViewCell>
+    </objects>
+    <designables>
+        <designable name="CCt-Yg-4jO">
+            <size key="intrinsicContentSize" width="391" height="14.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
