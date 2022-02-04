@@ -40,6 +40,7 @@ public struct AdsNibVars {
     public struct TableViewCell {
         public static let adsBudget = "AdsBudgetTableViewCell"
         public static let adsNoHistory = "AdsNoHistoryTableViewCell"
+        public static let adsHistory = "AdsHistoryTableViewCell"
     }
     
     // MARK: - CollectionViewCell

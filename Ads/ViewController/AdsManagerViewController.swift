@@ -39,6 +39,8 @@ class AdsManagerViewController: UIViewController {
         case history
     }
     
+    let isEmptyHistory = Bool.random()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
@@ -63,10 +65,7 @@ class AdsManagerViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsNoHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsNoHistory)
-//        self.tableView.register(UINib(nibName: SettingNibVars.TableViewCell.pageList, bundle: ConfigBundle.setting), forCellReuseIdentifier: SettingNibVars.TableViewCell.pageList)
-//        self.tableView.register(UINib(nibName: SettingNibVars.TableViewCell.setting, bundle: ConfigBundle.setting), forCellReuseIdentifier: SettingNibVars.TableViewCell.setting)
-//        self.tableView.register(UINib(nibName: SettingNibVars.TableViewCell.other, bundle: ConfigBundle.setting), forCellReuseIdentifier: SettingNibVars.TableViewCell.other)
-//        self.tableView.register(UINib(nibName: SettingNibVars.TableViewCell.social, bundle: ConfigBundle.setting), forCellReuseIdentifier: SettingNibVars.TableViewCell.social)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistory)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -85,7 +84,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
         case AdsManagerViewControllerSection.budget.rawValue:
             return 1
         case AdsManagerViewControllerSection.history.rawValue:
-            return 1
+            return (self.isEmptyHistory ? 1 : 10)
         default:
             return 0
         }
@@ -93,14 +92,14 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == AdsManagerViewControllerSection.history.rawValue {
-            return 15
+            return 50
         } else {
             return 0
         }
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 15))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
         let label = UILabel()
         label.frame = CGRect.init(x: 15, y: 0, width: headerView.frame.width - 30, height: headerView.frame.height)
         label.font = UIFont.asset(.regular, fontSize: .body)
@@ -113,6 +112,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
             label.text = ""
         }
         headerView.addSubview(label)
+        headerView.backgroundColor = UIColor.Asset.darkGraphiteBlue
         return headerView
     }
     
@@ -123,9 +123,15 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsBudgetTableViewCell()
         case AdsManagerViewControllerSection.history.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsNoHistory, for: indexPath as IndexPath) as? AdsNoHistoryTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            return cell ?? AdsNoHistoryTableViewCell()
+            if self.isEmptyHistory {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsNoHistory, for: indexPath as IndexPath) as? AdsNoHistoryTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? AdsNoHistoryTableViewCell()
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistory, for: indexPath as IndexPath) as? AdsHistoryTableViewCell
+                cell?.backgroundColor = UIColor.Asset.darkGray
+                return cell ?? AdsHistoryTableViewCell()
+            }
         default:
             return UITableViewCell()
         }
