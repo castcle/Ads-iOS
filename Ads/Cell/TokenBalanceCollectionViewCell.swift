@@ -74,8 +74,14 @@ class TokenBalanceCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func depositAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Error", message: "Waiting for implementation", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        Utility.currentViewController().present(alert, animated: true, completion: nil)
     }
     
     @IBAction func buyAction(_ sender: Any) {
+        let alert = UIAlertController(title: "Error", message: "Waiting for implementation", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        Utility.currentViewController().present(alert, animated: true, completion: nil)
     }
 }
