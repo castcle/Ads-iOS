@@ -15,6 +15,7 @@
 		B7167F8A27ACD6F400067DBD /* AdsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */; };
 		B7167F8B27ACD6F400067DBD /* AdsHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */; };
 		B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8D27ACDBF900067DBD /* Assets.xcassets */; };
+		B757347427BBB4F70048671A /* Component.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B757347327BBB4F70048671A /* Component.framework */; };
 		B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E5B1427ABC0E700B6CC14 /* AdsNibVars.swift */; };
 		B75E5B1727ABC0F800B6CC14 /* AdsOpener.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E5B1627ABC0F800B6CC14 /* AdsOpener.swift */; };
 		B75E5B1927ABC15D00B6CC14 /* Ads.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B75E5B1827ABC15D00B6CC14 /* Ads.storyboard */; };
@@ -44,6 +45,7 @@
 		B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B7167F8D27ACDBF900067DBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B757347327BBB4F70048671A /* Component.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Component.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B75E5B1427ABC0E700B6CC14 /* AdsNibVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsNibVars.swift; sourceTree = "<group>"; };
 		B75E5B1627ABC0F800B6CC14 /* AdsOpener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsOpener.swift; sourceTree = "<group>"; };
 		B75E5B1827ABC15D00B6CC14 /* Ads.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ads.storyboard; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			files = (
 				B7927DAE27A8009E005DB48A /* Networking.framework in Frameworks */,
 				B7927DAA27A80095005DB48A /* Core.framework in Frameworks */,
+				B757347427BBB4F70048671A /* Component.framework in Frameworks */,
 				A448B94132390A7E49832F9A /* Pods_Ads.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +184,7 @@
 		B7927DA827A80095005DB48A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B757347327BBB4F70048671A /* Component.framework */,
 				B7927DAD27A8009E005DB48A /* Networking.framework */,
 				B7927DA927A80095005DB48A /* Core.framework */,
 				BF18E0455D8BA910DA8901FE /* Pods_Ads.framework */,
