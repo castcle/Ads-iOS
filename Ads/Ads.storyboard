@@ -17,32 +17,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k2J-II-9qf">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="478"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k2J-II-9qf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZ0-Ep-rgB">
-                                <rect key="frame" x="20" y="498" width="280" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltg-wa-wvF">
+                                <rect key="frame" x="0.0" y="478" width="320" height="90"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aZ0-Ep-rgB">
+                                        <rect key="frame" x="20" y="20" width="280" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="B9q-X2-PDH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Boost Page"/>
+                                        <connections>
+                                            <action selector="boostAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V1a-7m-5U2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="B9q-X2-PDH"/>
+                                    <constraint firstAttribute="trailing" secondItem="aZ0-Ep-rgB" secondAttribute="trailing" constant="20" id="N3i-fe-QHB"/>
+                                    <constraint firstItem="aZ0-Ep-rgB" firstAttribute="centerY" secondItem="ltg-wa-wvF" secondAttribute="centerY" id="YQg-Bn-CDe"/>
+                                    <constraint firstItem="aZ0-Ep-rgB" firstAttribute="leading" secondItem="ltg-wa-wvF" secondAttribute="leading" constant="20" id="te0-ij-IQK"/>
+                                    <constraint firstAttribute="height" constant="90" id="zKR-b9-yiD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Boost Page"/>
-                                <connections>
-                                    <action selector="boostAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V1a-7m-5U2"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aZ0-Ep-rgB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="GHL-oI-wJI"/>
+                            <constraint firstItem="ltg-wa-wvF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="HLj-eF-cj1"/>
+                            <constraint firstItem="ltg-wa-wvF" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="Orf-e6-EQS"/>
                             <constraint firstItem="k2J-II-9qf" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="cie-AA-T5d"/>
                             <constraint firstItem="k2J-II-9qf" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="dsD-5h-TEx"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="aZ0-Ep-rgB" secondAttribute="trailing" constant="20" id="gwl-QU-z83"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="aZ0-Ep-rgB" secondAttribute="bottom" constant="20" id="jKE-VD-l1P"/>
+                            <constraint firstItem="k2J-II-9qf" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="mmf-3d-gyf"/>
                             <constraint firstItem="k2J-II-9qf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="u1P-Pr-pVF"/>
-                            <constraint firstItem="aZ0-Ep-rgB" firstAttribute="top" secondItem="k2J-II-9qf" secondAttribute="bottom" constant="20" id="xlb-da-jEa"/>
+                            <constraint firstItem="ltg-wa-wvF" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="xsL-Od-V8q"/>
                         </constraints>
                     </view>
                     <connections>

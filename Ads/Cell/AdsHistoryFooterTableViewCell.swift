@@ -19,34 +19,21 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  AdsNibVars.swift
+//  AdsHistoryFooterTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 3/2/2565 BE.
+//  Created by Castcle Co., Ltd. on 15/2/2565 BE.
 //
 
-public struct AdsNibVars {
-    // MARK: - View Controller
-    public struct ViewController {
-        public static let adsManager = "AdsManagerViewController"
+import UIKit
+
+class AdsHistoryFooterTableViewCell: UITableViewCell {
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
-    
-    // MARK: - View
-    public struct Storyboard {
-        public static let ads = "Ads"
-    }
-    
-    // MARK: - TableViewCell
-    public struct TableViewCell {
-        public static let adsBudget = "AdsBudgetTableViewCell"
-        public static let adsNoHistory = "AdsNoHistoryTableViewCell"
-        public static let adsHistory = "AdsHistoryTableViewCell"
-        public static let adsHistoryFooter = "AdsHistoryFooterTableViewCell"
-    }
-    
-    // MARK: - CollectionViewCell
-    public struct CollectionViewCell {
-        public static let tokenBalance = "TokenBalanceCollectionViewCell"
-        public static let adsCredits = "AdsCreditsCollectionViewCell"
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
 }

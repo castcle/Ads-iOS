@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A448B94132390A7E49832F9A /* Pods_Ads.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF18E0455D8BA910DA8901FE /* Pods_Ads.framework */; };
+		B70EDBDC27BB84C700EA53E2 /* AdsManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EDBDB27BB84C700EA53E2 /* AdsManagerViewModel.swift */; };
+		B70EDBDF27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70EDBDD27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift */; };
+		B70EDBE027BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70EDBDE27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib */; };
 		B7167F8A27ACD6F400067DBD /* AdsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */; };
 		B7167F8B27ACD6F400067DBD /* AdsHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */; };
 		B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8D27ACDBF900067DBD /* Assets.xcassets */; };
@@ -33,6 +36,9 @@
 		4C1B985F7808017DDCEB23BE /* Pods-Ads.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ads.release (production).xcconfig"; path = "Target Support Files/Pods-Ads/Pods-Ads.release (production).xcconfig"; sourceTree = "<group>"; };
 		85E70DFD60F0AF0C61A826AC /* Pods-Ads.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ads.debug (staging).xcconfig"; path = "Target Support Files/Pods-Ads/Pods-Ads.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		9E0C4B88FB45FDAADC5D7E9A /* Pods-Ads.debug (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ads.debug (development).xcconfig"; path = "Target Support Files/Pods-Ads/Pods-Ads.debug (development).xcconfig"; sourceTree = "<group>"; };
+		B70EDBDB27BB84C700EA53E2 /* AdsManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsManagerViewModel.swift; sourceTree = "<group>"; };
+		B70EDBDD27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsHistoryFooterTableViewCell.swift; sourceTree = "<group>"; };
+		B70EDBDE27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsHistoryFooterTableViewCell.xib; sourceTree = "<group>"; };
 		B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B7167F8D27ACDBF900067DBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,6 +91,14 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
+		B70EDBDA27BB84AA00EA53E2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B70EDBDB27BB84C700EA53E2 /* AdsManagerViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B7167F8C27ACDBE800067DBD /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +137,8 @@
 				B75E5B3027ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.xib */,
 				B75E5B3327ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.swift */,
 				B75E5B3427ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.xib */,
+				B70EDBDD27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift */,
+				B70EDBDE27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -151,6 +167,7 @@
 				B7927DA127A7FF42005DB48A /* Ads.h */,
 				B75E5B1827ABC15D00B6CC14 /* Ads.storyboard */,
 				B7167F8C27ACDBE800067DBD /* Assets */,
+				B70EDBDA27BB84AA00EA53E2 /* ViewModel */,
 				B75E5B1A27ABC17C00B6CC14 /* ViewController */,
 				B75E5B1C27ABC19100B6CC14 /* Cell */,
 				B75E5B1327ABC0CE00B6CC14 /* Utilities */,
@@ -241,6 +258,7 @@
 			files = (
 				B75E5B1927ABC15D00B6CC14 /* Ads.storyboard in Resources */,
 				B75E5B3627ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.xib in Resources */,
+				B70EDBE027BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib in Resources */,
 				B75E5B3227ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.xib in Resources */,
 				B75E5B2B27ABC89A00B6CC14 /* AdsNoHistoryTableViewCell.xib in Resources */,
 				B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */,
@@ -284,6 +302,8 @@
 				B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */,
 				B75E5B3127ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.swift in Sources */,
 				B75E5B2227ABC26400B6CC14 /* AdsBudgetTableViewCell.swift in Sources */,
+				B70EDBDC27BB84C700EA53E2 /* AdsManagerViewModel.swift in Sources */,
+				B70EDBDF27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift in Sources */,
 				B75E5B3527ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.swift in Sources */,
 				B75E5B1727ABC0F800B6CC14 /* AdsOpener.swift in Sources */,
 				B7167F8A27ACD6F400067DBD /* AdsHistoryTableViewCell.swift in Sources */,

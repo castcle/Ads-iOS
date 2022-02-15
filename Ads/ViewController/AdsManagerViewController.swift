@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Component
 import SwiftColor
 
 class AdsManagerViewController: UIViewController {
@@ -37,9 +38,10 @@ class AdsManagerViewController: UIViewController {
     enum AdsManagerViewControllerSection: Int, CaseIterable {
         case budget = 0
         case history
+        case footer
     }
     
-    let isEmptyHistory = Bool.random()
+    var viewModel = AdsManagerViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,29 @@ class AdsManagerViewController: UIViewController {
         self.boostButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.boostButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.boostButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
+        
+        self.tableView.cr.addHeadRefresh(animator: FastAnimator()) {
+            self.tableView.cr.resetNoMore()
+            self.tableView.isScrollEnabled = false
+            self.viewModel.adsLoaded = false
+            self.tableView.reloadData()
+            self.viewModel.reloadData()
+        }
+        
+        self.tableView.cr.addFootRefresh(animator: NormalFooterAnimator()) {
+            if self.viewModel.adsCanLoad {
+                self.viewModel.getAds()
+            } else {
+                self.tableView.cr.noticeNoMoreData()
+            }
+        }
+        
+        self.viewModel.didGetAdsFinish = {
+            self.tableView.cr.endHeaderRefresh()
+            self.tableView.cr.endLoadingMore()
+            self.tableView.isScrollEnabled = true
+            self.tableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,11 +86,14 @@ class AdsManagerViewController: UIViewController {
     }
     
     func configureTableView() {
+        self.tableView.isScrollEnabled = false
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsNoHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsNoHistory)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistory)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistoryFooter, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistoryFooter)
+        self.tableView.register(UINib(nibName: ComponentNibVars.TableViewCell.skeleton, bundle: ConfigBundle.component), forCellReuseIdentifier: ComponentNibVars.TableViewCell.skeleton)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -87,7 +115,13 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
         case AdsManagerViewControllerSection.budget.rawValue:
             return 1
         case AdsManagerViewControllerSection.history.rawValue:
-            return (self.isEmptyHistory ? 1 : 10)
+            if self.viewModel.adsLoaded {
+                return (self.viewModel.ads.isEmpty ? 1 : self.viewModel.ads.count)
+            } else {
+                return 1
+            }
+        case AdsManagerViewControllerSection.footer.rawValue:
+            return 1
         default:
             return 0
         }
@@ -126,15 +160,26 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsBudgetTableViewCell()
         case AdsManagerViewControllerSection.history.rawValue:
-            if self.isEmptyHistory {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsNoHistory, for: indexPath as IndexPath) as? AdsNoHistoryTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                return cell ?? AdsNoHistoryTableViewCell()
+            if self.viewModel.adsLoaded {
+                if self.viewModel.ads.isEmpty {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsNoHistory, for: indexPath as IndexPath) as? AdsNoHistoryTableViewCell
+                    cell?.backgroundColor = UIColor.clear
+                    return cell ?? AdsNoHistoryTableViewCell()
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistory, for: indexPath as IndexPath) as? AdsHistoryTableViewCell
+                    cell?.backgroundColor = UIColor.Asset.darkGray
+                    return cell ?? AdsHistoryTableViewCell()
+                }
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistory, for: indexPath as IndexPath) as? AdsHistoryTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.skeleton, for: indexPath as IndexPath) as? SkeletonFeedTableViewCell
                 cell?.backgroundColor = UIColor.Asset.darkGray
-                return cell ?? AdsHistoryTableViewCell()
+                cell?.configCell()
+                return cell ?? SkeletonFeedTableViewCell()
             }
+        case AdsManagerViewControllerSection.footer.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistoryFooter, for: indexPath as IndexPath) as? AdsHistoryFooterTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsHistoryFooterTableViewCell()
         default:
             return UITableViewCell()
         }
