@@ -66,6 +66,36 @@
             </objects>
             <point key="canvasLocation" x="61.875" y="68.661971830985919"/>
         </scene>
+        <!--Create Ads View Controller-->
+        <scene sceneID="nTk-pP-eZ5">
+            <objects>
+                <viewController storyboardIdentifier="CreateAdsViewController" id="I2H-tc-Gha" customClass="CreateAdsViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gTk-iN-EWO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eNW-yq-Xn3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pjB-2D-CFr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="eNW-yq-Xn3" firstAttribute="bottom" secondItem="gTk-iN-EWO" secondAttribute="bottom" id="78Y-EH-QKc"/>
+                            <constraint firstItem="eNW-yq-Xn3" firstAttribute="top" secondItem="pjB-2D-CFr" secondAttribute="top" id="FZ1-bZ-9gO"/>
+                            <constraint firstItem="eNW-yq-Xn3" firstAttribute="trailing" secondItem="pjB-2D-CFr" secondAttribute="trailing" id="PVj-eH-21f"/>
+                            <constraint firstItem="eNW-yq-Xn3" firstAttribute="leading" secondItem="pjB-2D-CFr" secondAttribute="leading" id="VX6-6a-nLQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="eNW-yq-Xn3" id="gXD-eQ-dY3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rdD-UQ-LFJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="774" y="69"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

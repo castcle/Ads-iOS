@@ -29,6 +29,7 @@ public struct AdsNibVars {
     // MARK: - View Controller
     public struct ViewController {
         public static let adsManager = "AdsManagerViewController"
+        public static let createAds = "CreateAdsViewController"
     }
     
     // MARK: - View
