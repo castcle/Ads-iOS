@@ -43,6 +43,13 @@ public struct AdsNibVars {
         public static let adsNoHistory = "AdsNoHistoryTableViewCell"
         public static let adsHistory = "AdsHistoryTableViewCell"
         public static let adsHistoryFooter = "AdsHistoryFooterTableViewCell"
+        public static let choosePage = "ChoosePageTableViewCell"
+        public static let chooseObjective = "ChooseObjectiveTableViewCell"
+        public static let campaignName = "CampaignNameTableViewCell"
+        public static let boostMessage = "BoostMessageTableViewCell"
+        public static let dailyBudget = "DailyBudgetTableViewCell"
+        public static let duration = "DurationTableViewCell"
+        public static let adPreview = "AdPreviewTableViewCell"
     }
     
     // MARK: - CollectionViewCell

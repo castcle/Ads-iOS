@@ -32,8 +32,10 @@ class CreateAdsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
+    var viewModel = CreateAdsViewModel()
     enum CreateAdsViewControllerSection: Int, CaseIterable {
         case budget = 0
+        case content
     }
     
     override func viewDidLoad() {
@@ -48,17 +50,20 @@ class CreateAdsViewController: UIViewController {
     }
     
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Boot page", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Boost page", leftBarButton: .back)
     }
     
     func configureTableView() {
-        self.tableView.isScrollEnabled = false
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
-//        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsNoHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsNoHistory)
-//        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistory)
-//        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistoryFooter, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistoryFooter)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.choosePage, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.choosePage)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.chooseObjective, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.chooseObjective)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.campaignName, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.campaignName)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.boostMessage, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.boostMessage)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBudget)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -73,14 +78,8 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
         switch section {
         case CreateAdsViewControllerSection.budget.rawValue:
             return 1
-//        case AdsManagerViewControllerSection.history.rawValue:
-//            if self.viewModel.adsLoaded {
-//                return (self.viewModel.ads.isEmpty ? 1 : self.viewModel.ads.count)
-//            } else {
-//                return 1
-//            }
-//        case AdsManagerViewControllerSection.footer.rawValue:
-//            return 1
+        case CreateAdsViewControllerSection.content.rawValue:
+            return self.viewModel.contents.count
         default:
             return 0
         }
@@ -92,6 +91,20 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsBudget, for: indexPath as IndexPath) as? AdsBudgetTableViewCell
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsBudgetTableViewCell()
+        case CreateAdsViewControllerSection.content.rawValue:
+            if self.viewModel.contents[indexPath.row] == .page {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(page: self.viewModel.page)
+                return cell ?? ChoosePageTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .objective {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                cell?.configCell(objective: self.viewModel.ads.objective)
+                return cell ?? ChooseObjectiveTableViewCell()
+            } else {
+                return UITableViewCell()
+            }
         default:
             return UITableViewCell()
         }
