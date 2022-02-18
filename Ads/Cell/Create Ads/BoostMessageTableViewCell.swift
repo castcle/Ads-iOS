@@ -29,18 +29,24 @@ import UIKit
 import Core
 import UITextView_Placeholder
 
-class BoostMessageTableViewCell: UITableViewCell {
+protocol BoostMessageTableViewCellDelegate {
+    func didEditChange(_ cell: BoostMessageTableViewCell, massage: String)
+}
+
+class BoostMessageTableViewCell: UITableViewCell, UITextViewDelegate {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var massageTextView: UITextView!
     @IBOutlet var massageView: UIView!
+    
+    var delegate: BoostMessageTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.titleLabel.textColor = UIColor.Asset.white
         self.massageView.custom(color: UIColor.Asset.darkGray, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.Asset.black)
-//        self.massageTextView.delegate = self
+        self.massageTextView.delegate = self
         self.massageTextView.font = UIFont.asset(.regular, fontSize: .overline)
         self.massageTextView.textColor = UIColor.Asset.white
         self.massageTextView.placeholder = "Type something to advertise your page"
@@ -48,5 +54,11 @@ class BoostMessageTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let massage = textView.text ?? ""
+        textView.text = massage.substringWithRange(range: 280)
+        self.delegate?.didEditChange(self, massage: massage.substringWithRange(range: 280))
     }
 }

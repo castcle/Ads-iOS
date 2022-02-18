@@ -27,23 +27,62 @@
 
 import UIKit
 import Core
+import Networking
+
+protocol AdPreviewTableViewCellDelegate {
+    func didConfirm(_ cell: AdPreviewTableViewCell)
+}
 
 class AdPreviewTableViewCell: UITableViewCell {
 
     @IBOutlet var adPreviewButton: UIButton!
     
+    var delegate: AdPreviewTableViewCellDelegate?
+    private var ads: Ads = Ads()
+    private var isValidated: Bool {
+        if self.ads.boostType == .page {
+            if self.ads.campaignName.isEmpty || self.ads.campaignMessage.isEmpty {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            if self.ads.campaignName.isEmpty {
+                return false
+            } else {
+                return true
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
-        self.adPreviewButton.setTitleColor(UIColor.Asset.white, for: .normal)
-        self.adPreviewButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
-        self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
+    func configCell(ads: Ads) {
+        self.ads = ads
+        self.updateButton()
+    }
+    
+    private func updateButton() {
+        self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
+        self.adPreviewButton.setTitleColor(UIColor.Asset.white, for: .normal)
+        if self.isValidated {
+            self.adPreviewButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
+            self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
+        } else {
+            self.adPreviewButton.setBackgroundImage(UIColor.Asset.gray.toImage(), for: .normal)
+            self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.Asset.gray)
+        }
+    }
+    
     @IBAction func adPreviewAction(_ sender: Any) {
+        if self.isValidated {
+            self.delegate?.didConfirm(self)
+        }
     }
 }

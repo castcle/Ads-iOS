@@ -28,8 +28,14 @@
 import UIKit
 import Core
 
+protocol DurationTableViewCellDelegate {
+    func didEditChange(_ cell: DurationTableViewCell, duration: Int)
+}
+
 class DurationTableViewCell: UITableViewCell {
 
+    var delegate: DurationTableViewCellDelegate?
+    
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet var minLabel: UILabel!
@@ -64,8 +70,10 @@ class DurationTableViewCell: UITableViewCell {
         let day = self.getDayFromValue(value: Int(value))
         if day == 0 {
             self.dayLabel.text = "1 Day"
+            self.delegate?.didEditChange(self, duration: 1)
         } else {
             self.dayLabel.text = "\(day) Day"
+            self.delegate?.didEditChange(self, duration: day)
         }
     }
 }

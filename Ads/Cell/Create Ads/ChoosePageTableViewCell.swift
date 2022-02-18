@@ -29,6 +29,10 @@ import UIKit
 import Core
 import Kingfisher
 
+protocol ChoosePageTableViewCellDelegate {
+    func didChoosePage(_ cell: ChoosePageTableViewCell)
+}
+
 class ChoosePageTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
@@ -39,6 +43,8 @@ class ChoosePageTableViewCell: UITableViewCell {
     @IBOutlet var nextImage: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
+    
+    var delegate: ChoosePageTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,5 +75,9 @@ class ChoosePageTableViewCell: UITableViewCell {
 //        } else {
             self.verifyImage.isHidden = true
 //        }
+    }
+    
+    @IBAction func choosePageAction(_ sender: Any) {
+        self.delegate?.didChoosePage(self)
     }
 }

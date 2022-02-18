@@ -64,22 +64,33 @@
                             <constraint firstAttribute="height" constant="1" id="fg0-do-D4p"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lhh-F9-eWJ">
+                        <rect key="frame" x="0.0" y="46.5" width="320" height="68.5"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="chooseObjectiveAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8bt-rq-PmA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="4et-a6-eAc" secondAttribute="bottom" constant="10" id="0kt-5e-Idy"/>
                     <constraint firstAttribute="trailing" secondItem="I2Q-uK-fg5" secondAttribute="trailing" constant="20" id="7GS-3o-7Mn"/>
                     <constraint firstAttribute="trailing" secondItem="KZC-SO-axj" secondAttribute="trailing" id="7mh-NM-jwW"/>
+                    <constraint firstItem="Lhh-F9-eWJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Aac-DG-L2s"/>
                     <constraint firstItem="zXF-Hz-l62" firstAttribute="leading" secondItem="rrG-j8-CiM" secondAttribute="trailing" constant="15" id="DBC-GS-Apg"/>
                     <constraint firstItem="9Z8-Wf-8V3" firstAttribute="centerY" secondItem="rrG-j8-CiM" secondAttribute="centerY" id="DyZ-w8-ZAf"/>
                     <constraint firstItem="KZC-SO-axj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IJA-QV-kK7"/>
                     <constraint firstItem="9Z8-Wf-8V3" firstAttribute="leading" secondItem="zXF-Hz-l62" secondAttribute="trailing" constant="10" id="JXa-MP-Bqy"/>
+                    <constraint firstItem="Lhh-F9-eWJ" firstAttribute="top" secondItem="KZC-SO-axj" secondAttribute="bottom" id="Na9-mE-FMI"/>
                     <constraint firstItem="4et-a6-eAc" firstAttribute="top" secondItem="P94-T2-joD" secondAttribute="bottom" constant="15" id="PqH-nj-54J"/>
                     <constraint firstItem="9Z8-Wf-8V3" firstAttribute="leading" secondItem="P94-T2-joD" secondAttribute="trailing" constant="10" id="Qzh-bx-bW8"/>
+                    <constraint firstAttribute="trailing" secondItem="Lhh-F9-eWJ" secondAttribute="trailing" id="Vf4-qI-Wxb"/>
                     <constraint firstItem="I2Q-uK-fg5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Wxq-Sq-vg3"/>
                     <constraint firstAttribute="trailing" secondItem="9Z8-Wf-8V3" secondAttribute="trailing" constant="20" id="Y3B-u7-0JK"/>
                     <constraint firstItem="I2Q-uK-fg5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Z6A-2E-eZf"/>
                     <constraint firstItem="P94-T2-joD" firstAttribute="top" secondItem="zXF-Hz-l62" secondAttribute="bottom" constant="2" id="ZwJ-DT-BEe"/>
                     <constraint firstItem="KZC-SO-axj" firstAttribute="top" secondItem="I2Q-uK-fg5" secondAttribute="bottom" constant="15" id="g2f-wH-s3Y"/>
+                    <constraint firstItem="4et-a6-eAc" firstAttribute="top" secondItem="Lhh-F9-eWJ" secondAttribute="bottom" id="iSi-ic-oc9"/>
                     <constraint firstItem="zXF-Hz-l62" firstAttribute="top" secondItem="rrG-j8-CiM" secondAttribute="top" id="ivi-cu-giL"/>
                     <constraint firstItem="rrG-j8-CiM" firstAttribute="top" secondItem="KZC-SO-axj" secondAttribute="bottom" constant="15" id="mYL-Sb-SP8"/>
                     <constraint firstAttribute="trailing" secondItem="4et-a6-eAc" secondAttribute="trailing" id="uwK-Qo-Iaq"/>

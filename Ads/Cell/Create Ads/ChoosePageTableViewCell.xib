@@ -71,16 +71,26 @@
                             <constraint firstAttribute="height" constant="1" id="9uH-qM-B7b"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jZZ-xs-qjf">
+                        <rect key="frame" x="0.0" y="46" width="320" height="70"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="choosePageAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IRN-NQ-1aA"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="eDE-rj-sT4" firstAttribute="top" secondItem="Mdn-JV-jRj" secondAttribute="bottom" constant="15" id="51s-1s-qMj"/>
                     <constraint firstItem="KwD-a3-aIL" firstAttribute="leading" secondItem="Mdn-JV-jRj" secondAttribute="trailing" constant="15" id="BaP-f6-YEe"/>
+                    <constraint firstItem="jZZ-xs-qjf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="D6g-PG-8Pq"/>
+                    <constraint firstItem="jZZ-xs-qjf" firstAttribute="top" secondItem="tYM-OO-b7Y" secondAttribute="bottom" id="Fu6-q5-ljK"/>
                     <constraint firstAttribute="trailing" secondItem="ffb-g2-fwu" secondAttribute="trailing" constant="20" id="NSU-L3-bvG"/>
                     <constraint firstAttribute="trailing" secondItem="eDE-rj-sT4" secondAttribute="trailing" id="OBG-KC-vmh"/>
                     <constraint firstItem="ffb-g2-fwu" firstAttribute="centerY" secondItem="Mdn-JV-jRj" secondAttribute="centerY" id="Sfc-0V-Yta"/>
                     <constraint firstItem="ffb-g2-fwu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6lk-Qz-nDK" secondAttribute="trailing" constant="10" id="Sqk-Pp-i72"/>
                     <constraint firstItem="ffb-g2-fwu" firstAttribute="leading" secondItem="5v2-Xb-x2t" secondAttribute="trailing" constant="10" id="WZY-18-AhT"/>
                     <constraint firstItem="eDE-rj-sT4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="b4k-sK-jFv"/>
+                    <constraint firstItem="eDE-rj-sT4" firstAttribute="top" secondItem="jZZ-xs-qjf" secondAttribute="bottom" id="dsf-n2-r7i"/>
                     <constraint firstItem="ViY-ez-ZAE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="fbM-aI-2Mb"/>
                     <constraint firstItem="tYM-OO-b7Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="h3I-hO-uxi"/>
                     <constraint firstAttribute="trailing" secondItem="tYM-OO-b7Y" secondAttribute="trailing" id="h7n-TK-RTS"/>
@@ -92,6 +102,7 @@
                     <constraint firstItem="6lk-Qz-nDK" firstAttribute="centerY" secondItem="KwD-a3-aIL" secondAttribute="centerY" id="mAq-G5-JPp"/>
                     <constraint firstItem="KwD-a3-aIL" firstAttribute="top" secondItem="Mdn-JV-jRj" secondAttribute="top" id="oAr-Ow-K07"/>
                     <constraint firstItem="6lk-Qz-nDK" firstAttribute="leading" secondItem="KwD-a3-aIL" secondAttribute="trailing" constant="5" id="pOU-kh-Wrb"/>
+                    <constraint firstAttribute="trailing" secondItem="jZZ-xs-qjf" secondAttribute="trailing" id="uHf-YH-ymX"/>
                     <constraint firstItem="5v2-Xb-x2t" firstAttribute="leading" secondItem="KwD-a3-aIL" secondAttribute="leading" id="wRu-aH-yjQ"/>
                     <constraint firstItem="5v2-Xb-x2t" firstAttribute="top" secondItem="KwD-a3-aIL" secondAttribute="bottom" constant="2" id="yAI-lE-FOZ"/>
                     <constraint firstItem="Mdn-JV-jRj" firstAttribute="top" secondItem="tYM-OO-b7Y" secondAttribute="bottom" constant="15" id="zZ5-5a-fJH"/>
@@ -108,7 +119,7 @@
                 <outlet property="titleLabel" destination="ViY-ez-ZAE" id="DYJ-MN-kbT"/>
                 <outlet property="verifyImage" destination="6lk-Qz-nDK" id="mcC-nk-gsW"/>
             </connections>
-            <point key="canvasLocation" x="131.8840579710145" y="121.20535714285714"/>
+            <point key="canvasLocation" x="131.8840579710145" y="120.87053571428571"/>
         </tableViewCell>
     </objects>
     <resources>

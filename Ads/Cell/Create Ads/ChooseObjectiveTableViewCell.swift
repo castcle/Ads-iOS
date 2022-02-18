@@ -29,6 +29,10 @@ import UIKit
 import Core
 import Networking
 
+protocol ChooseObjectiveTableViewCellDelegate {
+    func didChooseObjective(_ cell: ChooseObjectiveTableViewCell)
+}
+
 class ChooseObjectiveTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
@@ -38,6 +42,8 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
     @IBOutlet var nextImage: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
+    
+    var delegate: ChooseObjectiveTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,5 +66,9 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
         self.typeImage.image = objective.image
         self.typeLabel.text = objective.rawValue.capitalized
         self.detailLabel.text = objective.detail
+    }
+    
+    @IBAction func chooseObjectiveAction(_ sender: Any) {
+        self.delegate?.didChooseObjective(self)
     }
 }

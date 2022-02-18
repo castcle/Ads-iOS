@@ -28,6 +28,10 @@
 import UIKit
 import Core
 
+protocol DailyBudgetTableViewCellDelegate {
+    func didEditChange(_ cell: DailyBudgetTableViewCell, budget: Int)
+}
+
 class DailyBudgetTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
@@ -37,6 +41,8 @@ class DailyBudgetTableViewCell: UITableViewCell {
     @IBOutlet var maxLabel: UILabel!
     @IBOutlet var slider: UISlider!
     @IBOutlet var editIcon: UIImageView!
+    
+    var delegate: DailyBudgetTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,8 +70,10 @@ class DailyBudgetTableViewCell: UITableViewCell {
         let value = Int(self.slider.value * 100)
         if value == 0 {
             self.amountLabel.text = "$1"
+            self.delegate?.didEditChange(self, budget: 1)
         } else {
             self.amountLabel.text = "$\(Int(value))"
+            self.delegate?.didEditChange(self, budget: Int(value))
         }
     }
 }

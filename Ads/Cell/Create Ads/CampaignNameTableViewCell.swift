@@ -28,11 +28,17 @@
 import UIKit
 import Core
 
+protocol CampaignNameTableViewCellDelegate {
+    func didEditChange(_ cell: CampaignNameTableViewCell, campaignName: String)
+}
+
 class CampaignNameTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var nameView: UIView!
     @IBOutlet var nameTextField: UITextField!
+    
+    var delegate: CampaignNameTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,9 +47,16 @@ class CampaignNameTableViewCell: UITableViewCell {
         self.nameTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.nameTextField.textColor = UIColor.Asset.white
         self.nameView.capsule(color: UIColor.Asset.darkGray)
+        self.nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        let campaignName = textField.text ?? ""
+        textField.text = campaignName.substringWithRange(range: 50)
+        self.delegate?.didEditChange(self, campaignName: campaignName.substringWithRange(range: 50))
     }
 }

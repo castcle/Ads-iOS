@@ -54,6 +54,11 @@ class CreateAdsViewController: UIViewController {
         self.customNavigationBar(.primary, title: "Boost page", leftBarButton: .back)
     }
     
+    private func reloadButton() {
+        let indexPath = IndexPath(row: (self.viewModel.contents.count - 1), section: CreateAdsViewControllerSection.content.rawValue)
+        self.tableView.reloadRows(at: [indexPath], with: .none)
+    }
+    
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -96,32 +101,40 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             if self.viewModel.contents[indexPath.row] == .page {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 cell?.configCell(page: self.viewModel.page)
                 return cell ?? ChoosePageTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .objective {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 cell?.configCell(objective: self.viewModel.ads.objective)
                 return cell ?? ChooseObjectiveTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .campaignName {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 return cell ?? CampaignNameTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .campaignMessage {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.boostMessage, for: indexPath as IndexPath) as? BoostMessageTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 return cell ?? BoostMessageTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .dailyBudget {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBudget, for: indexPath as IndexPath) as? DailyBudgetTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 return cell ?? DailyBudgetTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .duration {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.duration, for: indexPath as IndexPath) as? DurationTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.delegate = self
                 return cell ?? DurationTableViewCell()
             } else if self.viewModel.contents[indexPath.row] == .adPreview {
                 let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
                 cell?.backgroundColor = UIColor.clear
+                cell?.configCell(ads: self.viewModel.ads)
+                cell?.delegate = self
                 return cell ?? AdPreviewTableViewCell()
             } else {
                 return UITableViewCell()
@@ -129,5 +142,49 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+    }
+}
+
+extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
+    func didChoosePage(_ cell: ChoosePageTableViewCell) {
+        //
+    }
+}
+
+extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
+    func didChooseObjective(_ cell: ChooseObjectiveTableViewCell) {
+        //
+    }
+}
+
+extension CreateAdsViewController: CampaignNameTableViewCellDelegate {
+    func didEditChange(_ cell: CampaignNameTableViewCell, campaignName: String) {
+        self.viewModel.ads.campaignName = campaignName
+        self.reloadButton()
+    }
+}
+
+extension CreateAdsViewController: BoostMessageTableViewCellDelegate {
+    func didEditChange(_ cell: BoostMessageTableViewCell, massage: String) {
+        self.viewModel.ads.campaignMessage = massage
+        self.reloadButton()
+    }
+}
+
+extension CreateAdsViewController: DailyBudgetTableViewCellDelegate {
+    func didEditChange(_ cell: DailyBudgetTableViewCell, budget: Int) {
+        self.viewModel.ads.dailyBudget = Double(budget)
+    }
+}
+
+extension CreateAdsViewController: DurationTableViewCellDelegate {
+    func didEditChange(_ cell: DurationTableViewCell, duration: Int) {
+        self.viewModel.ads.duration = duration
+    }
+}
+
+extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
+    func didConfirm(_ cell: AdPreviewTableViewCell) {
+        //
     }
 }
