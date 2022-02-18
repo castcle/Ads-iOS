@@ -26,14 +26,24 @@
 //
 
 import UIKit
+import Core
 
 class AdPreviewTableViewCell: UITableViewCell {
 
+    @IBOutlet var adPreviewButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
+        self.adPreviewButton.setTitleColor(UIColor.Asset.white, for: .normal)
+        self.adPreviewButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
+        self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @IBAction func adPreviewAction(_ sender: Any) {
     }
 }

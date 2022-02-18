@@ -26,14 +26,46 @@
 //
 
 import UIKit
+import Core
 
 class DailyBudgetTableViewCell: UITableViewCell {
 
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var amountLabel: UILabel!
+    @IBOutlet var noteLabel: UILabel!
+    @IBOutlet var minLabel: UILabel!
+    @IBOutlet var maxLabel: UILabel!
+    @IBOutlet var slider: UISlider!
+    @IBOutlet var editIcon: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.titleLabel.textColor = UIColor.Asset.white
+        self.amountLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.amountLabel.textColor = UIColor.Asset.white
+        self.noteLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.noteLabel.textColor = UIColor.Asset.white
+        self.minLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.minLabel.textColor = UIColor.Asset.white
+        self.maxLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.maxLabel.textColor = UIColor.Asset.white
+        self.slider.thumbTintColor = UIColor.Asset.lightBlue
+        self.slider.minimumTrackTintColor = UIColor.Asset.lightBlue
+        self.slider.value = 0.1
+        self.editIcon.image = UIImage.init(icon: .castcle(.editNew), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @IBAction func sliderValueChange(_ sender: Any) {
+        let value = Int(self.slider.value * 100)
+        if value == 0 {
+            self.amountLabel.text = "$1"
+        } else {
+            self.amountLabel.text = "$\(Int(value))"
+        }
     }
 }

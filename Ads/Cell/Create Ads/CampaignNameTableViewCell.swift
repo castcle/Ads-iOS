@@ -26,15 +26,24 @@
 //
 
 import UIKit
+import Core
 
 class CampaignNameTableViewCell: UITableViewCell {
 
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var nameView: UIView!
+    @IBOutlet var nameTextField: UITextField!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.titleLabel.textColor = UIColor.Asset.white
+        self.nameTextField.font = UIFont.asset(.regular, fontSize: .overline)
+        self.nameTextField.textColor = UIColor.Asset.white
+        self.nameView.capsule(color: UIColor.Asset.darkGray)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

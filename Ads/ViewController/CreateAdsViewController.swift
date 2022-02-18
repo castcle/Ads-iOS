@@ -46,6 +46,7 @@ class CreateAdsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.hideKeyboardWhenTapped()
         self.setupNavBar()
     }
     
@@ -102,6 +103,26 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
                 cell?.backgroundColor = UIColor.clear
                 cell?.configCell(objective: self.viewModel.ads.objective)
                 return cell ?? ChooseObjectiveTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .campaignName {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? CampaignNameTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .campaignMessage {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.boostMessage, for: indexPath as IndexPath) as? BoostMessageTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? BoostMessageTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .dailyBudget {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBudget, for: indexPath as IndexPath) as? DailyBudgetTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? DailyBudgetTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .duration {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.duration, for: indexPath as IndexPath) as? DurationTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? DurationTableViewCell()
+            } else if self.viewModel.contents[indexPath.row] == .adPreview {
+                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
+                cell?.backgroundColor = UIColor.clear
+                return cell ?? AdPreviewTableViewCell()
             } else {
                 return UITableViewCell()
             }
