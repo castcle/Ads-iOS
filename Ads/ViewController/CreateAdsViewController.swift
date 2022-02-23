@@ -34,6 +34,7 @@ class CreateAdsViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     var viewModel = CreateAdsViewModel()
+    
     enum CreateAdsViewControllerSection: Int, CaseIterable {
         case budget = 0
         case content
@@ -190,7 +191,7 @@ extension CreateAdsViewController: DurationTableViewCellDelegate {
 
 extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
-        //
+        self.navigationController?.pushViewController(AdsOpener.open(.adsPreview(AdsPreviewViewModel(ads: self.viewModel.ads, page: self.viewModel.page))), animated: true)
     }
 }
 

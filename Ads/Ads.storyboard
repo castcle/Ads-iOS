@@ -156,6 +156,36 @@
             </objects>
             <point key="canvasLocation" x="2169" y="69"/>
         </scene>
+        <!--Ads Preview View Controller-->
+        <scene sceneID="mHb-ju-o2f">
+            <objects>
+                <viewController storyboardIdentifier="AdsPreviewViewController" id="wzY-qV-I5U" customClass="AdsPreviewViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PCo-Rg-b40">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uHB-pR-fPz">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Jaw-IZ-sO3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uHB-pR-fPz" firstAttribute="top" secondItem="Jaw-IZ-sO3" secondAttribute="top" id="9Bj-2L-PSy"/>
+                            <constraint firstItem="uHB-pR-fPz" firstAttribute="bottom" secondItem="PCo-Rg-b40" secondAttribute="bottom" id="Pna-XL-79d"/>
+                            <constraint firstItem="uHB-pR-fPz" firstAttribute="leading" secondItem="Jaw-IZ-sO3" secondAttribute="leading" id="WxH-cF-dLe"/>
+                            <constraint firstItem="uHB-pR-fPz" firstAttribute="trailing" secondItem="Jaw-IZ-sO3" secondAttribute="trailing" id="crk-js-q5e"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="uHB-pR-fPz" id="vQZ-7I-E8g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S5n-vj-RTo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2871" y="69"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

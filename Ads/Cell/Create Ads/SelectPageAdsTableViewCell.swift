@@ -58,10 +58,10 @@ class SelectPageAdsTableViewCell: UITableViewCell {
         self.userAvatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.userDisplayNameLabel.text = page.displayName
         self.userIdLabel.text = "@\(page.castcleId)"
-//        if self.user.verified.official {
-//            self.userVerifyImage.isHidden = false
-//        } else {
+        if page.official {
+            self.userVerifyImage.isHidden = false
+        } else {
             self.userVerifyImage.isHidden = true
-//        }
+        }
     }
 }

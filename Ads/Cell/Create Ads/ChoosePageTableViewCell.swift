@@ -70,11 +70,11 @@ class ChoosePageTableViewCell: UITableViewCell {
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.displayNameLabel.text = page.displayName
         self.castcleIdLabel.text = "@\(page.castcleId)"
-//        if page.verified.official {
-//            self.verifyImage.isHidden = false
-//        } else {
+        if page.official {
+            self.verifyImage.isHidden = false
+        } else {
             self.verifyImage.isHidden = true
-//        }
+        }
     }
     
     @IBAction func choosePageAction(_ sender: Any) {

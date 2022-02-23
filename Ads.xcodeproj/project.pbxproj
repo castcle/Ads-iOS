@@ -49,6 +49,10 @@
 		B771843627C619B700A17C1D /* SelectPageAdsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */; };
 		B771843927C61EF300A17C1D /* SelectObjectiveTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */; };
 		B771843A27C61EF300A17C1D /* SelectObjectiveTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B771843827C61EF300A17C1D /* SelectObjectiveTableViewCell.xib */; };
+		B771843C27C62A1D00A17C1D /* AdsPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771843B27C62A1D00A17C1D /* AdsPreviewViewController.swift */; };
+		B771843E27C62A8D00A17C1D /* AdsPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771843D27C62A8D00A17C1D /* AdsPreviewViewModel.swift */; };
+		B771844127C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771843F27C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift */; };
+		B771844227C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B771844027C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib */; };
 		B7927DA227A7FF42005DB48A /* Ads.h in Headers */ = {isa = PBXBuildFile; fileRef = B7927DA127A7FF42005DB48A /* Ads.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7927DAA27A80095005DB48A /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7927DA927A80095005DB48A /* Core.framework */; };
 		B7927DAE27A8009E005DB48A /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7927DAD27A8009E005DB48A /* Networking.framework */; };
@@ -100,6 +104,10 @@
 		B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPageAdsTableViewCell.xib; sourceTree = "<group>"; };
 		B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectObjectiveTableViewCell.swift; sourceTree = "<group>"; };
 		B771843827C61EF300A17C1D /* SelectObjectiveTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectObjectiveTableViewCell.xib; sourceTree = "<group>"; };
+		B771843B27C62A1D00A17C1D /* AdsPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPreviewViewController.swift; sourceTree = "<group>"; };
+		B771843D27C62A8D00A17C1D /* AdsPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPreviewViewModel.swift; sourceTree = "<group>"; };
+		B771843F27C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButtonTableViewCell.swift; sourceTree = "<group>"; };
+		B771844027C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmButtonTableViewCell.xib; sourceTree = "<group>"; };
 		B7927D9E27A7FF42005DB48A /* Ads.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Ads.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7927DA127A7FF42005DB48A /* Ads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ads.h; sourceTree = "<group>"; };
 		B7927DA927A80095005DB48A /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +151,7 @@
 			children = (
 				B70EDBDB27BB84C700EA53E2 /* AdsManagerViewModel.swift */,
 				B76DD15B27BE38A70037A787 /* CreateAdsViewModel.swift */,
+				B771843D27C62A8D00A17C1D /* AdsPreviewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -171,6 +180,7 @@
 				B70EDBE127BBA4AA00EA53E2 /* CreateAdsViewController.swift */,
 				B771842F27C617D600A17C1D /* SelectAdsPageViewController.swift */,
 				B771843127C617FB00A17C1D /* SelectAdsObjectiveViewController.swift */,
+				B771843B27C62A1D00A17C1D /* AdsPreviewViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -216,6 +226,8 @@
 				B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */,
 				B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */,
 				B771843827C61EF300A17C1D /* SelectObjectiveTableViewCell.xib */,
+				B771843F27C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift */,
+				B771844027C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib */,
 			);
 			path = "Create Ads";
 			sourceTree = "<group>";
@@ -350,6 +362,7 @@
 				B771843A27C61EF300A17C1D /* SelectObjectiveTableViewCell.xib in Resources */,
 				B76DD15227BE37BE0037A787 /* DailyBudgetTableViewCell.xib in Resources */,
 				B7167F8B27ACD6F400067DBD /* AdsHistoryTableViewCell.xib in Resources */,
+				B771844227C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib in Resources */,
 				B76DD14227BE34610037A787 /* ChoosePageTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,15 +404,18 @@
 				B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */,
 				B76DD14127BE34610037A787 /* ChoosePageTableViewCell.swift in Sources */,
 				B771843527C619B700A17C1D /* SelectPageAdsTableViewCell.swift in Sources */,
+				B771843E27C62A8D00A17C1D /* AdsPreviewViewModel.swift in Sources */,
 				B771843027C617D600A17C1D /* SelectAdsPageViewController.swift in Sources */,
 				B75E5B3127ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.swift in Sources */,
 				B75E5B2227ABC26400B6CC14 /* AdsBudgetTableViewCell.swift in Sources */,
 				B76DD15C27BE38A70037A787 /* CreateAdsViewModel.swift in Sources */,
 				B76DD14927BE34B50037A787 /* CampaignNameTableViewCell.swift in Sources */,
+				B771843C27C62A1D00A17C1D /* AdsPreviewViewController.swift in Sources */,
 				B70EDBDC27BB84C700EA53E2 /* AdsManagerViewModel.swift in Sources */,
 				B76DD14527BE347B0037A787 /* ChooseObjectiveTableViewCell.swift in Sources */,
 				B771843227C617FB00A17C1D /* SelectAdsObjectiveViewController.swift in Sources */,
 				B70EDBE227BBA4AB00EA53E2 /* CreateAdsViewController.swift in Sources */,
+				B771844127C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift in Sources */,
 				B70EDBDF27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift in Sources */,
 				B76DD15127BE37BE0037A787 /* DailyBudgetTableViewCell.swift in Sources */,
 				B75E5B3527ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.swift in Sources */,

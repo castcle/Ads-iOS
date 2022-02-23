@@ -32,6 +32,7 @@ public struct AdsNibVars {
         public static let createAds = "CreateAdsViewController"
         public static let selectAdsPage = "SelectAdsPageViewController"
         public static let selectAdsObjective = "SelectAdsObjectiveViewController"
+        public static let adsPreview = "AdsPreviewViewController"
     }
     
     // MARK: - View
@@ -54,6 +55,7 @@ public struct AdsNibVars {
         public static let adPreview = "AdPreviewTableViewCell"
         public static let selectPageAds = "SelectPageAdsTableViewCell"
         public static let selectObjective = "SelectObjectiveTableViewCell"
+        public static let confirmButton = "ConfirmButtonTableViewCell"
     }
     
     // MARK: - CollectionViewCell
