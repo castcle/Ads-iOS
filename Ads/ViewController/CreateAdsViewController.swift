@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 class CreateAdsViewController: UIViewController {
 
@@ -147,13 +148,17 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
     func didChoosePage(_ cell: ChoosePageTableViewCell) {
-        //
+        let vc = AdsOpener.open(.selectAdsPage) as? SelectAdsPageViewController
+        vc?.delegate = self
+        self.navigationController?.pushViewController(vc ?? SelectAdsPageViewController(), animated: true)
     }
 }
 
 extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
     func didChooseObjective(_ cell: ChooseObjectiveTableViewCell) {
-        //
+        let vc = AdsOpener.open(.selectAdsObjective) as? SelectAdsObjectiveViewController
+        vc?.delegate = self
+        self.navigationController?.pushViewController(vc ?? SelectAdsObjectiveViewController(), animated: true)
     }
 }
 
@@ -186,5 +191,19 @@ extension CreateAdsViewController: DurationTableViewCellDelegate {
 extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
         //
+    }
+}
+
+extension CreateAdsViewController: SelectAdsPageViewControllerDelegate {
+    func didSelectPage(_ view: SelectAdsPageViewController, page: Page) {
+        self.viewModel.page = page
+        self.tableView.reloadData()
+    }
+}
+
+extension CreateAdsViewController: SelectAdsObjectiveViewControllerDelegate {
+    func didSelectPage(_ view: SelectAdsObjectiveViewController, objective: AdsObjective) {
+        self.viewModel.ads.objective = objective
+        self.tableView.reloadData()
     }
 }

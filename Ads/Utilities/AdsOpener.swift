@@ -31,6 +31,8 @@ import Core
 public enum AdsScene {
     case adsManager
     case createAds
+    case selectAdsPage
+    case selectAdsObjective
 }
 
 public struct AdsOpener {
@@ -43,6 +45,14 @@ public struct AdsOpener {
         case .createAds:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let vc = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.createAds)
+            return vc
+        case .selectAdsPage:
+            let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
+            let vc = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPage)
+            return vc
+        case .selectAdsObjective:
+            let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
+            let vc = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective)
             return vc
         }
     }

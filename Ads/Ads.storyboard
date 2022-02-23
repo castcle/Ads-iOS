@@ -96,6 +96,66 @@
             </objects>
             <point key="canvasLocation" x="774" y="69"/>
         </scene>
+        <!--Select Ads Page View Controller-->
+        <scene sceneID="JOe-0e-kFi">
+            <objects>
+                <viewController storyboardIdentifier="SelectAdsPageViewController" id="NgU-jd-QzX" customClass="SelectAdsPageViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4qt-JQ-k2g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GWH-GN-3MW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OAJ-pV-Hb5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GWH-GN-3MW" firstAttribute="top" secondItem="OAJ-pV-Hb5" secondAttribute="top" id="0MZ-Z2-gGj"/>
+                            <constraint firstItem="GWH-GN-3MW" firstAttribute="leading" secondItem="OAJ-pV-Hb5" secondAttribute="leading" id="UJH-Rt-2VR"/>
+                            <constraint firstItem="GWH-GN-3MW" firstAttribute="bottom" secondItem="4qt-JQ-k2g" secondAttribute="bottom" id="bLw-X2-64U"/>
+                            <constraint firstItem="GWH-GN-3MW" firstAttribute="trailing" secondItem="OAJ-pV-Hb5" secondAttribute="trailing" id="iYO-vL-eUP"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="GWH-GN-3MW" id="Rv7-aZ-cvZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cUK-Hu-7nG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1478" y="69"/>
+        </scene>
+        <!--Select Ads Objective View Controller-->
+        <scene sceneID="mJJ-kw-q4Z">
+            <objects>
+                <viewController storyboardIdentifier="SelectAdsObjectiveViewController" id="eqx-mW-lqM" customClass="SelectAdsObjectiveViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s6P-GZ-JuQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hTL-vH-8qC">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Crn-Yo-zzq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hTL-vH-8qC" firstAttribute="trailing" secondItem="Crn-Yo-zzq" secondAttribute="trailing" id="BjL-RZ-6Dk"/>
+                            <constraint firstItem="hTL-vH-8qC" firstAttribute="leading" secondItem="Crn-Yo-zzq" secondAttribute="leading" id="Cv2-ty-mU1"/>
+                            <constraint firstItem="hTL-vH-8qC" firstAttribute="bottom" secondItem="s6P-GZ-JuQ" secondAttribute="bottom" id="fPs-Bk-NFD"/>
+                            <constraint firstItem="hTL-vH-8qC" firstAttribute="top" secondItem="Crn-Yo-zzq" secondAttribute="top" id="k8j-BO-GU9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="hTL-vH-8qC" id="37h-CA-RVs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rbO-wc-nP2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2169" y="69"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

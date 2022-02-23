@@ -30,6 +30,8 @@ public struct AdsNibVars {
     public struct ViewController {
         public static let adsManager = "AdsManagerViewController"
         public static let createAds = "CreateAdsViewController"
+        public static let selectAdsPage = "SelectAdsPageViewController"
+        public static let selectAdsObjective = "SelectAdsObjectiveViewController"
     }
     
     // MARK: - View
@@ -50,6 +52,8 @@ public struct AdsNibVars {
         public static let dailyBudget = "DailyBudgetTableViewCell"
         public static let duration = "DurationTableViewCell"
         public static let adPreview = "AdPreviewTableViewCell"
+        public static let selectPageAds = "SelectPageAdsTableViewCell"
+        public static let selectObjective = "SelectObjectiveTableViewCell"
     }
     
     // MARK: - CollectionViewCell
