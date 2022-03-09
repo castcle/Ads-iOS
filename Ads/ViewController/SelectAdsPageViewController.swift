@@ -46,7 +46,7 @@ class SelectAdsPageViewController: UIViewController {
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
         self.setupNavBar()
-        self.pages = self.realm.objects(Page.self)
+        self.pages = self.realm.objects(Page.self).sorted(byKeyPath: "id")
     }
     
     func setupNavBar() {
