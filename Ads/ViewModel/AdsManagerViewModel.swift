@@ -37,9 +37,9 @@ public final class AdsManagerViewModel {
     var meta: Meta = Meta()
     var adsLoaded: Bool = false
     var adsCanLoad: Bool = true
-    var stage: Stage = .none
+    var state: State = .none
     
-    enum Stage {
+    enum State {
         case getAds
         case none
     }
@@ -50,7 +50,7 @@ public final class AdsManagerViewModel {
     }
     
     func getAds() {
-        self.stage = .getAds
+        self.state = .getAds
         self.adsRepository.getAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
             if success {
                 do {
@@ -93,7 +93,7 @@ public final class AdsManagerViewModel {
 
 extension AdsManagerViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        if self.stage == .getAds {
+        if self.state == .getAds {
             self.getAds()
         }
     }
