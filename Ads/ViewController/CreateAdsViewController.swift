@@ -35,11 +35,6 @@ class CreateAdsViewController: UIViewController {
     
     var viewModel = CreateAdsViewModel()
     
-    enum CreateAdsViewControllerSection: Int, CaseIterable {
-        case budget = 0
-        case content
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
@@ -57,14 +52,13 @@ class CreateAdsViewController: UIViewController {
     }
     
     private func reloadButton() {
-        let indexPath = IndexPath(row: (self.viewModel.contents.count - 1), section: CreateAdsViewControllerSection.content.rawValue)
+        let indexPath = IndexPath(row: self.viewModel.contents.count, section: 0)
         self.tableView.reloadRows(at: [indexPath], with: .none)
     }
     
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.choosePage, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.choosePage)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.chooseObjective, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.chooseObjective)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.campaignName, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.campaignName)
@@ -79,69 +73,53 @@ class CreateAdsViewController: UIViewController {
 
 extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return CreateAdsViewControllerSection.allCases.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case CreateAdsViewControllerSection.budget.rawValue:
-            return 1
-        case CreateAdsViewControllerSection.content.rawValue:
-            return self.viewModel.contents.count
-        default:
-            return 0
-        }
+        return self.viewModel.contents.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case CreateAdsViewControllerSection.budget.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsBudget, for: indexPath as IndexPath) as? AdsBudgetTableViewCell
+        if self.viewModel.contents[indexPath.row] == .page {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
             cell?.backgroundColor = UIColor.clear
-            return cell ?? AdsBudgetTableViewCell()
-        case CreateAdsViewControllerSection.content.rawValue:
-            if self.viewModel.contents[indexPath.row] == .page {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                cell?.configCell(page: self.viewModel.page)
-                return cell ?? ChoosePageTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .objective {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                cell?.configCell(objective: self.viewModel.ads.objective)
-                return cell ?? ChooseObjectiveTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .campaignName {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                return cell ?? CampaignNameTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .campaignMessage {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.boostMessage, for: indexPath as IndexPath) as? BoostMessageTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                return cell ?? BoostMessageTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .dailyBudget {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBudget, for: indexPath as IndexPath) as? DailyBudgetTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                return cell ?? DailyBudgetTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .duration {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.duration, for: indexPath as IndexPath) as? DurationTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.delegate = self
-                return cell ?? DurationTableViewCell()
-            } else if self.viewModel.contents[indexPath.row] == .adPreview {
-                let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
-                cell?.backgroundColor = UIColor.clear
-                cell?.configCell(ads: self.viewModel.ads)
-                cell?.delegate = self
-                return cell ?? AdPreviewTableViewCell()
-            } else {
-                return UITableViewCell()
-            }
-        default:
+            cell?.delegate = self
+            cell?.configCell(page: self.viewModel.page)
+            return cell ?? ChoosePageTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .objective {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            cell?.configCell(objective: self.viewModel.ads.objective)
+            return cell ?? ChooseObjectiveTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .campaignName {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            return cell ?? CampaignNameTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .campaignMessage {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.boostMessage, for: indexPath as IndexPath) as? BoostMessageTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            return cell ?? BoostMessageTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .dailyBudget {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBudget, for: indexPath as IndexPath) as? DailyBudgetTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            return cell ?? DailyBudgetTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .duration {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.duration, for: indexPath as IndexPath) as? DurationTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            return cell ?? DurationTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .adPreview {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.delegate = self
+            return cell ?? AdPreviewTableViewCell()
+        } else {
             return UITableViewCell()
         }
     }
