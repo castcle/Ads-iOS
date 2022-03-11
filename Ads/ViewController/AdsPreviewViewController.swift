@@ -48,7 +48,7 @@ class AdsPreviewViewController: UIViewController {
     }
     
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Ad preview", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Ad Preview", leftBarButton: .back)
     }
     
     func configureTableView() {

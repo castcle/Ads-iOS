@@ -48,7 +48,7 @@ class CreateAdsViewController: UIViewController {
     }
     
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Boost page", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Boost Page", leftBarButton: .back)
     }
     
     private func reloadButton() {
@@ -66,6 +66,7 @@ class CreateAdsViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -113,6 +114,12 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
             return cell ?? DurationTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .paymentMethod {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            cell?.configCell(adsPaymentType: self.viewModel.ads.payment)
+            return cell ?? AdsPaymentMethodTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .adPreview {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
             cell?.backgroundColor = UIColor.clear
@@ -167,6 +174,14 @@ extension CreateAdsViewController: DurationTableViewCellDelegate {
     }
 }
 
+extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
+    func didChoosePaymentMethod(_ cell: AdsPaymentMethodTableViewCell) {
+        let vc = AdsOpener.open(.selectAdsPayment) as? SelectAdsPaymentViewController
+        vc?.delegate = self
+        self.navigationController?.pushViewController(vc ?? SelectAdsPaymentViewController(), animated: true)
+    }
+}
+
 extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
         self.navigationController?.pushViewController(AdsOpener.open(.adsPreview(AdsPreviewViewModel(ads: self.viewModel.ads, page: self.viewModel.page))), animated: true)
@@ -183,6 +198,13 @@ extension CreateAdsViewController: SelectAdsPageViewControllerDelegate {
 extension CreateAdsViewController: SelectAdsObjectiveViewControllerDelegate {
     func didSelectPage(_ view: SelectAdsObjectiveViewController, objective: AdsObjective) {
         self.viewModel.ads.objective = objective
+        self.tableView.reloadData()
+    }
+}
+
+extension CreateAdsViewController: SelectAdsPaymentViewControllerDelegate {
+    func didSelectPaymenyMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType) {
+        self.viewModel.ads.payment = adsPaymentType
         self.tableView.reloadData()
     }
 }

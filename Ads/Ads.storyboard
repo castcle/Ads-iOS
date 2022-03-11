@@ -184,7 +184,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S5n-vj-RTo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2871" y="69"/>
+            <point key="canvasLocation" x="773" y="773"/>
+        </scene>
+        <!--Select Ads Payment View Controller-->
+        <scene sceneID="0Le-Qy-Rjg">
+            <objects>
+                <viewController storyboardIdentifier="SelectAdsPaymentViewController" id="tGd-9i-gL4" customClass="SelectAdsPaymentViewController" customModule="Ads" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aRA-9k-YNb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8FJ-oB-FAW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5jA-ly-pTh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8FJ-oB-FAW" firstAttribute="bottom" secondItem="aRA-9k-YNb" secondAttribute="bottom" id="Cog-dr-Qvu"/>
+                            <constraint firstItem="8FJ-oB-FAW" firstAttribute="trailing" secondItem="5jA-ly-pTh" secondAttribute="trailing" id="ft8-89-khw"/>
+                            <constraint firstItem="8FJ-oB-FAW" firstAttribute="top" secondItem="5jA-ly-pTh" secondAttribute="top" id="kYh-lq-0cp"/>
+                            <constraint firstItem="8FJ-oB-FAW" firstAttribute="leading" secondItem="5jA-ly-pTh" secondAttribute="leading" id="m5S-kw-95G"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="8FJ-oB-FAW" id="3X9-kM-A6W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ku4-SH-MZq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2856" y="69"/>
         </scene>
     </scenes>
     <resources>

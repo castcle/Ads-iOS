@@ -42,13 +42,14 @@ public final class CreateAdsViewModel {
         case campaignMessage
         case dailyBudget
         case duration
+        case paymentMethod
         case adPreview
     }
     var contents: [CreateAdsContent] {
         if self.ads.boostType == .content {
             return []
         } else {
-            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .adPreview]
+            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .paymentMethod, .adPreview]
         }
     }
     

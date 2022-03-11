@@ -82,7 +82,7 @@ class AdsManagerViewController: UIViewController {
     }
     
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Ad manager", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Ad Manager", leftBarButton: .back)
     }
     
     func configureTableView() {
