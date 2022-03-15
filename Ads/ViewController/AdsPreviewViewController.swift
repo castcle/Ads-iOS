@@ -72,11 +72,7 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.viewModel.adsPreviewSection[indexPath.row] == .budget {
-            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsBudget, for: indexPath as IndexPath) as? AdsBudgetTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            return cell ?? AdsBudgetTableViewCell()
-        } else if self.viewModel.adsPreviewSection[indexPath.row] == .confirm {
+        if self.viewModel.adsPreviewSection[indexPath.row] == .confirm {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.confirmButton, for: indexPath as IndexPath) as? ConfirmButtonTableViewCell
             cell?.configCell(title: self.viewModel.ads.boostType == .page ? "Boost this Page" : "Boost this Cast")
             cell?.delegate = self

@@ -31,7 +31,6 @@ import Networking
 public final class AdsPreviewViewModel {
     
     enum AdsPreviewSection {
-        case budget
         case header
         case page
         case content
@@ -43,9 +42,9 @@ public final class AdsPreviewViewModel {
     
     var adsPreviewSection: [AdsPreviewSection] {
         if self.ads.boostType == .page {
-            return [.budget, .header, .page, .confirm]
+            return [.header, .page, .confirm]
         } else {
-            return [.budget, .header, .content, .confirm]
+            return [.header, .content, .confirm]
         }
     }
     
