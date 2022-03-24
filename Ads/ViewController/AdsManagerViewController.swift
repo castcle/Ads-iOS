@@ -33,11 +33,13 @@ import SwiftColor
 class AdsManagerViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var filterTitleLabel: UILabel!
+    @IBOutlet var filterLabel: UILabel!
+    @IBOutlet var filterIcon: UIImageView!
     @IBOutlet var boostButton: UIButton!
     
     enum AdsManagerViewControllerSection: Int, CaseIterable {
-        case budget = 0
-        case history
+        case history = 0
         case footer
     }
     
@@ -47,6 +49,11 @@ class AdsManagerViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.filterTitleLabel.font = UIFont.asset(.bold, fontSize: .h3)
+        self.filterTitleLabel.textColor = UIColor.Asset.white
+        self.filterLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.filterLabel.textColor = UIColor.Asset.lightBlue
+        self.filterIcon.image = UIImage.init(icon: .castcle(.settings), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
         self.boostButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
         self.boostButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.boostButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
@@ -89,13 +96,50 @@ class AdsManagerViewController: UIViewController {
         self.tableView.isScrollEnabled = false
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsNoHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsNoHistory)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistory, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistory)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsHistoryFooter, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsHistoryFooter)
         self.tableView.register(UINib(nibName: ComponentNibVars.TableViewCell.skeleton, bundle: ConfigBundle.component), forCellReuseIdentifier: ComponentNibVars.TableViewCell.skeleton)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
+    }
+    
+    @IBAction func filterAction(_ sender: Any) {
+        let actionSheet = CCActionSheet()
+        let allButton = CCAction(title: HistoryFilterType.all.rawValue, color: UIColor.Asset.lightBlue) {
+            actionSheet.dismissActionSheet()
+            self.viewModel.filterType = .all
+            self.updateFilterLabel()
+        }
+        let dayButton = CCAction(title: HistoryFilterType.day.rawValue) {
+            actionSheet.dismissActionSheet()
+            self.viewModel.filterType = .day
+            self.updateFilterLabel()
+        }
+        let weekButton = CCAction(title: HistoryFilterType.week.rawValue) {
+            actionSheet.dismissActionSheet()
+            self.viewModel.filterType = .week
+            self.updateFilterLabel()
+        }
+        let monthButton = CCAction(title: HistoryFilterType.month.rawValue) {
+            actionSheet.dismissActionSheet()
+            self.viewModel.filterType = .month
+            self.updateFilterLabel()
+        }
+        let cancelButton = CCAction(title: "Cancel", color: UIColor.Asset.denger) {
+            actionSheet.dismissActionSheet()
+        }
+        
+        actionSheet.addActions([allButton, dayButton, weekButton, monthButton, cancelButton])
+        Utility.currentViewController().present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func updateFilterLabel() {
+        if self.viewModel.filterType == .all {
+            self.filterLabel.text = ""
+        } else {
+            self.filterLabel.text = self.viewModel.filterType.rawValue
+        }
     }
     
     @IBAction func boostAction(_ sender: Any) {
@@ -110,8 +154,6 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case AdsManagerViewControllerSection.budget.rawValue:
-            return 1
         case AdsManagerViewControllerSection.history.rawValue:
             if self.viewModel.adsLoaded {
                 return (self.viewModel.ads.isEmpty ? 1 : self.viewModel.ads.count)
@@ -125,38 +167,8 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == AdsManagerViewControllerSection.history.rawValue {
-            return 50
-        } else {
-            return 0
-        }
-    }
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        let label = UILabel()
-        label.frame = CGRect.init(x: 15, y: 0, width: headerView.frame.width - 30, height: headerView.frame.height)
-        label.font = UIFont.asset(.regular, fontSize: .body)
-        label.textColor = UIColor.Asset.white
-
-        switch section {
-        case AdsManagerViewControllerSection.history.rawValue:
-            label.text = "All boosts"
-        default:
-            label.text = ""
-        }
-        headerView.addSubview(label)
-        headerView.backgroundColor = UIColor.Asset.darkGraphiteBlue
-        return headerView
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case AdsManagerViewControllerSection.budget.rawValue:
-            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsBudget, for: indexPath as IndexPath) as? AdsBudgetTableViewCell
-            cell?.backgroundColor = UIColor.clear
-            return cell ?? AdsBudgetTableViewCell()
         case AdsManagerViewControllerSection.history.rawValue:
             if self.viewModel.adsLoaded {
                 if self.viewModel.ads.isEmpty {

@@ -28,6 +28,13 @@
 import Networking
 import SwiftyJSON
 
+public enum HistoryFilterType: String {
+    case all = "All"
+    case day = "Today"
+    case week = "This week"
+    case month = "This month"
+}
+
 public final class AdsManagerViewModel {
     
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
@@ -38,6 +45,7 @@ public final class AdsManagerViewModel {
     var adsLoaded: Bool = false
     var adsCanLoad: Bool = true
     var state: State = .none
+    var filterType: HistoryFilterType = .all
     
     enum State {
         case getAds
