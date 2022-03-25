@@ -57,7 +57,7 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
     
     public func configCell(adsPaymentType: AdsPaymentType) {
         self.methodImage.image = adsPaymentType.image
-        self.methodTitleLabel.text = adsPaymentType.rawValue
+        self.methodTitleLabel.text = adsPaymentType.display
         self.detailLabel.text = adsPaymentType.notice
     }
 }

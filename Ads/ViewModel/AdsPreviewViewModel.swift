@@ -27,6 +27,7 @@
 
 import Core
 import Networking
+import SwiftyJSON
 
 public final class AdsPreviewViewModel {
     
@@ -37,8 +38,11 @@ public final class AdsPreviewViewModel {
         case confirm
     }
     
+    private var adsRepository: AdsRepository = AdsRepositoryImpl()
+    let tokenHelper: TokenHelper = TokenHelper()
     var ads: Ads = Ads()
     var page: Page = Page()
+    private var adsRequest: AdsRequest = AdsRequest()
     
     var adsPreviewSection: [AdsPreviewSection] {
         if self.ads.boostType == .page {
@@ -51,5 +55,44 @@ public final class AdsPreviewViewModel {
     public init(ads: Ads = Ads(), page: Page = Page()) {
         self.ads = ads
         self.page = page
+        self.tokenHelper.delegate = self
+    }
+    
+    func createAds(adsRequest: AdsRequest) {
+        self.adsRequest = adsRequest
+        self.adsRepository.createAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    print(json)
+                    print("========")
+//                    let payload = json[ContentShelfKey.payload.rawValue].arrayValue
+//                    let meta: Meta = Meta(json: JSON(json[ContentShelfKey.meta.rawValue].dictionaryValue))
+//
+//                    if meta.resultCount < self.adsRequest.maxResults {
+//                        self.adsCanLoad = false
+//                    }
+//
+//                    payload.forEach { ads in
+//                        self.ads.append(Ads(json: ads))
+//                    }
+//
+//                    self.meta = meta
+//                    self.adsLoaded = true
+//                    self.didGetAdsFinish?()
+                } catch {}
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                }
+            }
+        }
+    }
+}
+
+extension AdsPreviewViewModel: TokenHelperDelegate {
+    public func didRefreshTokenFinish() {
+        self.createAds(adsRequest: self.adsRequest)
     }
 }

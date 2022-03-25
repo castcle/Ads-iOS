@@ -96,6 +96,15 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension AdsPreviewViewController: ConfirmButtonTableViewCellDelegate {
     func didConfirm(_ cell: ConfirmButtonTableViewCell) {
-        //
+        var adsRequest: AdsRequest = AdsRequest()
+        adsRequest.campaignName = self.viewModel.ads.campaignName
+        adsRequest.campaignMessage = self.viewModel.ads.campaignMessage
+        adsRequest.objective = self.viewModel.ads.objective
+        adsRequest.dailyBudget = self.viewModel.ads.dailyBudget
+        adsRequest.duration = self.viewModel.ads.duration
+        adsRequest.paymentMethod = self.viewModel.ads.payment
+        adsRequest.contentId = ""
+        adsRequest.userId = self.viewModel.page.castcleId
+        self.viewModel.createAds(adsRequest: adsRequest)
     }
 }

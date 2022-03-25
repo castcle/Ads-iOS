@@ -64,7 +64,7 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
     
     public func configCell(adsPaymentType: AdsPaymentType) {
         self.adsIcon.image = adsPaymentType.image
-        self.adCreditTitleLabel.text = adsPaymentType.rawValue
+        self.adCreditTitleLabel.text = adsPaymentType.display
     }
     
     @IBAction func choosePageAction(_ sender: Any) {
