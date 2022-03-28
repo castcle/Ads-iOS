@@ -49,14 +49,12 @@ class AdsHistoryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.avatarImage.circle()
         self.avatarImage.image = UIImage.Asset.userPlaceholder
         self.dotImage.circle()
         self.dotImage.image = UIColor.Asset.trendUp.toImage()
         self.approvedView.capsule(color: UIColor.Asset.trendUp)
         self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
-        
         self.campaignLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.campaignLabel.textColor = UIColor.Asset.white
         self.idLabel.font = UIFont.asset(.regular, fontSize: .small)
@@ -89,5 +87,4 @@ class AdsHistoryTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }
