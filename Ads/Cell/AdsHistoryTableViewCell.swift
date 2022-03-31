@@ -51,6 +51,7 @@ class AdsHistoryTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.avatarImage.circle()
         self.avatarImage.image = UIImage.Asset.userPlaceholder
+        self.typeImage.image = UIImage.Asset.typePageIcon
         self.dotImage.circle()
         self.dotImage.image = UIColor.Asset.trendUp.toImage()
         self.approvedView.capsule(color: UIColor.Asset.trendUp)

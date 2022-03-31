@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" constant="40" id="eDP-K5-vi5"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="boost-page" translatesAutoresizingMaskIntoConstraints="NO" id="RNw-xc-fxF">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RNw-xc-fxF">
                         <rect key="frame" x="40" y="40" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="RNw-xc-fxF" secondAttribute="height" multiplier="1:1" id="0To-SU-nxx"/>
@@ -181,7 +181,6 @@ Castcle is a new decentralized social media that revolutionize the way we use in
         </designable>
     </designables>
     <resources>
-        <image name="boost-page" width="40.5" height="40.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
