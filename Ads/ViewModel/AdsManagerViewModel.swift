@@ -25,15 +25,9 @@
 //  Created by Castcle Co., Ltd. on 15/2/2565 BE.
 //
 
+import Core
 import Networking
 import SwiftyJSON
-
-public enum HistoryFilterType: String {
-    case all = "All"
-    case day = "Today"
-    case week = "This week"
-    case month = "This month"
-}
 
 public final class AdsManagerViewModel {
     
