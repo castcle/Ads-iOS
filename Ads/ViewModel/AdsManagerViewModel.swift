@@ -41,11 +41,6 @@ public final class AdsManagerViewModel {
     var state: State = .none
     var filterType: HistoryFilterType = .all
     
-    enum State {
-        case getAds
-        case none
-    }
-    
     public init() {
         self.tokenHelper.delegate = self
         self.getAds()
@@ -58,8 +53,8 @@ public final class AdsManagerViewModel {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    let payload = json[ContentShelfKey.payload.rawValue].arrayValue
-                    let meta: Meta = Meta(json: JSON(json[ContentShelfKey.meta.rawValue].dictionaryValue))
+                    let payload = json[JsonKey.payload.rawValue].arrayValue
+                    let meta: Meta = Meta(json: JSON(json[JsonKey.meta.rawValue].dictionaryValue))
 
                     if meta.resultCount < self.adsRequest.maxResults {
                         self.adsCanLoad = false

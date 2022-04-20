@@ -45,6 +45,7 @@ public final class CreateAdsViewModel {
         case paymentMethod
         case adPreview
     }
+    
     var contents: [CreateAdsContent] {
         if self.ads.boostType == .content {
             return []
