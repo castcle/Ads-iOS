@@ -37,16 +37,15 @@ class AdsCreditsCollectionViewCell: UICollectionViewCell {
     @IBOutlet var balanceLabel: UILabel!
     @IBOutlet var coinImage: UIImageView!
     @IBOutlet var noticLabel: ActiveLabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.balanceView.custom(color: UIColor.Asset.white, cornerRadius: 10)
-        self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.balanceTitleLabel.textColor = UIColor.Asset.black
-        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .h2)
+        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .head2)
         self.balanceLabel.textColor = UIColor.Asset.black
         self.coinImage.image = UIImage.init(icon: .castcle(.coin), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.black)
-        
         self.noticLabel.customize { label in
             label.font = UIFont.asset(.regular, fontSize: .small)
             label.numberOfLines = 2
@@ -55,8 +54,7 @@ class AdsCreditsCollectionViewCell: UICollectionViewCell {
             label.enabledTypes = [learnMore]
             label.customColor[learnMore] = UIColor.Asset.lightBlue
             label.customSelectedColor[learnMore] = UIColor.Asset.gray
-            
-            label.handleCustomTap(for: learnMore) { element in
+            label.handleCustomTap(for: learnMore) { _ in
             }
         }
     }

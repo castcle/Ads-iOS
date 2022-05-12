@@ -28,25 +28,25 @@
 import UIKit
 import Core
 
-protocol DurationTableViewCellDelegate {
+protocol DurationTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: DurationTableViewCell, duration: Int)
 }
 
 class DurationTableViewCell: UITableViewCell {
 
     var delegate: DurationTableViewCellDelegate?
-    
+
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var dayLabel: UILabel!
     @IBOutlet var minLabel: UILabel!
     @IBOutlet var maxLabel: UILabel!
     @IBOutlet var slider: UISlider!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.titleLabel.textColor = UIColor.Asset.white
-        self.dayLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.dayLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.dayLabel.textColor = UIColor.Asset.white
         self.minLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.minLabel.textColor = UIColor.Asset.white
@@ -60,11 +60,11 @@ class DurationTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     private func getDayFromValue(value: Int) -> Int {
         return (value * 30) / 100
     }
-    
+
     @IBAction func sliderValueChange(_ sender: Any) {
         let value = Int(self.slider.value * 100)
         let day = self.getDayFromValue(value: Int(value))

@@ -29,7 +29,7 @@ import UIKit
 import Core
 import UITextView_Placeholder
 
-protocol BoostMessageTableViewCellDelegate {
+protocol BoostMessageTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: BoostMessageTableViewCell, massage: String)
 }
 
@@ -38,9 +38,9 @@ class BoostMessageTableViewCell: UITableViewCell, UITextViewDelegate {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var massageTextView: UITextView!
     @IBOutlet var massageView: UIView!
-    
+
     var delegate: BoostMessageTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
@@ -55,7 +55,7 @@ class BoostMessageTableViewCell: UITableViewCell, UITextViewDelegate {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func textViewDidChange(_ textView: UITextView) {
         let massage = textView.text ?? ""
         textView.text = massage.substringWithRange(range: 280)

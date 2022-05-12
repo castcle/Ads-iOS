@@ -29,7 +29,7 @@ import UIKit
 import Core
 import Networking
 
-protocol ChooseObjectiveTableViewCellDelegate {
+protocol ChooseObjectiveTableViewCellDelegate: AnyObject {
     func didChooseObjective(_ cell: ChooseObjectiveTableViewCell)
 }
 
@@ -42,9 +42,9 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
     @IBOutlet var nextImage: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
-    
+
     var delegate: ChooseObjectiveTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
@@ -61,13 +61,13 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(objective: AdsObjective) {
         self.typeImage.image = objective.image
         self.typeLabel.text = objective.rawValue.capitalized
         self.detailLabel.text = objective.detail
     }
-    
+
     @IBAction func chooseObjectiveAction(_ sender: Any) {
         self.delegate?.didChooseObjective(self)
     }

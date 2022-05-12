@@ -37,7 +37,7 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
     @IBOutlet weak var balanceTitleLabel: UILabel!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.methodTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
@@ -46,7 +46,7 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
         self.detailLabel.textColor = UIColor.Asset.white
         self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.balanceTitleLabel.textColor = UIColor.Asset.white
-        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .h3)
+        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .head3)
         self.balanceLabel.textColor = UIColor.Asset.lightBlue
         self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
     }
@@ -54,7 +54,7 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(adsPaymentType: AdsPaymentType) {
         self.methodImage.image = adsPaymentType.image
         self.methodTitleLabel.text = adsPaymentType.rawValue

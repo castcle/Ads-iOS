@@ -31,7 +31,6 @@ import SwiftColor
 import ActiveLabel
 
 class TokenBalanceCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet var balanceView: UIView!
     @IBOutlet var balanceTitleLabel: UILabel!
     @IBOutlet var balanceLabel: UILabel!
@@ -39,26 +38,23 @@ class TokenBalanceCollectionViewCell: UICollectionViewCell {
     @IBOutlet var noticLabel: ActiveLabel!
     @IBOutlet var depositButton: UIButton!
     @IBOutlet var buyButton: UIButton!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.balanceView.custom(color: UIColor.Asset.white, cornerRadius: 10)
-        self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.balanceTitleLabel.textColor = UIColor.Asset.black
-        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .h2)
+        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .head2)
         self.balanceLabel.textColor = UIColor.Asset.black
         self.coinImage.image = UIImage.init(icon: .castcle(.coin), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.black)
-        
         self.depositButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.depositButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.depositButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.depositButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
-        
         self.buyButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .overline)
         self.buyButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.buyButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.buyButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
-        
         self.noticLabel.customize { label in
             label.font = UIFont.asset(.regular, fontSize: .small)
             label.numberOfLines = 2
@@ -67,18 +63,18 @@ class TokenBalanceCollectionViewCell: UICollectionViewCell {
             label.enabledTypes = [learnMore]
             label.customColor[learnMore] = UIColor.Asset.lightBlue
             label.customSelectedColor[learnMore] = UIColor.Asset.gray
-            
             label.handleCustomTap(for: learnMore) { element in
+                print(element)
             }
         }
     }
-    
+
     @IBAction func depositAction(_ sender: Any) {
         let alert = UIAlertController(title: "Error", message: "Waiting for implementation", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         Utility.currentViewController().present(alert, animated: true, completion: nil)
     }
-    
+
     @IBAction func buyAction(_ sender: Any) {
         let alert = UIAlertController(title: "Error", message: "Waiting for implementation", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

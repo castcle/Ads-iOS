@@ -33,24 +33,24 @@ import Component
 class AdsPreviewViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-    
+
     var viewModel = AdsPreviewViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavBar()
     }
-    
+
     func setupNavBar() {
         self.customNavigationBar(.primary, title: "Ad Preview", leftBarButton: .back)
     }
-    
+
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -66,11 +66,11 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.adsPreviewSection.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.viewModel.adsPreviewSection[indexPath.row] == .confirm {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.confirmButton, for: indexPath as IndexPath) as? ConfirmButtonTableViewCell

@@ -30,11 +30,9 @@ import Networking
 import RealmSwift
 
 public final class CreateAdsViewModel {
-    
     var ads: Ads = Ads()
     var page: Page = Page()
-    private let realm = try! Realm()
-    
+
     enum CreateAdsContent {
         case page
         case objective
@@ -45,7 +43,7 @@ public final class CreateAdsViewModel {
         case paymentMethod
         case adPreview
     }
-    
+
     var contents: [CreateAdsContent] {
         if self.ads.boostType == .content {
             return []
@@ -53,10 +51,15 @@ public final class CreateAdsViewModel {
             return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .paymentMethod, .adPreview]
         }
     }
-    
+
     public init() {
-        if let pageRealm = self.realm.objects(Page.self).first {
-            self.page = pageRealm
+        do {
+            let realm = try Realm()
+            if let pageRealm = realm.objects(Page.self).first {
+                self.page = pageRealm
+            }
+        } catch let error as NSError {
+            print(error)
         }
     }
 }

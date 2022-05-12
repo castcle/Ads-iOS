@@ -30,7 +30,6 @@ import Networking
 import SwiftyJSON
 
 public final class AdsManagerViewModel {
-    
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var adsRequest: AdsRequest = AdsRequest()
@@ -40,12 +39,12 @@ public final class AdsManagerViewModel {
     var adsCanLoad: Bool = true
     var state: State = .none
     var filterType: HistoryFilterType = .all
-    
+
     public init() {
         self.tokenHelper.delegate = self
         self.getAds()
     }
-    
+
     func getAds() {
         self.state = .getAds
         self.adsRepository.getAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
@@ -59,7 +58,7 @@ public final class AdsManagerViewModel {
                     if meta.resultCount < self.adsRequest.maxResults {
                         self.adsCanLoad = false
                     }
-                    
+
                     payload.forEach { ads in
                         self.ads.append(Ads(json: ads))
                     }
@@ -75,7 +74,7 @@ public final class AdsManagerViewModel {
             }
         }
     }
-    
+
     func reloadData() {
         self.ads = []
         self.adsLoaded = false
@@ -84,8 +83,8 @@ public final class AdsManagerViewModel {
         self.adsRequest.untilId = ""
         self.getAds()
     }
-    
-    var didGetAdsFinish: (() -> ())?
+
+    var didGetAdsFinish: (() -> Void)?
 }
 
 extension AdsManagerViewModel: TokenHelperDelegate {

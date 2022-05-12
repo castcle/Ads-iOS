@@ -29,17 +29,16 @@ import Core
 import Networking
 
 public final class AdsPreviewViewModel {
-    
     enum AdsPreviewSection {
         case header
         case page
         case content
         case confirm
     }
-    
+
     var ads: Ads = Ads()
     var page: Page = Page()
-    
+
     var adsPreviewSection: [AdsPreviewSection] {
         if self.ads.boostType == .page {
             return [.header, .page, .confirm]
@@ -47,7 +46,7 @@ public final class AdsPreviewViewModel {
             return [.header, .content, .confirm]
         }
     }
-    
+
     public init(ads: Ads = Ads(), page: Page = Page()) {
         self.ads = ads
         self.page = page

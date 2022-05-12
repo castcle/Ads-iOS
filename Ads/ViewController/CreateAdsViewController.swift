@@ -32,30 +32,30 @@ import Networking
 class CreateAdsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-    
+
     var viewModel = CreateAdsViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.hideKeyboardWhenTapped()
         self.setupNavBar()
     }
-    
+
     func setupNavBar() {
         self.customNavigationBar(.primary, title: "Boost Page", leftBarButton: .back)
     }
-    
+
     private func reloadButton() {
         let indexPath = IndexPath(row: self.viewModel.contents.count, section: 0)
         self.tableView.reloadRows(at: [indexPath], with: .none)
     }
-    
+
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -76,11 +76,11 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel.contents.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.viewModel.contents[indexPath.row] == .page {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
@@ -134,17 +134,17 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
     func didChoosePage(_ cell: ChoosePageTableViewCell) {
-        let vc = AdsOpener.open(.selectAdsPage) as? SelectAdsPageViewController
-        vc?.delegate = self
-        self.navigationController?.pushViewController(vc ?? SelectAdsPageViewController(), animated: true)
+        let viewController = AdsOpener.open(.selectAdsPage) as? SelectAdsPageViewController
+        viewController?.delegate = self
+        self.navigationController?.pushViewController(viewController ?? SelectAdsPageViewController(), animated: true)
     }
 }
 
 extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
     func didChooseObjective(_ cell: ChooseObjectiveTableViewCell) {
-        let vc = AdsOpener.open(.selectAdsObjective) as? SelectAdsObjectiveViewController
-        vc?.delegate = self
-        self.navigationController?.pushViewController(vc ?? SelectAdsObjectiveViewController(), animated: true)
+        let viewController = AdsOpener.open(.selectAdsObjective) as? SelectAdsObjectiveViewController
+        viewController?.delegate = self
+        self.navigationController?.pushViewController(viewController ?? SelectAdsObjectiveViewController(), animated: true)
     }
 }
 
@@ -176,9 +176,9 @@ extension CreateAdsViewController: DurationTableViewCellDelegate {
 
 extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
     func didChoosePaymentMethod(_ cell: AdsPaymentMethodTableViewCell) {
-        let vc = AdsOpener.open(.selectAdsPayment) as? SelectAdsPaymentViewController
-        vc?.delegate = self
-        self.navigationController?.pushViewController(vc ?? SelectAdsPaymentViewController(), animated: true)
+        let viewController = AdsOpener.open(.selectAdsPayment) as? SelectAdsPaymentViewController
+        viewController?.delegate = self
+        self.navigationController?.pushViewController(viewController ?? SelectAdsPaymentViewController(), animated: true)
     }
 }
 

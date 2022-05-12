@@ -32,7 +32,7 @@ class AdsNoHistoryTableViewCell: UITableViewCell {
 
     @IBOutlet var emptyTitleLabel: UILabel!
     @IBOutlet var emptyDetailLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.emptyTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
@@ -44,5 +44,4 @@ class AdsNoHistoryTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

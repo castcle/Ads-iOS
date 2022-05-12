@@ -37,7 +37,7 @@ class SelectPageAdsTableViewCell: UITableViewCell {
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet weak var userVerifyImage: UIImageView!
     @IBOutlet weak var lineView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userAvatarImage.circle(color: UIColor.Asset.white)
@@ -52,7 +52,7 @@ class SelectPageAdsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(page: Page) {
         let userAvatar = URL(string: page.avatar)
         self.userAvatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])

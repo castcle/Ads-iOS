@@ -28,7 +28,7 @@
 import UIKit
 import Core
 
-protocol CampaignNameTableViewCellDelegate {
+protocol CampaignNameTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: CampaignNameTableViewCell, campaignName: String)
 }
 
@@ -37,9 +37,9 @@ class CampaignNameTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var nameView: UIView!
     @IBOutlet var nameTextField: UITextField!
-    
+
     var delegate: CampaignNameTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
@@ -53,7 +53,7 @@ class CampaignNameTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     @objc func textFieldDidChange(_ textField: UITextField) {
         let campaignName = textField.text ?? ""
         textField.text = campaignName.substringWithRange(range: 50)

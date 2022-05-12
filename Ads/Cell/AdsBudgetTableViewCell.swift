@@ -33,16 +33,16 @@ class AdsBudgetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet var pageControl: UIPageControl!
-    
+
     let cellPercentWidth: CGFloat = 0.9
     var centeredCollectionViewFlowLayout: CenteredCollectionViewFlowLayout!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.pageControl.backgroundColor = .clear
         self.pageControl.pageIndicatorTintColor = UIColor.Asset.white
         self.pageControl.currentPageIndicatorTintColor = UIColor.Asset.lightBlue
-        
+
         self.centeredCollectionViewFlowLayout = self.collectionView.collectionViewLayout as? CenteredCollectionViewFlowLayout
         self.collectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         self.collectionView.delegate = self
@@ -67,7 +67,7 @@ extension AdsBudgetTableViewCell: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AdsNibVars.CollectionViewCell.tokenBalance, for: indexPath as IndexPath) as? TokenBalanceCollectionViewCell
@@ -77,7 +77,7 @@ extension AdsBudgetTableViewCell: UICollectionViewDelegate, UICollectionViewData
             return cell ?? AdsCreditsCollectionViewCell()
         }
     }
-    
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if let index = self.centeredCollectionViewFlowLayout.currentCenteredPage {
             self.pageControl.currentPage = index
