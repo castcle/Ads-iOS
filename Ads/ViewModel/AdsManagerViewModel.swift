@@ -25,18 +25,11 @@
 //  Created by Castcle Co., Ltd. on 15/2/2565 BE.
 //
 
+import Core
 import Networking
 import SwiftyJSON
 
-public enum HistoryFilterType: String {
-    case all = "All"
-    case day = "Today"
-    case week = "This week"
-    case month = "This month"
-}
-
 public final class AdsManagerViewModel {
-    
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var adsRequest: AdsRequest = AdsRequest()
@@ -46,17 +39,12 @@ public final class AdsManagerViewModel {
     var adsCanLoad: Bool = true
     var state: State = .none
     var filterType: HistoryFilterType = .all
-    
-    enum State {
-        case getAds
-        case none
-    }
-    
+
     public init() {
         self.tokenHelper.delegate = self
         self.getAds()
     }
-    
+
     func getAds() {
         self.state = .getAds
         self.adsRepository.getAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
@@ -64,13 +52,13 @@ public final class AdsManagerViewModel {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    let payload = json[ContentShelfKey.payload.rawValue].arrayValue
-                    let meta: Meta = Meta(json: JSON(json[ContentShelfKey.meta.rawValue].dictionaryValue))
+                    let payload = json[JsonKey.payload.rawValue].arrayValue
+                    let meta: Meta = Meta(json: JSON(json[JsonKey.meta.rawValue].dictionaryValue))
 
                     if meta.resultCount < self.adsRequest.maxResults {
                         self.adsCanLoad = false
                     }
-                    
+
                     payload.forEach { ads in
                         self.ads.append(Ads(json: ads))
                     }
@@ -86,7 +74,7 @@ public final class AdsManagerViewModel {
             }
         }
     }
-    
+
     func reloadData() {
         self.ads = []
         self.adsLoaded = false
@@ -95,8 +83,8 @@ public final class AdsManagerViewModel {
         self.adsRequest.untilId = ""
         self.getAds()
     }
-    
-    var didGetAdsFinish: (() -> ())?
+
+    var didGetAdsFinish: (() -> Void)?
 }
 
 extension AdsManagerViewModel: TokenHelperDelegate {

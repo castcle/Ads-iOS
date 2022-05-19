@@ -29,30 +29,34 @@ import UIKit
 import Core
 import RealmSwift
 
-protocol SelectAdsPageViewControllerDelegate {
+protocol SelectAdsPageViewControllerDelegate: AnyObject {
     func didSelectPage(_ view: SelectAdsPageViewController, page: Page)
 }
 
 class SelectAdsPageViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-    
+
     var delegate: SelectAdsPageViewControllerDelegate?
-    private let realm = try! Realm()
     var pages: Results<Page>!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
         self.setupNavBar()
-        self.pages = self.realm.objects(Page.self).sorted(byKeyPath: "id")
+        do {
+            let realm = try Realm()
+            self.pages = realm.objects(Page.self).sorted(byKeyPath: "id")
+        } catch let error as NSError {
+            print(error)
+        }
     }
-    
+
     func setupNavBar() {
         self.customNavigationBar(.primary, title: "Page", leftBarButton: .back)
     }
-    
+
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -66,18 +70,18 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pages.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGray
         cell?.configCell(page: self.pages[indexPath.row])
         return cell ?? SelectPageAdsTableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.didSelectPage(self, page: self.pages[indexPath.row])
         self.navigationController?.popViewController(animated: true)

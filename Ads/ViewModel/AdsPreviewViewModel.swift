@@ -30,20 +30,18 @@ import Networking
 import SwiftyJSON
 
 public final class AdsPreviewViewModel {
-    
     enum AdsPreviewSection {
         case header
         case page
         case content
         case confirm
     }
-    
+
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var ads: Ads = Ads()
     var page: Page = Page()
     private var adsRequest: AdsRequest = AdsRequest()
-    
     var adsPreviewSection: [AdsPreviewSection] {
         if self.ads.boostType == .page {
             return [.header, .page, .confirm]
@@ -51,13 +49,13 @@ public final class AdsPreviewViewModel {
             return [.header, .content, .confirm]
         }
     }
-    
+
     public init(ads: Ads = Ads(), page: Page = Page()) {
         self.ads = ads
         self.page = page
         self.tokenHelper.delegate = self
     }
-    
+
     func createAds(adsRequest: AdsRequest) {
         self.adsRequest = adsRequest
         self.adsRepository.createAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in

@@ -29,7 +29,7 @@ import UIKit
 import Core
 import Networking
 
-protocol AdsPaymentMethodTableViewCellDelegate {
+protocol AdsPaymentMethodTableViewCellDelegate: AnyObject {
     func didChoosePaymentMethod(_ cell: AdsPaymentMethodTableViewCell)
 }
 
@@ -42,16 +42,16 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
     @IBOutlet var nextImage: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
-    
+
     var delegate: AdsPaymentMethodTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.titleLabel.textColor = UIColor.Asset.white
         self.adCreditTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.adCreditTitleLabel.textColor = UIColor.Asset.white
-        self.adCreditLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.adCreditLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.adCreditLabel.textColor = UIColor.Asset.lightBlue
         self.line1View.backgroundColor = UIColor.Asset.darkGray
         self.line2View.backgroundColor = UIColor.Asset.darkGray
@@ -61,12 +61,12 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(adsPaymentType: AdsPaymentType) {
         self.adsIcon.image = adsPaymentType.image
         self.adCreditTitleLabel.text = adsPaymentType.display
     }
-    
+
     @IBAction func choosePageAction(_ sender: Any) {
         self.delegate?.didChoosePaymentMethod(self)
     }

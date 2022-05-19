@@ -30,12 +30,11 @@ import Core
 import Networking
 
 class SelectObjectiveTableViewCell: UITableViewCell {
-
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
     @IBOutlet var typeImage: UIImageView!
     @IBOutlet weak var lineView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.typeLabel.font = UIFont.asset(.regular, fontSize: .body)
@@ -48,7 +47,7 @@ class SelectObjectiveTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(objective: AdsObjective) {
         self.typeImage.image = objective.image
         self.typeLabel.text = objective.rawValue.capitalized

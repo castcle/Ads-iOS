@@ -29,7 +29,7 @@ import UIKit
 import Core
 import Kingfisher
 
-protocol ChoosePageTableViewCellDelegate {
+protocol ChoosePageTableViewCellDelegate: AnyObject {
     func didChoosePage(_ cell: ChoosePageTableViewCell)
 }
 
@@ -43,9 +43,9 @@ class ChoosePageTableViewCell: UITableViewCell {
     @IBOutlet var nextImage: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
-    
+
     var delegate: ChoosePageTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.avatarImage.circle(color: UIColor.Asset.white)
@@ -64,7 +64,7 @@ class ChoosePageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     public func configCell(page: Page) {
         let userAvatar = URL(string: page.avatar)
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
@@ -76,7 +76,7 @@ class ChoosePageTableViewCell: UITableViewCell {
             self.verifyImage.isHidden = true
         }
     }
-    
+
     @IBAction func choosePageAction(_ sender: Any) {
         self.delegate?.didChoosePage(self)
     }

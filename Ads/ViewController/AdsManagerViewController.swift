@@ -37,61 +37,61 @@ class AdsManagerViewController: UIViewController {
     @IBOutlet var filterLabel: UILabel!
     @IBOutlet var filterIcon: UIImageView!
     @IBOutlet var boostButton: UIButton!
-    
+
     enum AdsManagerViewControllerSection: Int, CaseIterable {
         case history = 0
         case footer
     }
-    
+
     var viewModel = AdsManagerViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
-        self.filterTitleLabel.font = UIFont.asset(.bold, fontSize: .h3)
+        self.filterTitleLabel.font = UIFont.asset(.bold, fontSize: .head3)
         self.filterTitleLabel.textColor = UIColor.Asset.white
         self.filterLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.filterLabel.textColor = UIColor.Asset.lightBlue
         self.filterIcon.image = UIImage.init(icon: .castcle(.settings), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
-        self.boostButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
+        self.boostButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .head4)
         self.boostButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.boostButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.boostButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
-        
-        self.tableView.cr.addHeadRefresh(animator: FastAnimator()) {
-            self.tableView.cr.resetNoMore()
+
+        self.tableView.coreRefresh.addHeadRefresh(animator: FastAnimator()) {
+            self.tableView.coreRefresh.resetNoMore()
             self.tableView.isScrollEnabled = false
             self.viewModel.adsLoaded = false
             self.tableView.reloadData()
             self.viewModel.reloadData()
         }
-        
-        self.tableView.cr.addFootRefresh(animator: NormalFooterAnimator()) {
+
+        self.tableView.coreRefresh.addFootRefresh(animator: NormalFooterAnimator()) {
             if self.viewModel.adsCanLoad {
                 self.viewModel.getAds()
             } else {
-                self.tableView.cr.noticeNoMoreData()
+                self.tableView.coreRefresh.noticeNoMoreData()
             }
         }
-        
+
         self.viewModel.didGetAdsFinish = {
-            self.tableView.cr.endHeaderRefresh()
-            self.tableView.cr.endLoadingMore()
+            self.tableView.coreRefresh.endHeaderRefresh()
+            self.tableView.coreRefresh.endLoadingMore()
             self.tableView.isScrollEnabled = true
             self.tableView.reloadData()
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupNavBar()
     }
-    
+
     func setupNavBar() {
         self.customNavigationBar(.primary, title: "Ad Manager", leftBarButton: .back)
     }
-    
+
     func configureTableView() {
         self.tableView.isScrollEnabled = false
         self.tableView.delegate = self
@@ -103,7 +103,7 @@ class AdsManagerViewController: UIViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
-    
+
     @IBAction func filterAction(_ sender: Any) {
         let actionSheet = CCActionSheet()
         let allButton = CCAction(title: HistoryFilterType.all.rawValue, color: UIColor.Asset.lightBlue) {
@@ -129,11 +129,11 @@ class AdsManagerViewController: UIViewController {
         let cancelButton = CCAction(title: "Cancel", color: UIColor.Asset.denger) {
             actionSheet.dismissActionSheet()
         }
-        
+
         actionSheet.addActions([allButton, dayButton, weekButton, monthButton, cancelButton])
         Utility.currentViewController().present(actionSheet, animated: true, completion: nil)
     }
-    
+
     private func updateFilterLabel() {
         if self.viewModel.filterType == .all {
             self.filterLabel.text = ""
@@ -141,7 +141,7 @@ class AdsManagerViewController: UIViewController {
             self.filterLabel.text = self.viewModel.filterType.rawValue
         }
     }
-    
+
     @IBAction func boostAction(_ sender: Any) {
         Utility.currentViewController().navigationController?.pushViewController(AdsOpener.open(.createAds), animated: true)
     }
@@ -151,7 +151,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return AdsManagerViewControllerSection.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case AdsManagerViewControllerSection.history.rawValue:
@@ -166,7 +166,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case AdsManagerViewControllerSection.history.rawValue:

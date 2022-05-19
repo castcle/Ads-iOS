@@ -28,19 +28,19 @@
 import UIKit
 import Core
 
-protocol ConfirmButtonTableViewCellDelegate {
+protocol ConfirmButtonTableViewCellDelegate: AnyObject {
     func didConfirm(_ cell: ConfirmButtonTableViewCell)
 }
 
 class ConfirmButtonTableViewCell: UITableViewCell {
 
     @IBOutlet var confirmButton: UIButton!
-    
+
     var delegate: ConfirmButtonTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.confirmButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
+        self.confirmButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .head4)
         self.confirmButton.setTitleColor(UIColor.Asset.white, for: .normal)
         self.confirmButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.confirmButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
@@ -49,11 +49,11 @@ class ConfirmButtonTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func configCell(title: String) {
         self.confirmButton.setTitle(title, for: .normal)
     }
-    
+
     @IBAction func adPreviewAction(_ sender: Any) {
         self.delegate?.didConfirm(self)
     }

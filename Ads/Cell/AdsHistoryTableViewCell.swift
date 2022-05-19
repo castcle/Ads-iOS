@@ -31,7 +31,6 @@ import ActiveLabel
 import SwiftColor
 
 class AdsHistoryTableViewCell: UITableViewCell {
-
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var typeImage: UIImageView!
     @IBOutlet weak var dotImage: UIImageView!
@@ -46,17 +45,16 @@ class AdsHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var impressionLabel: UILabel!
     @IBOutlet weak var approvedView: UIView!
     @IBOutlet weak var lineView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         self.avatarImage.circle()
         self.avatarImage.image = UIImage.Asset.userPlaceholder
+        self.typeImage.image = UIImage.Asset.typePageIcon
         self.dotImage.circle()
         self.dotImage.image = UIColor.Asset.trendUp.toImage()
         self.approvedView.capsule(color: UIColor.Asset.trendUp)
         self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
-        
         self.campaignLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.campaignLabel.textColor = UIColor.Asset.white
         self.idLabel.font = UIFont.asset(.regular, fontSize: .small)
@@ -73,7 +71,6 @@ class AdsHistoryTableViewCell: UITableViewCell {
         self.detailLabel.textColor = UIColor.Asset.white
         self.impressionLabel.font = UIFont.asset(.regular, fontSize: .small)
         self.impressionLabel.textColor = UIColor.Asset.lightBlue
-        
         self.totalSpendLabel.customize { label in
             label.font = UIFont.asset(.bold, fontSize: .body)
             label.numberOfLines = 1
@@ -81,13 +78,10 @@ class AdsHistoryTableViewCell: UITableViewCell {
             let amountType = ActiveType.custom(pattern: "\\$345")
             label.enabledTypes = [amountType]
             label.customColor[amountType] = UIColor.Asset.lightBlue
-            label.handleCustomTap(for: amountType) { element in
-            }
         }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 }

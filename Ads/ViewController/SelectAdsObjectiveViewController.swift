@@ -29,28 +29,28 @@ import UIKit
 import Core
 import Networking
 
-protocol SelectAdsObjectiveViewControllerDelegate {
+protocol SelectAdsObjectiveViewControllerDelegate: AnyObject {
     func didSelectPage(_ view: SelectAdsObjectiveViewController, objective: AdsObjective)
 }
 
 class SelectAdsObjectiveViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
-    
+
     var delegate: SelectAdsObjectiveViewControllerDelegate?
     let adsObjective: [AdsObjective] = [.engagement, .reach]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
         self.setupNavBar()
     }
-    
+
     func setupNavBar() {
         self.customNavigationBar(.primary, title: "Marketing Objective", leftBarButton: .back)
     }
-    
+
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -64,18 +64,18 @@ extension SelectAdsObjectiveViewController: UITableViewDelegate, UITableViewData
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.adsObjective.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectObjective, for: indexPath as IndexPath) as? SelectObjectiveTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGray
         cell?.configCell(objective: self.adsObjective[indexPath.row])
         return cell ?? SelectObjectiveTableViewCell()
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.didSelectPage(self, objective: self.adsObjective[indexPath.row])
         self.navigationController?.popViewController(animated: true)

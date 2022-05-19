@@ -28,7 +28,7 @@
 import UIKit
 import Core
 
-protocol DailyBudgetTableViewCellDelegate {
+protocol DailyBudgetTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: DailyBudgetTableViewCell, budget: Int)
 }
 
@@ -41,14 +41,14 @@ class DailyBudgetTableViewCell: UITableViewCell {
     @IBOutlet var maxLabel: UILabel!
     @IBOutlet var slider: UISlider!
     @IBOutlet var editIcon: UIImageView!
-    
+
     var delegate: DailyBudgetTableViewCellDelegate?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.titleLabel.textColor = UIColor.Asset.white
-        self.amountLabel.font = UIFont.asset(.regular, fontSize: .h4)
+        self.amountLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.amountLabel.textColor = UIColor.Asset.white
         self.noteLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.noteLabel.textColor = UIColor.Asset.white
@@ -65,7 +65,7 @@ class DailyBudgetTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     @IBAction func sliderValueChange(_ sender: Any) {
         let value = Int(self.slider.value * 100)
         if value == 0 {

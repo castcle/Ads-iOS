@@ -29,14 +29,14 @@ import UIKit
 import Core
 import Networking
 
-protocol AdPreviewTableViewCellDelegate {
+protocol AdPreviewTableViewCellDelegate: AnyObject {
     func didConfirm(_ cell: AdPreviewTableViewCell)
 }
 
 class AdPreviewTableViewCell: UITableViewCell {
 
     @IBOutlet var adPreviewButton: UIButton!
-    
+
     var delegate: AdPreviewTableViewCellDelegate?
     private var ads: Ads = Ads()
     private var isValidated: Bool {
@@ -54,7 +54,7 @@ class AdPreviewTableViewCell: UITableViewCell {
             }
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -62,14 +62,14 @@ class AdPreviewTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func configCell(ads: Ads) {
         self.ads = ads
         self.updateButton()
     }
-    
+
     private func updateButton() {
-        self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .h4)
+        self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .head4)
         self.adPreviewButton.setTitleColor(UIColor.Asset.white, for: .normal)
         if self.isValidated {
             self.adPreviewButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
@@ -79,7 +79,7 @@ class AdPreviewTableViewCell: UITableViewCell {
             self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.Asset.gray)
         }
     }
-    
+
     @IBAction func adPreviewAction(_ sender: Any) {
         if self.isValidated {
             self.delegate?.didConfirm(self)

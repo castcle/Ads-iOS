@@ -35,12 +35,12 @@ public struct AdsNibVars {
         public static let selectAdsPayment = "SelectAdsPaymentViewController"
         public static let adsPreview = "AdsPreviewViewController"
     }
-    
+
     // MARK: - View
     public struct Storyboard {
         public static let ads = "Ads"
     }
-    
+
     // MARK: - TableViewCell
     public struct TableViewCell {
         public static let adsBudget = "AdsBudgetTableViewCell"
@@ -60,7 +60,7 @@ public struct AdsNibVars {
         public static let confirmButton = "ConfirmButtonTableViewCell"
         public static let adsPaymentMethod = "AdsPaymentMethodTableViewCell"
     }
-    
+
     // MARK: - CollectionViewCell
     public struct CollectionViewCell {
         public static let tokenBalance = "TokenBalanceCollectionViewCell"
