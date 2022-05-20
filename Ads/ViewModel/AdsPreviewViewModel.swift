@@ -65,20 +65,6 @@ public final class AdsPreviewViewModel {
                     let json = JSON(rawJson)
                     print(json)
                     print("========")
-//                    let payload = json[ContentShelfKey.payload.rawValue].arrayValue
-//                    let meta: Meta = Meta(json: JSON(json[ContentShelfKey.meta.rawValue].dictionaryValue))
-//
-//                    if meta.resultCount < self.adsRequest.maxResults {
-//                        self.adsCanLoad = false
-//                    }
-//
-//                    payload.forEach { ads in
-//                        self.ads.append(Ads(json: ads))
-//                    }
-//
-//                    self.meta = meta
-//                    self.adsLoaded = true
-//                    self.didGetAdsFinish?()
                 } catch {}
             } else {
                 if isRefreshToken {

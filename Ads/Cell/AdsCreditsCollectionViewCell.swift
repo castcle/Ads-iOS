@@ -55,6 +55,7 @@ class AdsCreditsCollectionViewCell: UICollectionViewCell {
             label.customColor[learnMore] = UIColor.Asset.lightBlue
             label.customSelectedColor[learnMore] = UIColor.Asset.gray
             label.handleCustomTap(for: learnMore) { _ in
+                // MARK: - Handle learn more
             }
         }
     }

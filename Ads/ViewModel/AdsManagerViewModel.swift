@@ -53,9 +53,9 @@ public final class AdsManagerViewModel {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
                     let payload = json[JsonKey.payload.rawValue].arrayValue
-                    let meta: Meta = Meta(json: JSON(json[JsonKey.meta.rawValue].dictionaryValue))
+                    self.meta = Meta(json: JSON(json[JsonKey.meta.rawValue].dictionaryValue))
 
-                    if meta.resultCount < self.adsRequest.maxResults {
+                    if self.meta.resultCount < self.adsRequest.maxResults {
                         self.adsCanLoad = false
                     }
 
@@ -63,7 +63,6 @@ public final class AdsManagerViewModel {
                         self.ads.append(Ads(json: ads))
                     }
 
-                    self.meta = meta
                     self.adsLoaded = true
                     self.didGetAdsFinish?()
                 } catch {}
