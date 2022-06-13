@@ -38,20 +38,12 @@ class AdPreviewTableViewCell: UITableViewCell {
     @IBOutlet var adPreviewButton: UIButton!
 
     var delegate: AdPreviewTableViewCellDelegate?
-    private var ads: Ads = Ads()
+    private var adsRequest: AdsRequest = AdsRequest()
     private var isValidated: Bool {
-        if self.ads.boostType == .page {
-            if self.ads.campaignName.isEmpty || self.ads.campaignMessage.isEmpty {
-                return false
-            } else {
-                return true
-            }
+        if self.adsRequest.campaignName.isEmpty {
+            return false
         } else {
-            if self.ads.campaignName.isEmpty {
-                return false
-            } else {
-                return true
-            }
+            return true
         }
     }
 
@@ -63,8 +55,8 @@ class AdPreviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(ads: Ads) {
-        self.ads = ads
+    func configCell(adsRequest: AdsRequest) {
+        self.adsRequest = adsRequest
         self.updateButton()
     }
 

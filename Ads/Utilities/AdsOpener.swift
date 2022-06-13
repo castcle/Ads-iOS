@@ -33,7 +33,7 @@ public enum AdsScene {
     case createAds
     case selectAdsPage(String)
     case selectAdsObjective(AdsObjective)
-    case selectAdsPayment
+    case selectAdsPayment(AdsPaymentType)
     case adsPreview(AdsPreviewViewModel)
 }
 
@@ -58,10 +58,11 @@ public struct AdsOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective) as? SelectAdsObjectiveViewController
             viewController?.oldSelect = oldSelect
             return viewController ?? SelectAdsObjectiveViewController()
-        case .selectAdsPayment:
+        case .selectAdsPayment(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment) as? SelectAdsPaymentViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsPaymentViewController()
         case .adsPreview(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsPreview) as? AdsPreviewViewController

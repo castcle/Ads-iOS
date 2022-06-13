@@ -227,6 +227,7 @@
 		B76DD13E27BE33CA0037A787 /* Create Ads */ = {
 			isa = PBXGroup;
 			children = (
+				B79F2B06285736FC00B82989 /* Selection */,
 				B76DD13F27BE34610037A787 /* ChoosePageTableViewCell.swift */,
 				B76DD14027BE34610037A787 /* ChoosePageTableViewCell.xib */,
 				B76DD14327BE347B0037A787 /* ChooseObjectiveTableViewCell.swift */,
@@ -241,18 +242,10 @@
 				B76DD15427BE37D30037A787 /* DurationTableViewCell.xib */,
 				B76DD15727BE37E70037A787 /* AdPreviewTableViewCell.swift */,
 				B76DD15827BE37E70037A787 /* AdPreviewTableViewCell.xib */,
-				B79F2AFE285712F200B82989 /* SelectPageHeaderTableViewCell.swift */,
-				B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */,
-				B771843327C619B700A17C1D /* SelectPageAdsTableViewCell.swift */,
-				B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */,
-				B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */,
-				B771843827C61EF300A17C1D /* SelectObjectiveTableViewCell.xib */,
 				B771843F27C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift */,
 				B771844027C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib */,
 				B7B1E06027DB408100280B9E /* AdsPaymentMethodTableViewCell.swift */,
 				B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */,
-				B7B1E06627DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.swift */,
-				B7B1E06727DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.xib */,
 				B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */,
 				B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */,
 			);
@@ -300,6 +293,21 @@
 				BF18E0455D8BA910DA8901FE /* Pods_Ads.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B79F2B06285736FC00B82989 /* Selection */ = {
+			isa = PBXGroup;
+			children = (
+				B79F2AFE285712F200B82989 /* SelectPageHeaderTableViewCell.swift */,
+				B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */,
+				B771843327C619B700A17C1D /* SelectPageAdsTableViewCell.swift */,
+				B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */,
+				B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */,
+				B771843827C61EF300A17C1D /* SelectObjectiveTableViewCell.xib */,
+				B7B1E06627DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.swift */,
+				B7B1E06727DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.xib */,
+			);
+			path = Selection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

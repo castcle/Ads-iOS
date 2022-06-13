@@ -74,7 +74,7 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.viewModel.adsPreviewSection[indexPath.row] == .confirm {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.confirmButton, for: indexPath as IndexPath) as? ConfirmButtonTableViewCell
-            cell?.configCell(title: self.viewModel.ads.boostType == .page ? "Boost this Page" : "Boost this Cast")
+            cell?.configCell(title: "Boost This Ad")
             cell?.delegate = self
             cell?.backgroundColor = UIColor.clear
             return cell ?? ConfirmButtonTableViewCell()
@@ -86,7 +86,7 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
         } else if self.viewModel.adsPreviewSection[indexPath.row] == .page {
             let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.adsPage, for: indexPath as IndexPath) as? AdsPageTableViewCell
             cell?.backgroundColor = UIColor.Asset.darkGray
-            cell?.configAdsPreViewCell(page: self.viewModel.page, ads: self.viewModel.ads)
+            cell?.configAdsPreViewCell(page: self.viewModel.page, adsRequest: self.viewModel.adsRequest)
             return cell ?? AdsPageTableViewCell()
         } else {
             return UITableViewCell()
@@ -96,15 +96,6 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension AdsPreviewViewController: ConfirmButtonTableViewCellDelegate {
     func didConfirm(_ cell: ConfirmButtonTableViewCell) {
-        var adsRequest: AdsRequest = AdsRequest()
-        adsRequest.campaignName = self.viewModel.ads.campaignName
-        adsRequest.campaignMessage = self.viewModel.ads.campaignMessage
-        adsRequest.objective = self.viewModel.ads.objective
-        adsRequest.dailyBudget = self.viewModel.ads.dailyBudget
-        adsRequest.duration = self.viewModel.ads.duration
-        adsRequest.paymentMethod = self.viewModel.ads.payment
-        adsRequest.contentId = ""
-        adsRequest.userId = self.viewModel.page.castcleId
-        self.viewModel.createAds(adsRequest: adsRequest)
+        self.viewModel.createAds()
     }
 }

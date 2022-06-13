@@ -30,7 +30,7 @@ import Networking
 import RealmSwift
 
 public final class CreateAdsViewModel {
-    var ads: Ads = Ads()
+    var adsRequest: AdsRequest = AdsRequest()
     var page: Page = Page()
 
     enum CreateAdsContent {
@@ -46,7 +46,7 @@ public final class CreateAdsViewModel {
     }
 
     var contents: [CreateAdsContent] {
-        if self.ads.boostType == .content {
+        if self.adsRequest.boostType == .content {
             return []
         } else {
             return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .dailyBid, .paymentMethod, .adPreview]
@@ -54,6 +54,6 @@ public final class CreateAdsViewModel {
     }
 
     public init() {
-        self.page = Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official)
+        self.page = Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
     }
 }

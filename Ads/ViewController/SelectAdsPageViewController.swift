@@ -99,7 +99,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
         case SelectAdsPageViewControllerSection.profile.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
             cell?.backgroundColor = UIColor.Asset.darkGray
-            cell?.configCell(page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official), oldSelect: self.oldSelect)
+            cell?.configCell(page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official), oldSelect: self.oldSelect)
             return cell ?? SelectPageAdsTableViewCell()
         case SelectAdsPageViewControllerSection.pageHeader.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageHeader, for: indexPath as IndexPath) as? SelectPageHeaderTableViewCell
@@ -119,7 +119,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case SelectAdsPageViewControllerSection.profile.rawValue:
-            self.delegate?.didSelectPage(self, page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official))
+            self.delegate?.didSelectPage(self, page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
             self.navigationController?.popViewController(animated: true)
         case SelectAdsPageViewControllerSection.page.rawValue:
             self.delegate?.didSelectPage(self, page: self.pages[indexPath.row])

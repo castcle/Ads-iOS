@@ -39,6 +39,7 @@ class SelectAdsPaymentViewController: UIViewController {
 
     var delegate: SelectAdsPaymentViewControllerDelegate?
     let adsPaymentMethod: [AdsPaymentType] = [.token, .adCredit]
+    var oldSelect: AdsPaymentType = .token
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ extension SelectAdsPaymentViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod, for: indexPath as IndexPath) as? SelectAdsPaymentMethodTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGray
-        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row])
+        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
         return cell ?? SelectAdsPaymentMethodTableViewCell()
     }
 

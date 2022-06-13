@@ -39,26 +39,25 @@ public final class AdsPreviewViewModel {
 
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
-    var ads: Ads = Ads()
+    var adsRequest: AdsRequest = AdsRequest()
     var page: Page = Page()
-    private var adsRequest: AdsRequest = AdsRequest()
     var adsPreviewSection: [AdsPreviewSection] {
-        if self.ads.boostType == .page {
+        if self.adsRequest.boostType == .user {
             return [.header, .page, .confirm]
         } else {
             return [.header, .content, .confirm]
         }
     }
 
-    public init(ads: Ads = Ads(), page: Page = Page()) {
-        self.ads = ads
+    public init(adsRequest: AdsRequest = AdsRequest(), page: Page = Page()) {
+        self.adsRequest = adsRequest
         self.page = page
         self.tokenHelper.delegate = self
     }
 
-    func createAds(adsRequest: AdsRequest) {
-        self.adsRequest = adsRequest
-        self.adsRepository.createAds(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
+    func createAds() {
+        self.adsRequest.castcleId = self.page.castcleId
+        self.adsRepository.createAdsUser(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
             if success {
                 do {
                     let rawJson = try response.mapJSON()
@@ -77,6 +76,6 @@ public final class AdsPreviewViewModel {
 
 extension AdsPreviewViewModel: TokenHelperDelegate {
     public func didRefreshTokenFinish() {
-        self.createAds(adsRequest: self.adsRequest)
+        self.createAds()
     }
 }
