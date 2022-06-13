@@ -19,45 +19,38 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectObjectiveTableViewCell.swift
+//  DailyBidTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 23/2/2565 BE.
+//  Created by Castcle Co., Ltd. on 13/6/2565 BE.
 //
 
 import UIKit
 import Core
-import Networking
 
-class SelectObjectiveTableViewCell: UITableViewCell {
-    @IBOutlet var typeLabel: UILabel!
-    @IBOutlet var detailLabel: UILabel!
-    @IBOutlet var typeImage: UIImageView!
-    @IBOutlet weak var lineView: UIView!
-    @IBOutlet weak var selectIcon: UIImageView!
+class DailyBidTableViewCell: UITableViewCell {
+
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var dailyBidTitleLabel: UILabel!
+    @IBOutlet var dailyBidDetailLabel: UILabel!
+    @IBOutlet var adsBidIcon: UIImageView!
+    @IBOutlet var line1View: UIView!
+    @IBOutlet var line2View: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.typeLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.typeLabel.textColor = UIColor.Asset.white
-        self.detailLabel.font = UIFont.asset(.regular, fontSize: .overline)
-        self.detailLabel.textColor = UIColor.Asset.white
-        self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
-        self.selectIcon.image = UIImage.init(icon: .castcle(.checkmark), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.lightBlue)
+        self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.titleLabel.textColor = UIColor.Asset.white
+        self.dailyBidTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.dailyBidTitleLabel.textColor = UIColor.Asset.white
+        self.dailyBidDetailLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.dailyBidDetailLabel.textColor = UIColor.Asset.white
+        self.line1View.backgroundColor = UIColor.Asset.darkGray
+        self.line2View.backgroundColor = UIColor.Asset.darkGray
+        self.adsBidIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 100, height: 100), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-
-    public func configCell(objective: AdsObjective, oldSelect: AdsObjective) {
-        self.typeImage.image = objective.image
-        self.typeLabel.text = objective.rawValue.capitalized
-        self.detailLabel.text = objective.detail
-        if objective == oldSelect {
-            self.selectIcon.isHidden = false
-        } else {
-            self.selectIcon.isHidden = true
-        }
     }
 }

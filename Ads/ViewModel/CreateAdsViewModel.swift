@@ -40,6 +40,7 @@ public final class CreateAdsViewModel {
         case campaignMessage
         case dailyBudget
         case duration
+        case dailyBid
         case paymentMethod
         case adPreview
     }
@@ -48,18 +49,11 @@ public final class CreateAdsViewModel {
         if self.ads.boostType == .content {
             return []
         } else {
-            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .paymentMethod, .adPreview]
+            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .dailyBid, .paymentMethod, .adPreview]
         }
     }
 
     public init() {
-        do {
-            let realm = try Realm()
-            if let pageRealm = realm.objects(Page.self).first {
-                self.page = pageRealm
-            }
-        } catch let error as NSError {
-            print(error)
-        }
+        self.page = Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official)
     }
 }

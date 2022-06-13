@@ -56,6 +56,10 @@
 		B7927DA227A7FF42005DB48A /* Ads.h in Headers */ = {isa = PBXBuildFile; fileRef = B7927DA127A7FF42005DB48A /* Ads.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7927DAA27A80095005DB48A /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7927DA927A80095005DB48A /* Core.framework */; };
 		B7927DAE27A8009E005DB48A /* Networking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7927DAD27A8009E005DB48A /* Networking.framework */; };
+		B79F2B00285712F200B82989 /* SelectPageHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79F2AFE285712F200B82989 /* SelectPageHeaderTableViewCell.swift */; };
+		B79F2B01285712F200B82989 /* SelectPageHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */; };
+		B79F2B0428571CD600B82989 /* DailyBidTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */; };
+		B79F2B0528571CD600B82989 /* DailyBidTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */; };
 		B7B1E06227DB408100280B9E /* AdsPaymentMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1E06027DB408100280B9E /* AdsPaymentMethodTableViewCell.swift */; };
 		B7B1E06327DB408100280B9E /* AdsPaymentMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */; };
 		B7B1E06527DB4F2A00280B9E /* SelectAdsPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */; };
@@ -117,6 +121,10 @@
 		B7927DA127A7FF42005DB48A /* Ads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Ads.h; sourceTree = "<group>"; };
 		B7927DA927A80095005DB48A /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7927DAD27A8009E005DB48A /* Networking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Networking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B79F2AFE285712F200B82989 /* SelectPageHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPageHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPageHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBidTableViewCell.swift; sourceTree = "<group>"; };
+		B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyBidTableViewCell.xib; sourceTree = "<group>"; };
 		B7B1E06027DB408100280B9E /* AdsPaymentMethodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPaymentMethodTableViewCell.swift; sourceTree = "<group>"; };
 		B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsPaymentMethodTableViewCell.xib; sourceTree = "<group>"; };
 		B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAdsPaymentViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +241,8 @@
 				B76DD15427BE37D30037A787 /* DurationTableViewCell.xib */,
 				B76DD15727BE37E70037A787 /* AdPreviewTableViewCell.swift */,
 				B76DD15827BE37E70037A787 /* AdPreviewTableViewCell.xib */,
+				B79F2AFE285712F200B82989 /* SelectPageHeaderTableViewCell.swift */,
+				B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */,
 				B771843327C619B700A17C1D /* SelectPageAdsTableViewCell.swift */,
 				B771843427C619B700A17C1D /* SelectPageAdsTableViewCell.xib */,
 				B771843727C61EF300A17C1D /* SelectObjectiveTableViewCell.swift */,
@@ -243,6 +253,8 @@
 				B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */,
 				B7B1E06627DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.swift */,
 				B7B1E06727DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.xib */,
+				B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */,
+				B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */,
 			);
 			path = "Create Ads";
 			sourceTree = "<group>";
@@ -372,6 +384,7 @@
 				B70EDBE027BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.xib in Resources */,
 				B75E5B3227ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.xib in Resources */,
 				B7B1E06927DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.xib in Resources */,
+				B79F2B01285712F200B82989 /* SelectPageHeaderTableViewCell.xib in Resources */,
 				B75E5B2B27ABC89A00B6CC14 /* AdsNoHistoryTableViewCell.xib in Resources */,
 				B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */,
 				B75E5B2327ABC26400B6CC14 /* AdsBudgetTableViewCell.xib in Resources */,
@@ -379,6 +392,7 @@
 				B7B1E06327DB408100280B9E /* AdsPaymentMethodTableViewCell.xib in Resources */,
 				B76DD15227BE37BE0037A787 /* DailyBudgetTableViewCell.xib in Resources */,
 				B7167F8B27ACD6F400067DBD /* AdsHistoryTableViewCell.xib in Resources */,
+				B79F2B0528571CD600B82989 /* DailyBidTableViewCell.xib in Resources */,
 				B771844227C62FBD00A17C1D /* ConfirmButtonTableViewCell.xib in Resources */,
 				B76DD14227BE34610037A787 /* ChoosePageTableViewCell.xib in Resources */,
 			);
@@ -437,8 +451,10 @@
 				B70EDBE227BBA4AB00EA53E2 /* CreateAdsViewController.swift in Sources */,
 				B771844127C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift in Sources */,
 				B70EDBDF27BB8EB600EA53E2 /* AdsHistoryFooterTableViewCell.swift in Sources */,
+				B79F2B00285712F200B82989 /* SelectPageHeaderTableViewCell.swift in Sources */,
 				B76DD15127BE37BE0037A787 /* DailyBudgetTableViewCell.swift in Sources */,
 				B75E5B3527ABCEE100B6CC14 /* AdsCreditsCollectionViewCell.swift in Sources */,
+				B79F2B0428571CD600B82989 /* DailyBidTableViewCell.swift in Sources */,
 				B75E5B1727ABC0F800B6CC14 /* AdsOpener.swift in Sources */,
 				B771843927C61EF300A17C1D /* SelectObjectiveTableViewCell.swift in Sources */,
 				B7167F8A27ACD6F400067DBD /* AdsHistoryTableViewCell.swift in Sources */,

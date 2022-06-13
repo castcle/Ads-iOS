@@ -30,7 +30,7 @@
                                             <constraint firstAttribute="height" constant="50" id="B9q-X2-PDH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Boost Page"/>
+                                        <state key="normal" title="Boost Ad"/>
                                         <connections>
                                             <action selector="boostAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="V1a-7m-5U2"/>
                                         </connections>

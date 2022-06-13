@@ -48,7 +48,7 @@ class CreateAdsViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Boost Page", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Boost Ad", leftBarButton: .back)
     }
 
     private func reloadButton() {
@@ -67,6 +67,7 @@ class CreateAdsViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBid, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBid)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -114,6 +115,10 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
             return cell ?? DurationTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .dailyBid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBid, for: indexPath as IndexPath) as? DailyBidTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? DailyBidTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .paymentMethod {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
             cell?.backgroundColor = UIColor.clear
@@ -134,7 +139,7 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
     func didChoosePage(_ cell: ChoosePageTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsPage) as? SelectAdsPageViewController
+        let viewController = AdsOpener.open(.selectAdsPage(self.viewModel.page.castcleId)) as? SelectAdsPageViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsPageViewController(), animated: true)
     }
@@ -142,7 +147,7 @@ extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
 
 extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
     func didChooseObjective(_ cell: ChooseObjectiveTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsObjective) as? SelectAdsObjectiveViewController
+        let viewController = AdsOpener.open(.selectAdsObjective(self.viewModel.ads.objective)) as? SelectAdsObjectiveViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsObjectiveViewController(), animated: true)
     }

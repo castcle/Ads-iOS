@@ -39,6 +39,14 @@ class SelectAdsPageViewController: UIViewController {
 
     var delegate: SelectAdsPageViewControllerDelegate?
     var pages: Results<Page>!
+    var oldSelect: String = ""
+
+    enum SelectAdsPageViewControllerSection: Int, CaseIterable {
+        case profileHeader = 0
+        case profile
+        case pageHeader
+        case page
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +56,7 @@ class SelectAdsPageViewController: UIViewController {
         do {
             let realm = try Realm()
             self.pages = realm.objects(Page.self).sorted(byKeyPath: "id")
-        } catch let error as NSError {
-            print(error)
-        }
+        } catch {}
     }
 
     func setupNavBar() {
@@ -60,6 +66,7 @@ class SelectAdsPageViewController: UIViewController {
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.selectPageHeader, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.selectPageHeader)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.selectPageAds, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.selectPageAds)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
@@ -68,22 +75,57 @@ class SelectAdsPageViewController: UIViewController {
 
 extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return SelectAdsPageViewControllerSection.allCases.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.pages.count
+        switch section {
+        case SelectAdsPageViewControllerSection.pageHeader.rawValue:
+            return (self.pages.count > 0 ? 1 : 0)
+        case SelectAdsPageViewControllerSection.page.rawValue:
+            return self.pages.count
+        default:
+            return 1
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
-        cell?.backgroundColor = UIColor.Asset.darkGray
-        cell?.configCell(page: self.pages[indexPath.row])
-        return cell ?? SelectPageAdsTableViewCell()
+        switch indexPath.section {
+        case SelectAdsPageViewControllerSection.profileHeader.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageHeader, for: indexPath as IndexPath) as? SelectPageHeaderTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
+            cell?.headerTitleLabel.text = "Profile"
+            return cell ?? SelectPageHeaderTableViewCell()
+        case SelectAdsPageViewControllerSection.profile.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.configCell(page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official), oldSelect: self.oldSelect)
+            return cell ?? SelectPageAdsTableViewCell()
+        case SelectAdsPageViewControllerSection.pageHeader.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageHeader, for: indexPath as IndexPath) as? SelectPageHeaderTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGraphiteBlue
+            cell?.headerTitleLabel.text = "Page"
+            return cell ?? SelectPageHeaderTableViewCell()
+        case SelectAdsPageViewControllerSection.page.rawValue:
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.configCell(page: self.pages[indexPath.row], oldSelect: self.oldSelect)
+            return cell ?? SelectPageAdsTableViewCell()
+        default:
+            return UITableViewCell()
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didSelectPage(self, page: self.pages[indexPath.row])
-        self.navigationController?.popViewController(animated: true)
+        switch indexPath.section {
+        case SelectAdsPageViewControllerSection.profile.rawValue:
+            self.delegate?.didSelectPage(self, page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, official: UserManager.shared.official))
+            self.navigationController?.popViewController(animated: true)
+        case SelectAdsPageViewControllerSection.page.rawValue:
+            self.delegate?.didSelectPage(self, page: self.pages[indexPath.row])
+            self.navigationController?.popViewController(animated: true)
+        default:
+            return
+        }
     }
 }

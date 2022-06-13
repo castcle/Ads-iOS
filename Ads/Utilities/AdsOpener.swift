@@ -31,8 +31,8 @@ import Core
 public enum AdsScene {
     case adsManager
     case createAds
-    case selectAdsPage
-    case selectAdsObjective
+    case selectAdsPage(String)
+    case selectAdsObjective(AdsObjective)
     case selectAdsPayment
     case adsPreview(AdsPreviewViewModel)
 }
@@ -48,14 +48,16 @@ public struct AdsOpener {
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.createAds)
             return viewController
-        case .selectAdsPage:
+        case .selectAdsPage(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPage)
-            return viewController
-        case .selectAdsObjective:
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPage) as? SelectAdsPageViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsPageViewController()
+        case .selectAdsObjective(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective) as? SelectAdsObjectiveViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsObjectiveViewController()
         case .selectAdsPayment:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment)
