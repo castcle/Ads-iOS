@@ -33,6 +33,7 @@ public struct AdsNibVars {
         public static let selectAdsPage = "SelectAdsPageViewController"
         public static let selectAdsObjective = "SelectAdsObjectiveViewController"
         public static let selectAdsPayment = "SelectAdsPaymentViewController"
+        public static let selectDailyBidType = "SelectDailyBidTypeViewController"
         public static let adsPreview = "AdsPreviewViewController"
     }
 

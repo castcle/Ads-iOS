@@ -28,6 +28,10 @@
 import UIKit
 import Core
 
+protocol DailyBidTableViewCellDelegate: AnyObject {
+    func didChooseDailyBidType(_ cell: DailyBidTableViewCell)
+}
+
 class DailyBidTableViewCell: UITableViewCell {
 
     @IBOutlet var titleLabel: UILabel!
@@ -36,6 +40,9 @@ class DailyBidTableViewCell: UITableViewCell {
     @IBOutlet var adsBidIcon: UIImageView!
     @IBOutlet var line1View: UIView!
     @IBOutlet var line2View: UIView!
+    @IBOutlet weak var nextIcon: UIImageView!
+
+    var delegate: DailyBidTableViewCellDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,10 +54,20 @@ class DailyBidTableViewCell: UITableViewCell {
         self.dailyBidDetailLabel.textColor = UIColor.Asset.white
         self.line1View.backgroundColor = UIColor.Asset.darkGray
         self.line2View.backgroundColor = UIColor.Asset.darkGray
-        self.adsBidIcon.image = UIImage.init(icon: .castcle(.remind), size: CGSize(width: 100, height: 100), textColor: UIColor.Asset.white)
+        self.nextIcon.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    public func configCell(dailyBidType: DailyBidType) {
+        self.adsBidIcon.image = dailyBidType.image
+        self.dailyBidTitleLabel.text = dailyBidType.display
+        self.dailyBidDetailLabel.text = dailyBidType.notice
+    }
+
+    @IBAction func selectDailyBidType(_ sender: Any) {
+        self.delegate?.didChooseDailyBidType(self)
     }
 }

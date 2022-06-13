@@ -60,6 +60,7 @@
 		B79F2B01285712F200B82989 /* SelectPageHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */; };
 		B79F2B0428571CD600B82989 /* DailyBidTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */; };
 		B79F2B0528571CD600B82989 /* DailyBidTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */; };
+		B79F2B082857474C00B82989 /* SelectDailyBidTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79F2B072857474C00B82989 /* SelectDailyBidTypeViewController.swift */; };
 		B7B1E06227DB408100280B9E /* AdsPaymentMethodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1E06027DB408100280B9E /* AdsPaymentMethodTableViewCell.swift */; };
 		B7B1E06327DB408100280B9E /* AdsPaymentMethodTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */; };
 		B7B1E06527DB4F2A00280B9E /* SelectAdsPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */; };
@@ -125,6 +126,7 @@
 		B79F2AFF285712F200B82989 /* SelectPageHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectPageHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		B79F2B0228571CD500B82989 /* DailyBidTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBidTableViewCell.swift; sourceTree = "<group>"; };
 		B79F2B0328571CD600B82989 /* DailyBidTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyBidTableViewCell.xib; sourceTree = "<group>"; };
+		B79F2B072857474C00B82989 /* SelectDailyBidTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDailyBidTypeViewController.swift; sourceTree = "<group>"; };
 		B7B1E06027DB408100280B9E /* AdsPaymentMethodTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsPaymentMethodTableViewCell.swift; sourceTree = "<group>"; };
 		B7B1E06127DB408100280B9E /* AdsPaymentMethodTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsPaymentMethodTableViewCell.xib; sourceTree = "<group>"; };
 		B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAdsPaymentViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				B771842F27C617D600A17C1D /* SelectAdsPageViewController.swift */,
 				B771843127C617FB00A17C1D /* SelectAdsObjectiveViewController.swift */,
 				B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */,
+				B79F2B072857474C00B82989 /* SelectDailyBidTypeViewController.swift */,
 				B771843B27C62A1D00A17C1D /* AdsPreviewViewController.swift */,
 			);
 			path = ViewController;
@@ -442,6 +445,7 @@
 				B76DD14D27BE34D50037A787 /* BoostMessageTableViewCell.swift in Sources */,
 				B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */,
 				B76DD14127BE34610037A787 /* ChoosePageTableViewCell.swift in Sources */,
+				B79F2B082857474C00B82989 /* SelectDailyBidTypeViewController.swift in Sources */,
 				B7B1E06527DB4F2A00280B9E /* SelectAdsPaymentViewController.swift in Sources */,
 				B7B1E06827DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.swift in Sources */,
 				B771843527C619B700A17C1D /* SelectPageAdsTableViewCell.swift in Sources */,

@@ -19,27 +19,27 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectAdsPaymentViewController.swift
+//  SelectDailyBidTypeViewController.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 11/3/2565 BE.
+//  Created by Castcle Co., Ltd. on 13/6/2565 BE.
 //
 
 import UIKit
 import Core
 import Networking
 
-protocol SelectAdsPaymentViewControllerDelegate: AnyObject {
-    func didSelectPaymentMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType)
+protocol SelectDailyBidTypeViewControllerDelegate: AnyObject {
+    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType)
 }
 
-class SelectAdsPaymentViewController: UIViewController {
+class SelectDailyBidTypeViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
 
-    var delegate: SelectAdsPaymentViewControllerDelegate?
-    let adsPaymentMethod: [AdsPaymentType] = [.token, .adCredit]
-    var oldSelect: AdsPaymentType = .token
+    var delegate: SelectDailyBidTypeViewControllerDelegate?
+    let dailyBidTypes: [DailyBidType] = [.auto, .costPerAccount]
+    var oldSelect: DailyBidType = .auto
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class SelectAdsPaymentViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Choose Your Payment Method", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Daily Bid", leftBarButton: .back)
     }
 
     func configureTableView() {
@@ -61,24 +61,24 @@ class SelectAdsPaymentViewController: UIViewController {
     }
 }
 
-extension SelectAdsPaymentViewController: UITableViewDelegate, UITableViewDataSource {
+extension SelectDailyBidTypeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.adsPaymentMethod.count
+        return self.dailyBidTypes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod, for: indexPath as IndexPath) as? SelectAdsPaymentMethodTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGray
-        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
+//        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
         return cell ?? SelectAdsPaymentMethodTableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didSelectPaymentMethod(self, adsPaymentType: self.adsPaymentMethod[indexPath.row])
+        self.delegate?.didDailyBidType(self, dailyBidType: self.dailyBidTypes[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
 }

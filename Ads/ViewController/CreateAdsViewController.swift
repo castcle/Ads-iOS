@@ -118,6 +118,8 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
         } else if self.viewModel.contents[indexPath.row] == .dailyBid {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBid, for: indexPath as IndexPath) as? DailyBidTableViewCell
             cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            cell?.configCell(dailyBidType: self.viewModel.adsRequest.dailyBidType)
             return cell ?? DailyBidTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .paymentMethod {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
@@ -187,6 +189,14 @@ extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
     }
 }
 
+extension CreateAdsViewController: DailyBidTableViewCellDelegate {
+    func didChooseDailyBidType(_ cell: DailyBidTableViewCell) {
+        let viewController = AdsOpener.open(.selectDailyBidType(self.viewModel.adsRequest.dailyBidType)) as? SelectDailyBidTypeViewController
+        viewController?.delegate = self
+        self.navigationController?.pushViewController(viewController ?? SelectDailyBidTypeViewController(), animated: true)
+    }
+}
+
 extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
         self.navigationController?.pushViewController(AdsOpener.open(.adsPreview(AdsPreviewViewModel(adsRequest: self.viewModel.adsRequest, page: self.viewModel.page))), animated: true)
@@ -208,8 +218,15 @@ extension CreateAdsViewController: SelectAdsObjectiveViewControllerDelegate {
 }
 
 extension CreateAdsViewController: SelectAdsPaymentViewControllerDelegate {
-    func didSelectPaymenyMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType) {
+    func didSelectPaymentMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType) {
         self.viewModel.adsRequest.paymentMethod = adsPaymentType
+        self.tableView.reloadData()
+    }
+}
+
+extension CreateAdsViewController: SelectDailyBidTypeViewControllerDelegate {
+    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType) {
+        self.viewModel.adsRequest.dailyBidType = dailyBidType
         self.tableView.reloadData()
     }
 }
