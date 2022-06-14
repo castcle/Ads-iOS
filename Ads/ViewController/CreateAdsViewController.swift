@@ -191,7 +191,7 @@ extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
 
 extension CreateAdsViewController: DailyBidTableViewCellDelegate {
     func didChooseDailyBidType(_ cell: DailyBidTableViewCell) {
-        let viewController = AdsOpener.open(.selectDailyBidType(self.viewModel.adsRequest.dailyBidType)) as? SelectDailyBidTypeViewController
+        let viewController = AdsOpener.open(.selectDailyBidType(self.viewModel.adsRequest.dailyBidType, self.viewModel.adsRequest.dailyBidValue)) as? SelectDailyBidTypeViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectDailyBidTypeViewController(), animated: true)
     }
@@ -225,8 +225,9 @@ extension CreateAdsViewController: SelectAdsPaymentViewControllerDelegate {
 }
 
 extension CreateAdsViewController: SelectDailyBidTypeViewControllerDelegate {
-    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType) {
+    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType, cost: Int) {
         self.viewModel.adsRequest.dailyBidType = dailyBidType
+        self.viewModel.adsRequest.dailyBidValue = cost
         self.tableView.reloadData()
     }
 }

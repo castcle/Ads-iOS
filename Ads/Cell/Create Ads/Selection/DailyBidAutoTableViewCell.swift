@@ -19,17 +19,17 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectObjectiveTableViewCell.swift
+//  DailyBidAutoTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 23/2/2565 BE.
+//  Created by Castcle Co., Ltd. on 14/6/2565 BE.
 //
 
 import UIKit
 import Core
 import Networking
 
-class SelectObjectiveTableViewCell: UITableViewCell {
+class DailyBidAutoTableViewCell: UITableViewCell {
 
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var detailLabel: UILabel!
@@ -39,7 +39,7 @@ class SelectObjectiveTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.typeLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.typeLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.typeLabel.textColor = UIColor.Asset.white
         self.detailLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.detailLabel.textColor = UIColor.Asset.white
@@ -51,11 +51,11 @@ class SelectObjectiveTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(objective: AdsObjective, oldSelect: AdsObjective) {
-        self.typeImage.image = objective.image
-        self.typeLabel.text = objective.rawValue.capitalized
-        self.detailLabel.text = objective.detail
-        if objective == oldSelect {
+    public func configCell(dailyBidType: DailyBidType, oldSelect: DailyBidType) {
+        self.typeImage.image = dailyBidType.image
+        self.typeLabel.text = dailyBidType.display
+        self.detailLabel.text = dailyBidType.notice
+        if dailyBidType == oldSelect {
             self.selectIcon.isHidden = false
         } else {
             self.selectIcon.isHidden = true

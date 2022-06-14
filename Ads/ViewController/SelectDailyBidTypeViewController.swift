@@ -30,7 +30,7 @@ import Core
 import Networking
 
 protocol SelectDailyBidTypeViewControllerDelegate: AnyObject {
-    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType)
+    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType, cost: Int)
 }
 
 class SelectDailyBidTypeViewController: UIViewController {
@@ -40,11 +40,13 @@ class SelectDailyBidTypeViewController: UIViewController {
     var delegate: SelectDailyBidTypeViewControllerDelegate?
     let dailyBidTypes: [DailyBidType] = [.auto, .costPerAccount]
     var oldSelect: DailyBidType = .auto
+    var cost: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.hideKeyboardWhenTapped()
         self.setupNavBar()
     }
 
@@ -55,7 +57,8 @@ class SelectDailyBidTypeViewController: UIViewController {
     func configureTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.selectAdsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBidCostPerAccount, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBidCostPerAccount)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBidAuto, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBidAuto)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -71,14 +74,28 @@ extension SelectDailyBidTypeViewController: UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod, for: indexPath as IndexPath) as? SelectAdsPaymentMethodTableViewCell
-        cell?.backgroundColor = UIColor.Asset.darkGray
-//        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
-        return cell ?? SelectAdsPaymentMethodTableViewCell()
+        if self.dailyBidTypes[indexPath.row] == .costPerAccount {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBidCostPerAccount, for: indexPath as IndexPath) as? DailyBidCostPerAccountTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.delegate = self
+            cell?.configCell(dailyBidType: self.dailyBidTypes[indexPath.row], oldSelect: self.oldSelect, cost: self.cost)
+            return cell ?? DailyBidCostPerAccountTableViewCell()
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBidAuto, for: indexPath as IndexPath) as? DailyBidAutoTableViewCell
+            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.configCell(dailyBidType: self.dailyBidTypes[indexPath.row], oldSelect: self.oldSelect)
+            return cell ?? DailyBidAutoTableViewCell()
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didDailyBidType(self, dailyBidType: self.dailyBidTypes[indexPath.row])
+        self.delegate?.didDailyBidType(self, dailyBidType: self.dailyBidTypes[indexPath.row], cost: self.cost)
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension SelectDailyBidTypeViewController: DailyBidCostPerAccountTableViewCellDelegate {
+    func didCostChange(_ dailyBidCostPerAccountTableViewCell: DailyBidCostPerAccountTableViewCell, cost: Int) {
+        self.cost = cost
     }
 }

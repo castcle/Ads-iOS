@@ -34,7 +34,7 @@ public enum AdsScene {
     case selectAdsPage(String)
     case selectAdsObjective(AdsObjective)
     case selectAdsPayment(AdsPaymentType)
-    case selectDailyBidType(DailyBidType)
+    case selectDailyBidType(DailyBidType, Int)
     case adsPreview(AdsPreviewViewModel)
 }
 
@@ -64,10 +64,11 @@ public struct AdsOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment) as? SelectAdsPaymentViewController
             viewController?.oldSelect = oldSelect
             return viewController ?? SelectAdsPaymentViewController()
-        case .selectDailyBidType(let oldSelect):
+        case .selectDailyBidType(let oldSelect, let cost):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectDailyBidType) as? SelectDailyBidTypeViewController
             viewController?.oldSelect = oldSelect
+            viewController?.cost = cost
             return viewController ?? SelectDailyBidTypeViewController()
         case .adsPreview(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
