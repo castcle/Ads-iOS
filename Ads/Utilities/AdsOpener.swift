@@ -43,8 +43,8 @@ public struct AdsOpener {
         switch adsScene {
         case .adsManager:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsManager)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsManager) as? AdsManagerViewController
+            return viewController ?? AdsManagerViewController()
         case .createAds:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.createAds)
