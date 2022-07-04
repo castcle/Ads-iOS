@@ -31,9 +31,10 @@ import Core
 public enum AdsScene {
     case adsManager
     case createAds
-    case selectAdsPage
-    case selectAdsObjective
-    case selectAdsPayment
+    case selectAdsPage(String)
+    case selectAdsObjective(AdsObjective)
+    case selectAdsPayment(AdsPaymentType)
+    case selectDailyBidType(DailyBidType, Int)
     case adsPreview(AdsPreviewViewModel)
 }
 
@@ -42,24 +43,33 @@ public struct AdsOpener {
         switch adsScene {
         case .adsManager:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsManager)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsManager) as? AdsManagerViewController
+            return viewController ?? AdsManagerViewController()
         case .createAds:
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.createAds)
             return viewController
-        case .selectAdsPage:
+        case .selectAdsPage(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPage)
-            return viewController
-        case .selectAdsObjective:
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPage) as? SelectAdsPageViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsPageViewController()
+        case .selectAdsObjective(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective)
-            return viewController
-        case .selectAdsPayment:
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective) as? SelectAdsObjectiveViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsObjectiveViewController()
+        case .selectAdsPayment(let oldSelect):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
-            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment)
-            return viewController
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment) as? SelectAdsPaymentViewController
+            viewController?.oldSelect = oldSelect
+            return viewController ?? SelectAdsPaymentViewController()
+        case .selectDailyBidType(let oldSelect, let cost):
+            let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectDailyBidType) as? SelectDailyBidTypeViewController
+            viewController?.oldSelect = oldSelect
+            viewController?.cost = cost
+            return viewController ?? SelectDailyBidTypeViewController()
         case .adsPreview(let viewModel):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsPreview) as? AdsPreviewViewController

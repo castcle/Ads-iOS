@@ -33,6 +33,7 @@ public struct AdsNibVars {
         public static let selectAdsPage = "SelectAdsPageViewController"
         public static let selectAdsObjective = "SelectAdsObjectiveViewController"
         public static let selectAdsPayment = "SelectAdsPaymentViewController"
+        public static let selectDailyBidType = "SelectDailyBidTypeViewController"
         public static let adsPreview = "AdsPreviewViewController"
     }
 
@@ -54,11 +55,15 @@ public struct AdsNibVars {
         public static let dailyBudget = "DailyBudgetTableViewCell"
         public static let duration = "DurationTableViewCell"
         public static let adPreview = "AdPreviewTableViewCell"
+        public static let selectPageHeader = "SelectPageHeaderTableViewCell"
         public static let selectPageAds = "SelectPageAdsTableViewCell"
         public static let selectObjective = "SelectObjectiveTableViewCell"
         public static let selectAdsPaymentMethod = "SelectAdsPaymentMethodTableViewCell"
         public static let confirmButton = "ConfirmButtonTableViewCell"
         public static let adsPaymentMethod = "AdsPaymentMethodTableViewCell"
+        public static let dailyBid = "DailyBidTableViewCell"
+        public static let dailyBidAuto = "DailyBidAutoTableViewCell"
+        public static let dailyBidCostPerAccount = "DailyBidCostPerAccountTableViewCell"
     }
 
     // MARK: - CollectionViewCell

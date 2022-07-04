@@ -19,41 +19,26 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  CreateAdsViewModel.swift
+//  SelectPageHeaderTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 17/2/2565 BE.
+//  Created by Castcle Co., Ltd. on 13/6/2565 BE.
 //
 
+import UIKit
 import Core
-import Networking
-import RealmSwift
 
-public final class CreateAdsViewModel {
-    var adsRequest: AdsRequest = AdsRequest()
-    var page: Page = Page()
+class SelectPageHeaderTableViewCell: UITableViewCell {
 
-    enum CreateAdsContent {
-        case page
-        case objective
-        case campaignName
-        case campaignMessage
-        case dailyBudget
-        case duration
-        case dailyBid
-        case paymentMethod
-        case adPreview
+    @IBOutlet weak var headerTitleLabel: UILabel!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.headerTitleLabel.font = UIFont.asset(.bold, fontSize: .body)
+        self.headerTitleLabel.textColor = UIColor.Asset.white
     }
 
-    var contents: [CreateAdsContent] {
-        if self.adsRequest.boostType == .content {
-            return []
-        } else {
-            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .dailyBid, .paymentMethod, .adPreview]
-        }
-    }
-
-    public init() {
-        self.page = Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
     }
 }

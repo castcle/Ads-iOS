@@ -181,10 +181,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell ?? AdsHistoryTableViewCell()
                 }
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.skeleton, for: indexPath as IndexPath) as? SkeletonFeedTableViewCell
-                cell?.backgroundColor = UIColor.Asset.darkGray
-                cell?.configCell()
-                return cell ?? SkeletonFeedTableViewCell()
+                return FeedCellHelper().renderSkeletonCell(tableView: tableView, indexPath: indexPath)
             }
         case AdsManagerViewControllerSection.footer.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistoryFooter, for: indexPath as IndexPath) as? AdsHistoryFooterTableViewCell

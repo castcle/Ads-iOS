@@ -30,7 +30,7 @@ import Core
 import Networking
 
 protocol SelectAdsPaymentViewControllerDelegate: AnyObject {
-    func didSelectPaymenyMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType)
+    func didSelectPaymentMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType)
 }
 
 class SelectAdsPaymentViewController: UIViewController {
@@ -39,6 +39,7 @@ class SelectAdsPaymentViewController: UIViewController {
 
     var delegate: SelectAdsPaymentViewControllerDelegate?
     let adsPaymentMethod: [AdsPaymentType] = [.token, .adCredit]
+    var oldSelect: AdsPaymentType = .token
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,12 +73,12 @@ extension SelectAdsPaymentViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod, for: indexPath as IndexPath) as? SelectAdsPaymentMethodTableViewCell
         cell?.backgroundColor = UIColor.Asset.darkGray
-        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row])
+        cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
         return cell ?? SelectAdsPaymentMethodTableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didSelectPaymenyMethod(self, adsPaymentType: self.adsPaymentMethod[indexPath.row])
+        self.delegate?.didSelectPaymentMethod(self, adsPaymentType: self.adsPaymentMethod[indexPath.row])
         self.navigationController?.popViewController(animated: true)
     }
 }

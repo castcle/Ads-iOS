@@ -37,6 +37,7 @@ class SelectPageAdsTableViewCell: UITableViewCell {
     @IBOutlet weak var userIdLabel: UILabel!
     @IBOutlet weak var userVerifyImage: UIImageView!
     @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var selectIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,13 +48,14 @@ class SelectPageAdsTableViewCell: UITableViewCell {
         self.userIdLabel.textColor = UIColor.Asset.white
         self.userVerifyImage.image = UIImage.init(icon: .castcle(.verify), size: CGSize(width: 15, height: 15), textColor: UIColor.Asset.lightBlue)
         self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.selectIcon.image = UIImage.init(icon: .castcle(.checkmark), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.lightBlue)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(page: Page) {
+    public func configCell(page: Page, oldSelect: String) {
         let userAvatar = URL(string: page.avatar)
         self.userAvatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.userDisplayNameLabel.text = page.displayName
@@ -62,6 +64,11 @@ class SelectPageAdsTableViewCell: UITableViewCell {
             self.userVerifyImage.isHidden = false
         } else {
             self.userVerifyImage.isHidden = true
+        }
+        if page.castcleId == oldSelect {
+            self.selectIcon.isHidden = false
+        } else {
+            self.selectIcon.isHidden = true
         }
     }
 }

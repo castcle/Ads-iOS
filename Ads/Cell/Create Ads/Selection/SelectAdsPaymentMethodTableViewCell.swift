@@ -19,38 +19,52 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  SelectObjectiveTableViewCell.swift
+//  SelectAdsPaymentMethodTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 23/2/2565 BE.
+//  Created by Castcle Co., Ltd. on 11/3/2565 BE.
 //
 
 import UIKit
 import Core
 import Networking
 
-class SelectObjectiveTableViewCell: UITableViewCell {
-    @IBOutlet var typeLabel: UILabel!
-    @IBOutlet var detailLabel: UILabel!
-    @IBOutlet var typeImage: UIImageView!
+class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var methodImage: UIImageView!
+    @IBOutlet weak var methodTitleLabel: UILabel!
+    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var balanceTitleLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var selectIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.typeLabel.font = UIFont.asset(.regular, fontSize: .body)
-        self.typeLabel.textColor = UIColor.Asset.white
-        self.detailLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.methodTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.methodTitleLabel.textColor = UIColor.Asset.white
+        self.detailLabel.font = UIFont.asset(.regular, fontSize: .small)
         self.detailLabel.textColor = UIColor.Asset.white
+        self.balanceTitleLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.balanceTitleLabel.textColor = UIColor.Asset.white
+        self.balanceLabel.font = UIFont.asset(.regular, fontSize: .head2)
+        self.balanceLabel.textColor = UIColor.Asset.lightBlue
         self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.selectIcon.image = UIImage.init(icon: .castcle(.checkmark), size: CGSize(width: 20, height: 20), textColor: UIColor.Asset.lightBlue)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(objective: AdsObjective) {
-        self.typeImage.image = objective.image
-        self.typeLabel.text = objective.rawValue.capitalized
-        self.detailLabel.text = objective.detail
+    public func configCell(adsPaymentType: AdsPaymentType, oldSelect: AdsPaymentType) {
+        self.methodImage.image = adsPaymentType.image
+        self.methodTitleLabel.text = adsPaymentType.display
+        self.detailLabel.text = adsPaymentType.notice
+        if adsPaymentType == oldSelect {
+            self.selectIcon.isHidden = false
+        } else {
+            self.selectIcon.isHidden = true
+        }
     }
 }

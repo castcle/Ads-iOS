@@ -48,7 +48,7 @@ class CreateAdsViewController: UIViewController {
     }
 
     func setupNavBar() {
-        self.customNavigationBar(.primary, title: "Boost Page", leftBarButton: .back)
+        self.customNavigationBar(.primary, title: "Boost Ad", leftBarButton: .back)
     }
 
     private func reloadButton() {
@@ -67,6 +67,7 @@ class CreateAdsViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBid, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBid)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -92,7 +93,7 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(objective: self.viewModel.ads.objective)
+            cell?.configCell(objective: self.viewModel.adsRequest.objective)
             return cell ?? ChooseObjectiveTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .campaignName {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
@@ -114,16 +115,22 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
             return cell ?? DurationTableViewCell()
+        } else if self.viewModel.contents[indexPath.row] == .dailyBid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBid, for: indexPath as IndexPath) as? DailyBidTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            cell?.configCell(dailyBidType: self.viewModel.adsRequest.dailyBidType)
+            return cell ?? DailyBidTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .paymentMethod {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(adsPaymentType: self.viewModel.ads.payment)
+            cell?.configCell(adsPaymentType: self.viewModel.adsRequest.paymentMethod)
             return cell ?? AdsPaymentMethodTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .adPreview {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(ads: self.viewModel.ads)
+            cell?.configCell(adsRequest: self.viewModel.adsRequest)
             cell?.delegate = self
             return cell ?? AdPreviewTableViewCell()
         } else {
@@ -134,7 +141,7 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
     func didChoosePage(_ cell: ChoosePageTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsPage) as? SelectAdsPageViewController
+        let viewController = AdsOpener.open(.selectAdsPage(self.viewModel.page.castcleId)) as? SelectAdsPageViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsPageViewController(), animated: true)
     }
@@ -142,7 +149,7 @@ extension CreateAdsViewController: ChoosePageTableViewCellDelegate {
 
 extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
     func didChooseObjective(_ cell: ChooseObjectiveTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsObjective) as? SelectAdsObjectiveViewController
+        let viewController = AdsOpener.open(.selectAdsObjective(self.viewModel.adsRequest.objective)) as? SelectAdsObjectiveViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsObjectiveViewController(), animated: true)
     }
@@ -150,41 +157,49 @@ extension CreateAdsViewController: ChooseObjectiveTableViewCellDelegate {
 
 extension CreateAdsViewController: CampaignNameTableViewCellDelegate {
     func didEditChange(_ cell: CampaignNameTableViewCell, campaignName: String) {
-        self.viewModel.ads.campaignName = campaignName
+        self.viewModel.adsRequest.campaignName = campaignName
         self.reloadButton()
     }
 }
 
 extension CreateAdsViewController: BoostMessageTableViewCellDelegate {
     func didEditChange(_ cell: BoostMessageTableViewCell, massage: String) {
-        self.viewModel.ads.campaignMessage = massage
+        self.viewModel.adsRequest.campaignMessage = massage
         self.reloadButton()
     }
 }
 
 extension CreateAdsViewController: DailyBudgetTableViewCellDelegate {
     func didEditChange(_ cell: DailyBudgetTableViewCell, budget: Int) {
-        self.viewModel.ads.dailyBudget = Double(budget)
+        self.viewModel.adsRequest.dailyBudget = Double(budget)
     }
 }
 
 extension CreateAdsViewController: DurationTableViewCellDelegate {
     func didEditChange(_ cell: DurationTableViewCell, duration: Int) {
-        self.viewModel.ads.duration = duration
+        self.viewModel.adsRequest.duration = duration
     }
 }
 
 extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
     func didChoosePaymentMethod(_ cell: AdsPaymentMethodTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsPayment) as? SelectAdsPaymentViewController
+        let viewController = AdsOpener.open(.selectAdsPayment(self.viewModel.adsRequest.paymentMethod)) as? SelectAdsPaymentViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsPaymentViewController(), animated: true)
     }
 }
 
+extension CreateAdsViewController: DailyBidTableViewCellDelegate {
+    func didChooseDailyBidType(_ cell: DailyBidTableViewCell) {
+        let viewController = AdsOpener.open(.selectDailyBidType(self.viewModel.adsRequest.dailyBidType, self.viewModel.adsRequest.dailyBidValue)) as? SelectDailyBidTypeViewController
+        viewController?.delegate = self
+        self.navigationController?.pushViewController(viewController ?? SelectDailyBidTypeViewController(), animated: true)
+    }
+}
+
 extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
-        self.navigationController?.pushViewController(AdsOpener.open(.adsPreview(AdsPreviewViewModel(ads: self.viewModel.ads, page: self.viewModel.page))), animated: true)
+        self.navigationController?.pushViewController(AdsOpener.open(.adsPreview(AdsPreviewViewModel(adsRequest: self.viewModel.adsRequest, page: self.viewModel.page))), animated: true)
     }
 }
 
@@ -197,14 +212,22 @@ extension CreateAdsViewController: SelectAdsPageViewControllerDelegate {
 
 extension CreateAdsViewController: SelectAdsObjectiveViewControllerDelegate {
     func didSelectPage(_ view: SelectAdsObjectiveViewController, objective: AdsObjective) {
-        self.viewModel.ads.objective = objective
+        self.viewModel.adsRequest.objective = objective
         self.tableView.reloadData()
     }
 }
 
 extension CreateAdsViewController: SelectAdsPaymentViewControllerDelegate {
-    func didSelectPaymenyMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType) {
-        self.viewModel.ads.payment = adsPaymentType
+    func didSelectPaymentMethod(_ view: SelectAdsPaymentViewController, adsPaymentType: AdsPaymentType) {
+        self.viewModel.adsRequest.paymentMethod = adsPaymentType
+        self.tableView.reloadData()
+    }
+}
+
+extension CreateAdsViewController: SelectDailyBidTypeViewControllerDelegate {
+    func didDailyBidType(_ view: SelectDailyBidTypeViewController, dailyBidType: DailyBidType, cost: Int) {
+        self.viewModel.adsRequest.dailyBidType = dailyBidType
+        self.viewModel.adsRequest.dailyBidValue = cost
         self.tableView.reloadData()
     }
 }
