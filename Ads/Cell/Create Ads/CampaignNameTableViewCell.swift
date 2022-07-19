@@ -46,7 +46,7 @@ class CampaignNameTableViewCell: UITableViewCell {
         self.titleLabel.textColor = UIColor.Asset.white
         self.nameTextField.font = UIFont.asset(.regular, fontSize: .overline)
         self.nameTextField.textColor = UIColor.Asset.white
-        self.nameView.capsule(color: UIColor.Asset.darkGray)
+        self.nameView.capsule(color: UIColor.Asset.cellBackground)
         self.nameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
 

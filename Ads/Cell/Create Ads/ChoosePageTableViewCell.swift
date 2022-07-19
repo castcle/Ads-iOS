@@ -56,8 +56,8 @@ class ChoosePageTableViewCell: UITableViewCell {
         self.castcleIdLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.castcleIdLabel.textColor = UIColor.Asset.white
         self.verifyImage.image = UIImage.init(icon: .castcle(.verify), size: CGSize(width: 15, height: 15), textColor: UIColor.Asset.lightBlue)
-        self.line1View.backgroundColor = UIColor.Asset.darkGray
-        self.line2View.backgroundColor = UIColor.Asset.darkGray
+        self.line1View.backgroundColor = UIColor.Asset.cellBackground
+        self.line2View.backgroundColor = UIColor.Asset.cellBackground
         self.nextImage.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 

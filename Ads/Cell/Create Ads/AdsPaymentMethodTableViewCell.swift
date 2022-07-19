@@ -53,8 +53,8 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
         self.adCreditTitleLabel.textColor = UIColor.Asset.white
         self.adCreditLabel.font = UIFont.asset(.regular, fontSize: .head4)
         self.adCreditLabel.textColor = UIColor.Asset.lightBlue
-        self.line1View.backgroundColor = UIColor.Asset.darkGray
-        self.line2View.backgroundColor = UIColor.Asset.darkGray
+        self.line1View.backgroundColor = UIColor.Asset.cellBackground
+        self.line2View.backgroundColor = UIColor.Asset.cellBackground
         self.nextImage.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 

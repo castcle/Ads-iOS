@@ -72,7 +72,7 @@ extension SelectAdsObjectiveViewController: UITableViewDelegate, UITableViewData
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectObjective, for: indexPath as IndexPath) as? SelectObjectiveTableViewCell
-        cell?.backgroundColor = UIColor.Asset.darkGray
+        cell?.backgroundColor = UIColor.Asset.cellBackground
         cell?.configCell(objective: self.adsObjective[indexPath.row], oldSelect: self.oldSelect)
         return cell ?? SelectObjectiveTableViewCell()
     }

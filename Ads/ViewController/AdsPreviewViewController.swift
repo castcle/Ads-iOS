@@ -80,12 +80,12 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
             return cell ?? ConfirmButtonTableViewCell()
         } else if self.viewModel.adsPreviewSection[indexPath.row] == .header {
             let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.headerFeed, for: indexPath as IndexPath) as? HeaderTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.configAdsPreViewCell(page: self.viewModel.page)
             return cell ?? HeaderTableViewCell()
         } else if self.viewModel.adsPreviewSection[indexPath.row] == .page {
             let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.adsPage, for: indexPath as IndexPath) as? AdsPageTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.configAdsPreViewCell(page: self.viewModel.page, adsRequest: self.viewModel.adsRequest)
             return cell ?? AdsPageTableViewCell()
         } else {

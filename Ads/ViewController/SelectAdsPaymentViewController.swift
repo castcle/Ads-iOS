@@ -72,7 +72,7 @@ extension SelectAdsPaymentViewController: UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectAdsPaymentMethod, for: indexPath as IndexPath) as? SelectAdsPaymentMethodTableViewCell
-        cell?.backgroundColor = UIColor.Asset.darkGray
+        cell?.backgroundColor = UIColor.Asset.cellBackground
         cell?.configCell(adsPaymentType: self.adsPaymentMethod[indexPath.row], oldSelect: self.oldSelect)
         return cell ?? SelectAdsPaymentMethodTableViewCell()
     }

@@ -52,8 +52,8 @@ class DailyBidTableViewCell: UITableViewCell {
         self.dailyBidTitleLabel.textColor = UIColor.Asset.white
         self.dailyBidDetailLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.dailyBidDetailLabel.textColor = UIColor.Asset.white
-        self.line1View.backgroundColor = UIColor.Asset.darkGray
-        self.line2View.backgroundColor = UIColor.Asset.darkGray
+        self.line1View.backgroundColor = UIColor.Asset.cellBackground
+        self.line2View.backgroundColor = UIColor.Asset.cellBackground
         self.nextIcon.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 

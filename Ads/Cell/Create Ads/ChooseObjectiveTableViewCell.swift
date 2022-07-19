@@ -53,8 +53,8 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
         self.typeLabel.textColor = UIColor.Asset.white
         self.detailLabel.font = UIFont.asset(.regular, fontSize: .overline)
         self.detailLabel.textColor = UIColor.Asset.white
-        self.line1View.backgroundColor = UIColor.Asset.darkGray
-        self.line2View.backgroundColor = UIColor.Asset.darkGray
+        self.line1View.backgroundColor = UIColor.Asset.cellBackground
+        self.line2View.backgroundColor = UIColor.Asset.cellBackground
         self.nextImage.image = UIImage.init(icon: .castcle(.next), size: CGSize(width: 25, height: 25), textColor: UIColor.Asset.white)
     }
 

@@ -177,7 +177,7 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell ?? AdsNoHistoryTableViewCell()
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistory, for: indexPath as IndexPath) as? AdsHistoryTableViewCell
-                    cell?.backgroundColor = UIColor.Asset.darkGray
+                    cell?.backgroundColor = UIColor.Asset.cellBackground
                     return cell ?? AdsHistoryTableViewCell()
                 }
             } else {

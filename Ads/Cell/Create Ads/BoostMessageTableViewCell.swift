@@ -45,7 +45,7 @@ class BoostMessageTableViewCell: UITableViewCell, UITextViewDelegate {
         super.awakeFromNib()
         self.titleLabel.font = UIFont.asset(.bold, fontSize: .body)
         self.titleLabel.textColor = UIColor.Asset.white
-        self.massageView.custom(color: UIColor.Asset.darkGray, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.Asset.black)
+        self.massageView.custom(color: UIColor.Asset.cellBackground, cornerRadius: 10, borderWidth: 1, borderColor: UIColor.Asset.black)
         self.massageTextView.delegate = self
         self.massageTextView.font = UIFont.asset(.regular, fontSize: .overline)
         self.massageTextView.textColor = UIColor.Asset.white

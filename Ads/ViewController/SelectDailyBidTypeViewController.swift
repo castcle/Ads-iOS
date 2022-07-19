@@ -76,13 +76,13 @@ extension SelectDailyBidTypeViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.dailyBidTypes[indexPath.row] == .costPerAccount {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBidCostPerAccount, for: indexPath as IndexPath) as? DailyBidCostPerAccountTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.delegate = self
             cell?.configCell(dailyBidType: self.dailyBidTypes[indexPath.row], oldSelect: self.oldSelect, cost: self.cost)
             return cell ?? DailyBidCostPerAccountTableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBidAuto, for: indexPath as IndexPath) as? DailyBidAutoTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.configCell(dailyBidType: self.dailyBidTypes[indexPath.row], oldSelect: self.oldSelect)
             return cell ?? DailyBidAutoTableViewCell()
         }

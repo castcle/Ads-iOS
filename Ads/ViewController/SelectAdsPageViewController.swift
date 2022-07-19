@@ -98,7 +98,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
             return cell ?? SelectPageHeaderTableViewCell()
         case SelectAdsPageViewControllerSection.profile.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.configCell(page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.rawCastcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official), oldSelect: self.oldSelect)
             return cell ?? SelectPageAdsTableViewCell()
         case SelectAdsPageViewControllerSection.pageHeader.rawValue:
@@ -108,7 +108,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
             return cell ?? SelectPageHeaderTableViewCell()
         case SelectAdsPageViewControllerSection.page.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
-            cell?.backgroundColor = UIColor.Asset.darkGray
+            cell?.backgroundColor = UIColor.Asset.cellBackground
             cell?.configCell(page: self.pages[indexPath.row], oldSelect: self.oldSelect)
             return cell ?? SelectPageAdsTableViewCell()
         default:
