@@ -65,7 +65,7 @@ class ChoosePageTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(page: Page) {
+    public func configCell(page: PageRealm) {
         let userAvatar = URL(string: page.avatar)
         self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.displayNameLabel.text = page.displayName

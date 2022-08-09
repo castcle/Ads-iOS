@@ -40,7 +40,7 @@ public final class AdsPreviewViewModel {
     private var adsRepository: AdsRepository = AdsRepositoryImpl()
     let tokenHelper: TokenHelper = TokenHelper()
     var adsRequest: AdsRequest = AdsRequest()
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
     var adsPreviewSection: [AdsPreviewSection] {
         if self.adsRequest.boostType == .user {
             return [.header, .page, .confirm]
@@ -49,7 +49,7 @@ public final class AdsPreviewViewModel {
         }
     }
 
-    public init(adsRequest: AdsRequest = AdsRequest(), page: Page = Page()) {
+    public init(adsRequest: AdsRequest = AdsRequest(), page: PageRealm = PageRealm()) {
         self.adsRequest = adsRequest
         self.page = page
         self.tokenHelper.delegate = self

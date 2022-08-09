@@ -31,7 +31,7 @@ import RealmSwift
 
 public final class CreateAdsViewModel {
     var adsRequest: AdsRequest = AdsRequest()
-    var page: Page = Page()
+    var page: PageRealm = PageRealm()
 
     enum CreateAdsContent {
         case page
@@ -54,6 +54,6 @@ public final class CreateAdsViewModel {
     }
 
     public init() {
-        self.page = Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
+        self.page = PageRealm().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
     }
 }

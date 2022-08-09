@@ -30,7 +30,7 @@ import Core
 import RealmSwift
 
 protocol SelectAdsPageViewControllerDelegate: AnyObject {
-    func didSelectPage(_ view: SelectAdsPageViewController, page: Page)
+    func didSelectPage(_ view: SelectAdsPageViewController, page: PageRealm)
 }
 
 class SelectAdsPageViewController: UIViewController {
@@ -38,7 +38,7 @@ class SelectAdsPageViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
 
     var delegate: SelectAdsPageViewControllerDelegate?
-    var pages: Results<Page>!
+    var pages: Results<PageRealm>!
     var oldSelect: String = ""
 
     enum SelectAdsPageViewControllerSection: Int, CaseIterable {
@@ -55,7 +55,7 @@ class SelectAdsPageViewController: UIViewController {
         self.setupNavBar()
         do {
             let realm = try Realm()
-            self.pages = realm.objects(Page.self).sorted(byKeyPath: "id")
+            self.pages = realm.objects(PageRealm.self).sorted(byKeyPath: "id")
         } catch {}
     }
 
@@ -99,7 +99,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
         case SelectAdsPageViewControllerSection.profile.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageAds, for: indexPath as IndexPath) as? SelectPageAdsTableViewCell
             cell?.backgroundColor = UIColor.Asset.cellBackground
-            cell?.configCell(page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official), oldSelect: self.oldSelect)
+            cell?.configCell(page: PageRealm().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official), oldSelect: self.oldSelect)
             return cell ?? SelectPageAdsTableViewCell()
         case SelectAdsPageViewControllerSection.pageHeader.rawValue:
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.selectPageHeader, for: indexPath as IndexPath) as? SelectPageHeaderTableViewCell
@@ -119,7 +119,7 @@ extension SelectAdsPageViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case SelectAdsPageViewControllerSection.profile.rawValue:
-            self.delegate?.didSelectPage(self, page: Page().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
+            self.delegate?.didSelectPage(self, page: PageRealm().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official))
             self.navigationController?.popViewController(animated: true)
         case SelectAdsPageViewControllerSection.page.rawValue:
             self.delegate?.didSelectPage(self, page: self.pages[indexPath.row])

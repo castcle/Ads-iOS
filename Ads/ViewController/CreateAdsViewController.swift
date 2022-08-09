@@ -204,7 +204,7 @@ extension CreateAdsViewController: AdPreviewTableViewCellDelegate {
 }
 
 extension CreateAdsViewController: SelectAdsPageViewControllerDelegate {
-    func didSelectPage(_ view: SelectAdsPageViewController, page: Page) {
+    func didSelectPage(_ view: SelectAdsPageViewController, page: PageRealm) {
         self.viewModel.page = page
         self.tableView.reloadData()
     }

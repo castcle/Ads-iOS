@@ -55,7 +55,7 @@ class SelectPageAdsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(page: Page, oldSelect: String) {
+    public func configCell(page: PageRealm, oldSelect: String) {
         let userAvatar = URL(string: page.avatar)
         self.userAvatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
         self.userDisplayNameLabel.text = page.displayName
