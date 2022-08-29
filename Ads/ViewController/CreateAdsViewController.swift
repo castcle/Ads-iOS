@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import Networking
+import Component
 
 class CreateAdsViewController: UIViewController {
 
@@ -39,12 +40,21 @@ class CreateAdsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.didGetWalletLockupFinish = {
+            CCLoading.shared.dismiss()
+            self.tableView.reloadData()
+        }
+        self.viewModel.didError = {
+            CCLoading.shared.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.hideKeyboardWhenTapped()
         self.setupNavBar()
+        CCLoading.shared.show(text: "Loading")
+        self.viewModel.walletLookup()
     }
 
     func setupNavBar() {
@@ -125,12 +135,12 @@ extension CreateAdsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
             cell?.backgroundColor = UIColor.clear
             cell?.delegate = self
-            cell?.configCell(adsPaymentType: self.viewModel.adsRequest.paymentMethod)
+            cell?.configCell(adsPaymentType: self.viewModel.adsRequest.paymentMethod, wallet: self.viewModel.wallet)
             return cell ?? AdsPaymentMethodTableViewCell()
         } else if self.viewModel.contents[indexPath.row] == .adPreview {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
             cell?.backgroundColor = UIColor.clear
-            cell?.configCell(adsRequest: self.viewModel.adsRequest)
+            cell?.configCell(adsRequest: self.viewModel.adsRequest, wallet: self.viewModel.wallet)
             cell?.delegate = self
             return cell ?? AdPreviewTableViewCell()
         } else {
@@ -183,7 +193,7 @@ extension CreateAdsViewController: DurationTableViewCellDelegate {
 
 extension CreateAdsViewController: AdsPaymentMethodTableViewCellDelegate {
     func didChoosePaymentMethod(_ cell: AdsPaymentMethodTableViewCell) {
-        let viewController = AdsOpener.open(.selectAdsPayment(self.viewModel.adsRequest.paymentMethod)) as? SelectAdsPaymentViewController
+        let viewController = AdsOpener.open(.selectAdsPayment(self.viewModel.adsRequest.paymentMethod, self.viewModel.wallet)) as? SelectAdsPaymentViewController
         viewController?.delegate = self
         self.navigationController?.pushViewController(viewController ?? SelectAdsPaymentViewController(), animated: true)
     }

@@ -62,9 +62,14 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(adsPaymentType: AdsPaymentType) {
+    public func configCell(adsPaymentType: AdsPaymentType, wallet: Wallet) {
         self.adsIcon.image = adsPaymentType.image
         self.adCreditTitleLabel.text = adsPaymentType.display
+        if adsPaymentType == .token {
+            self.adCreditLabel.text = wallet.availableBalance
+        } else {
+            self.adCreditLabel.text = wallet.adsCredit
+        }
     }
 
     @IBAction func choosePageAction(_ sender: Any) {

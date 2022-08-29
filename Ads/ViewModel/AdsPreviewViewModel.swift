@@ -57,21 +57,21 @@ public final class AdsPreviewViewModel {
 
     func createAds() {
         self.adsRequest.castcleId = self.page.castcleId
-        self.adsRepository.createAdsUser(adsRequest: self.adsRequest) { (success, response, isRefreshToken) in
+        self.adsRepository.createAdsUser(adsRequest: self.adsRequest) { (success, _, isRefreshToken) in
             if success {
-                do {
-                    let rawJson = try response.mapJSON()
-                    let json = JSON(rawJson)
-                    print(json)
-                    print("========")
-                } catch {}
+                self.didCreateAdsFinish?()
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
                 }
             }
         }
     }
+
+    var didCreateAdsFinish: (() -> Void)?
+    var didError: (() -> Void)?
 }
 
 extension AdsPreviewViewModel: TokenHelperDelegate {

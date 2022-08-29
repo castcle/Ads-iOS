@@ -39,8 +39,13 @@ class AdPreviewTableViewCell: UITableViewCell {
 
     var delegate: AdPreviewTableViewCellDelegate?
     private var adsRequest: AdsRequest = AdsRequest()
+    private var wallet: Wallet = Wallet()
     private var isValidated: Bool {
         if self.adsRequest.campaignName.isEmpty {
+            return false
+        } else if (self.adsRequest.paymentMethod == .token) && (self.wallet.availableBalanceNumber == 0) {
+            return false
+        } else if (self.adsRequest.paymentMethod == .adCredit) && (self.wallet.adsCreditNumber == 0) {
             return false
         } else {
             return true
@@ -55,8 +60,9 @@ class AdPreviewTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    func configCell(adsRequest: AdsRequest) {
+    func configCell(adsRequest: AdsRequest, wallet: Wallet) {
         self.adsRequest = adsRequest
+        self.wallet = wallet
         self.updateButton()
     }
 

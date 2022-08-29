@@ -39,20 +39,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#SD43487fR5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M1x-Yv-6S7">
-                        <rect key="frame" x="75" y="44.5" width="81" height="14.5"/>
+                        <rect key="frame" x="75" y="39.5" width="81" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BZ5-R9-0pG">
-                        <rect key="frame" x="75" y="69" width="5" height="5"/>
+                        <rect key="frame" x="75" y="64" width="5" height="5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="BZ5-R9-0pG" secondAttribute="height" multiplier="1:1" id="QWc-38-ZVf"/>
                             <constraint firstAttribute="width" constant="5" id="m6d-Rf-fQn"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Running" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rlf-Kr-fWG">
-                        <rect key="frame" x="85" y="64" width="46.5" height="14.5"/>
+                        <rect key="frame" x="85" y="59" width="46.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -76,22 +76,19 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwc-22-3Y1">
-                        <rect key="frame" x="20" y="88.5" width="280" height="19.5"/>
+                        <rect key="frame" x="20" y="83.5" width="280" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16 Nov 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3tp-7C-Mh7">
-                        <rect key="frame" x="20" y="113" width="280" height="15"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="15" id="RIJ-U3-NrG"/>
-                        </constraints>
+                        <rect key="frame" x="20" y="103" width="280" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6w-gn-ifw">
-                        <rect key="frame" x="20" y="133" width="280" height="43.5"/>
+                        <rect key="frame" x="20" y="123" width="280" height="53.5"/>
                         <string key="text">What is Castcle? 
 Castcle is a new decentralized social media that revolutionize the way we use in </string>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -111,10 +108,10 @@ Castcle is a new decentralized social media that revolutionize the way we use in
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJ6-zC-7wI">
-                        <rect key="frame" x="0.0" y="246" width="320" height="5"/>
+                        <rect key="frame" x="0.0" y="250" width="320" height="1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="5" id="cTP-p5-wnk"/>
+                            <constraint firstAttribute="height" constant="1" id="cTP-p5-wnk"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -127,7 +124,7 @@ Castcle is a new decentralized social media that revolutionize the way we use in
                     <constraint firstAttribute="bottom" secondItem="YJ6-zC-7wI" secondAttribute="bottom" id="CJn-at-MUp"/>
                     <constraint firstItem="TQm-sL-bBP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="CgK-tk-g85"/>
                     <constraint firstAttribute="trailing" secondItem="YJ6-zC-7wI" secondAttribute="trailing" id="FB1-OA-ayM"/>
-                    <constraint firstItem="M1x-Yv-6S7" firstAttribute="top" secondItem="y8g-Cc-eBE" secondAttribute="bottom" constant="5" id="H17-Qy-NIG"/>
+                    <constraint firstItem="M1x-Yv-6S7" firstAttribute="top" secondItem="y8g-Cc-eBE" secondAttribute="bottom" id="H17-Qy-NIG"/>
                     <constraint firstItem="TQm-sL-bBP" firstAttribute="top" secondItem="b6w-gn-ifw" secondAttribute="bottom" constant="10" id="HTZ-RV-isv"/>
                     <constraint firstItem="b6w-gn-ifw" firstAttribute="leading" secondItem="3tp-7C-Mh7" secondAttribute="leading" id="HX1-Z4-EnZ"/>
                     <constraint firstItem="YJ6-zC-7wI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JRU-ZZ-jjv"/>
@@ -138,7 +135,7 @@ Castcle is a new decentralized social media that revolutionize the way we use in
                     <constraint firstItem="RNw-xc-fxF" firstAttribute="bottom" secondItem="5mC-aq-WxC" secondAttribute="bottom" id="YDV-FE-XgT"/>
                     <constraint firstItem="Rwc-22-3Y1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="YEL-H7-fAG"/>
                     <constraint firstAttribute="trailing" secondItem="s89-jC-9oa" secondAttribute="trailing" constant="20" id="YkX-u8-Iig"/>
-                    <constraint firstItem="3tp-7C-Mh7" firstAttribute="top" secondItem="Rwc-22-3Y1" secondAttribute="bottom" constant="5" id="a3M-Q5-oaM"/>
+                    <constraint firstItem="3tp-7C-Mh7" firstAttribute="top" secondItem="Rwc-22-3Y1" secondAttribute="bottom" id="a3M-Q5-oaM"/>
                     <constraint firstItem="s89-jC-9oa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bIl-1P-aNU"/>
                     <constraint firstAttribute="trailing" secondItem="zlH-aQ-sby" secondAttribute="trailing" constant="20" id="dNP-75-Bzk"/>
                     <constraint firstItem="Rwc-22-3Y1" firstAttribute="top" secondItem="Rlf-Kr-fWG" secondAttribute="bottom" constant="10" id="dff-yJ-dw4"/>

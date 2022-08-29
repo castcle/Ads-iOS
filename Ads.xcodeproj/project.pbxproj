@@ -70,6 +70,10 @@
 		B7B34E1B28587A2900600699 /* DailyBidAutoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B34E1928587A2900600699 /* DailyBidAutoTableViewCell.xib */; };
 		B7B34E1E28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B34E1C28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.swift */; };
 		B7B34E1F28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7B34E1D28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.xib */; };
+		B7BE89C728B8BF4300A41D59 /* AdsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BE89C628B8BF4300A41D59 /* AdsDetailViewController.swift */; };
+		B7BE89C928B8C8AB00A41D59 /* AdDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BE89C828B8C8AB00A41D59 /* AdDetailViewModel.swift */; };
+		B7BE89CD28B8CA8700A41D59 /* AdsInfomationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BE89CB28B8CA8700A41D59 /* AdsInfomationTableViewCell.swift */; };
+		B7BE89CE28B8CA8700A41D59 /* AdsInfomationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7BE89CC28B8CA8700A41D59 /* AdsInfomationTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,6 +144,10 @@
 		B7B34E1928587A2900600699 /* DailyBidAutoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyBidAutoTableViewCell.xib; sourceTree = "<group>"; };
 		B7B34E1C28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyBidCostPerAccountTableViewCell.swift; sourceTree = "<group>"; };
 		B7B34E1D28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyBidCostPerAccountTableViewCell.xib; sourceTree = "<group>"; };
+		B7BE89C628B8BF4300A41D59 /* AdsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsDetailViewController.swift; sourceTree = "<group>"; };
+		B7BE89C828B8C8AB00A41D59 /* AdDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdDetailViewModel.swift; sourceTree = "<group>"; };
+		B7BE89CB28B8CA8700A41D59 /* AdsInfomationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInfomationTableViewCell.swift; sourceTree = "<group>"; };
+		B7BE89CC28B8CA8700A41D59 /* AdsInfomationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsInfomationTableViewCell.xib; sourceTree = "<group>"; };
 		BF18E0455D8BA910DA8901FE /* Pods_Ads.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ads.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D62243FE79662E49E2CD2052 /* Pods-Ads.release (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ads.release (staging).xcconfig"; path = "Target Support Files/Pods-Ads/Pods-Ads.release (staging).xcconfig"; sourceTree = "<group>"; };
 		FB538B0717E4D7ACB15B493F /* Pods-Ads.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ads.release (development).xcconfig"; path = "Target Support Files/Pods-Ads/Pods-Ads.release (development).xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +188,7 @@
 				B70EDBDB27BB84C700EA53E2 /* AdsManagerViewModel.swift */,
 				B76DD15B27BE38A70037A787 /* CreateAdsViewModel.swift */,
 				B771843D27C62A8D00A17C1D /* AdsPreviewViewModel.swift */,
+				B7BE89C828B8C8AB00A41D59 /* AdDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -211,6 +220,7 @@
 				B7B1E06427DB4F2A00280B9E /* SelectAdsPaymentViewController.swift */,
 				B79F2B072857474C00B82989 /* SelectDailyBidTypeViewController.swift */,
 				B771843B27C62A1D00A17C1D /* AdsPreviewViewController.swift */,
+				B7BE89C628B8BF4300A41D59 /* AdsDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -218,6 +228,7 @@
 		B75E5B1C27ABC19100B6CC14 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				B7BE89CA28B8CA6A00A41D59 /* Ads Deatil */,
 				B76DD13E27BE33CA0037A787 /* Create Ads */,
 				B75E5B2027ABC26400B6CC14 /* AdsBudgetTableViewCell.swift */,
 				B75E5B2127ABC26400B6CC14 /* AdsBudgetTableViewCell.xib */,
@@ -325,6 +336,15 @@
 			path = Selection;
 			sourceTree = "<group>";
 		};
+		B7BE89CA28B8CA6A00A41D59 /* Ads Deatil */ = {
+			isa = PBXGroup;
+			children = (
+				B7BE89CB28B8CA8700A41D59 /* AdsInfomationTableViewCell.swift */,
+				B7BE89CC28B8CA8700A41D59 /* AdsInfomationTableViewCell.xib */,
+			);
+			path = "Ads Deatil";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -412,6 +432,7 @@
 				B75E5B2B27ABC89A00B6CC14 /* AdsNoHistoryTableViewCell.xib in Resources */,
 				B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */,
 				B75E5B2327ABC26400B6CC14 /* AdsBudgetTableViewCell.xib in Resources */,
+				B7BE89CE28B8CA8700A41D59 /* AdsInfomationTableViewCell.xib in Resources */,
 				B771843A27C61EF300A17C1D /* SelectObjectiveTableViewCell.xib in Resources */,
 				B7B1E06327DB408100280B9E /* AdsPaymentMethodTableViewCell.xib in Resources */,
 				B7B34E1F28587A8E00600699 /* DailyBidCostPerAccountTableViewCell.xib in Resources */,
@@ -460,6 +481,7 @@
 				B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */,
 				B76DD14127BE34610037A787 /* ChoosePageTableViewCell.swift in Sources */,
 				B79F2B082857474C00B82989 /* SelectDailyBidTypeViewController.swift in Sources */,
+				B7BE89CD28B8CA8700A41D59 /* AdsInfomationTableViewCell.swift in Sources */,
 				B7B1E06527DB4F2A00280B9E /* SelectAdsPaymentViewController.swift in Sources */,
 				B7B1E06827DB512400280B9E /* SelectAdsPaymentMethodTableViewCell.swift in Sources */,
 				B771843527C619B700A17C1D /* SelectPageAdsTableViewCell.swift in Sources */,
@@ -469,11 +491,13 @@
 				B75E5B3127ABCEAB00B6CC14 /* TokenBalanceCollectionViewCell.swift in Sources */,
 				B75E5B2227ABC26400B6CC14 /* AdsBudgetTableViewCell.swift in Sources */,
 				B76DD15C27BE38A70037A787 /* CreateAdsViewModel.swift in Sources */,
+				B7BE89C928B8C8AB00A41D59 /* AdDetailViewModel.swift in Sources */,
 				B76DD14927BE34B50037A787 /* CampaignNameTableViewCell.swift in Sources */,
 				B771843C27C62A1D00A17C1D /* AdsPreviewViewController.swift in Sources */,
 				B70EDBDC27BB84C700EA53E2 /* AdsManagerViewModel.swift in Sources */,
 				B7B1E06227DB408100280B9E /* AdsPaymentMethodTableViewCell.swift in Sources */,
 				B76DD14527BE347B0037A787 /* ChooseObjectiveTableViewCell.swift in Sources */,
+				B7BE89C728B8BF4300A41D59 /* AdsDetailViewController.swift in Sources */,
 				B771843227C617FB00A17C1D /* SelectAdsObjectiveViewController.swift in Sources */,
 				B70EDBE227BBA4AB00EA53E2 /* CreateAdsViewController.swift in Sources */,
 				B771844127C62FBD00A17C1D /* ConfirmButtonTableViewCell.swift in Sources */,

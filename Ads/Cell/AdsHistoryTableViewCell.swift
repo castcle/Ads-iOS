@@ -27,8 +27,10 @@
 
 import UIKit
 import Core
+import Networking
 import ActiveLabel
 import SwiftColor
+import Kingfisher
 
 class AdsHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImage: UIImageView!
@@ -50,11 +52,8 @@ class AdsHistoryTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.avatarImage.circle()
         self.avatarImage.image = UIImage.Asset.userPlaceholder
-        self.typeImage.image = UIImage.Asset.typePageIcon
         self.dotImage.circle()
-        self.dotImage.image = UIColor.Asset.trendUp.toImage()
-        self.approvedView.capsule(color: UIColor.Asset.trendUp)
-        self.lineView.backgroundColor = UIColor.Asset.darkGraphiteBlue
+        self.lineView.backgroundColor = UIColor.Asset.lineGray
         self.campaignLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.campaignLabel.textColor = UIColor.Asset.white
         self.idLabel.font = UIFont.asset(.regular, fontSize: .small)
@@ -71,17 +70,66 @@ class AdsHistoryTableViewCell: UITableViewCell {
         self.detailLabel.textColor = UIColor.Asset.white
         self.impressionLabel.font = UIFont.asset(.regular, fontSize: .small)
         self.impressionLabel.textColor = UIColor.Asset.lightBlue
-        self.totalSpendLabel.customize { label in
-            label.font = UIFont.asset(.bold, fontSize: .body)
-            label.numberOfLines = 1
-            label.textColor = UIColor.Asset.white
-            let amountType = ActiveType.custom(pattern: "\\$345")
-            label.enabledTypes = [amountType]
-            label.customColor[amountType] = UIColor.Asset.lightBlue
-        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configCell(ads: Ads) {
+        self.campaignLabel.text = ads.campaignName
+        self.idLabel.text = ads.campaignCode
+        self.detailLabel.text = ads.campaignMessage
+        self.approvedLabel.text = ads.adStatus.display
+        self.statusLabel.text = ads.boostStatus.rawValue.capitalized
+        if ads.adStatus == .approved {
+            self.approvedView.capsule(color: UIColor.Asset.trendUp)
+        } else if ads.adStatus == .declinded {
+            self.approvedView.capsule(color: UIColor.Asset.trendDown)
+        } else if ads.adStatus == .canceled {
+            self.approvedView.capsule(color: UIColor.Asset.warning)
+        } else {
+            self.approvedView.capsule(color: UIColor.Asset.lineGray)
+        }
+        if ads.boostType == .user {
+            self.typeImage.image = UIImage.Asset.typePageIcon
+            self.displayNameLabel.text = ads.user.displayName
+            let url = URL(string: ads.user.images.avatar.thumbnail)
+            self.avatarImage.kf.setImage(with: url, placeholder: UIImage.Asset.placeholder, options: [.transition(.fade(0.35))])
+        } else {
+            self.typeImage.image = UIImage.Asset.typeCastIcon
+        }
+        if ads.boostStatus == .running {
+            self.dotImage.isHidden = false
+            self.statusLabel.isHidden = false
+            self.dotImage.image = UIColor.Asset.trendUp.toImage()
+            self.dateLabel.text = "\(ads.createdDisplay.dateToString()) \(ads.createdDisplay.timeToString())"
+        } else if ads.boostStatus == .pause {
+            self.dotImage.isHidden = false
+            self.statusLabel.isHidden = false
+            self.dotImage.image = UIColor.Asset.lineGray.toImage()
+            self.dateLabel.text = "\(ads.createdDisplay.dateToString()) \(ads.createdDisplay.timeToString())"
+        } else if ads.boostStatus == .end {
+            self.dotImage.isHidden = false
+            self.statusLabel.isHidden = false
+            self.dotImage.image = UIColor.Asset.trendDown.toImage()
+            self.dateLabel.text = "\(ads.createdDisplay.dateToString()) \(ads.createdDisplay.timeToString())"
+        } else {
+            self.dotImage.isHidden = true
+            self.statusLabel.isHidden = true
+            self.dateLabel.text = ""
+        }
+
+        let totalSpend: Double = (Double(ads.duration) * ads.dailyBudget)
+        self.totalSpendLabel.text = "Total spending : $\(totalSpend)"
+        self.totalSpendLabel.customize { label in
+            label.font = UIFont.asset(.bold, fontSize: .body)
+            label.numberOfLines = 1
+            label.textColor = UIColor.Asset.white
+            let amountType = ActiveType.custom(pattern: "\\$\(totalSpend)")
+            label.enabledTypes = [amountType]
+            label.customColor[amountType] = UIColor.Asset.lightBlue
+        }
+        self.impressionLabel.text = "\(ads.statistics.impression.organic + ads.statistics.impression.paid) impressions"
     }
 }

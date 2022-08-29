@@ -28,10 +28,14 @@
 import Core
 import Networking
 import RealmSwift
+import SwiftyJSON
 
 public final class CreateAdsViewModel {
+    private var walletRepository: WalletRepository = WalletRepositoryImpl()
+    let tokenHelper: TokenHelper = TokenHelper()
     var adsRequest: AdsRequest = AdsRequest()
     var page: PageRealm = PageRealm()
+    var wallet: Wallet = Wallet()
 
     enum CreateAdsContent {
         case page
@@ -49,11 +53,44 @@ public final class CreateAdsViewModel {
         if self.adsRequest.boostType == .content {
             return []
         } else {
-            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .dailyBid, .paymentMethod, .adPreview]
+            return [.page, .objective, .campaignName, .campaignMessage, .dailyBudget, .duration, .paymentMethod, .adPreview]
         }
     }
 
     public init() {
-        self.page = PageRealm().initCustom(displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
+        self.tokenHelper.delegate = self
+        self.adsRequest.dailyBudget = 10
+        self.adsRequest.duration = 1
+        self.page = PageRealm().initCustom(id: UserManager.shared.id, displayName: UserManager.shared.displayName, castcleId: UserManager.shared.castcleId, avatar: UserManager.shared.avatar, cover: UserManager.shared.cover, overview: UserManager.shared.overview, official: UserManager.shared.official)
+    }
+
+    func walletLookup() {
+        self.walletRepository.walletLookup(userId: self.page.id) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.wallet = Wallet(json: json)
+                    self.didGetWalletLockupFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    var didGetWalletLockupFinish: (() -> Void)?
+    var didError: (() -> Void)?
+}
+
+extension CreateAdsViewModel: TokenHelperDelegate {
+    public func didRefreshTokenFinish() {
+        self.walletLookup()
     }
 }

@@ -40,6 +40,14 @@ class AdsPreviewViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.Asset.darkGraphiteBlue
         self.configureTableView()
+        self.viewModel.didCreateAdsFinish = {
+            CCLoading.shared.dismiss()
+            let viewControllers: [UIViewController] = Utility.currentViewController().navigationController!.viewControllers as [UIViewController]
+            Utility.currentViewController().navigationController!.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
+        }
+        self.viewModel.didError = {
+            CCLoading.shared.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +104,7 @@ extension AdsPreviewViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension AdsPreviewViewController: ConfirmButtonTableViewCellDelegate {
     func didConfirm(_ cell: ConfirmButtonTableViewCell) {
+        CCLoading.shared.show(text: "Boosting")
         self.viewModel.createAds()
     }
 }

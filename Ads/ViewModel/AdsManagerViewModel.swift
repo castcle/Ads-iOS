@@ -36,13 +36,10 @@ public final class AdsManagerViewModel {
     var ads: [Ads] = []
     var meta: Meta = Meta()
     var adsLoaded: Bool = false
-    var adsCanLoad: Bool = true
     var state: State = .none
-    var filterType: HistoryFilterType = .all
 
     public init() {
         self.tokenHelper.delegate = self
-        self.getAds()
     }
 
     func getAds() {
@@ -52,17 +49,12 @@ public final class AdsManagerViewModel {
                 do {
                     let rawJson = try response.mapJSON()
                     let json = JSON(rawJson)
-                    let payload = json[JsonKey.payload.rawValue].arrayValue
+                    let adsData = (json[JsonKey.payload.rawValue].arrayValue).map { Ads(json: $0) }
+                    self.ads.append(contentsOf: adsData)
                     self.meta = Meta(json: JSON(json[JsonKey.meta.rawValue].dictionaryValue))
-
-                    if self.meta.resultCount < self.adsRequest.maxResults {
-                        self.adsCanLoad = false
-                    }
-
-                    payload.forEach { ads in
-                        self.ads.append(Ads(json: ads))
-                    }
-
+                    let includes = JSON(json[JsonKey.includes.rawValue].dictionaryValue)
+                    let users = includes[JsonKey.users.rawValue].arrayValue
+                    UserHelper.shared.updateAuthorRef(users: users)
                     self.adsLoaded = true
                     self.didGetAdsFinish?()
                 } catch {}
@@ -77,7 +69,6 @@ public final class AdsManagerViewModel {
     func reloadData() {
         self.ads = []
         self.adsLoaded = false
-        self.adsCanLoad = true
         self.adsRequest.maxResults = 25
         self.adsRequest.untilId = ""
         self.getAds()

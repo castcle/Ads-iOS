@@ -57,7 +57,7 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(adsPaymentType: AdsPaymentType, oldSelect: AdsPaymentType) {
+    public func configCell(adsPaymentType: AdsPaymentType, oldSelect: AdsPaymentType, wallet: Wallet) {
         self.methodImage.image = adsPaymentType.image
         self.methodTitleLabel.text = adsPaymentType.display
         self.detailLabel.text = adsPaymentType.notice
@@ -65,6 +65,11 @@ class SelectAdsPaymentMethodTableViewCell: UITableViewCell {
             self.selectIcon.isHidden = false
         } else {
             self.selectIcon.isHidden = true
+        }
+        if adsPaymentType == .token {
+            self.balanceLabel.text = wallet.availableBalance
+        } else {
+            self.balanceLabel.text = wallet.adsCredit
         }
     }
 }

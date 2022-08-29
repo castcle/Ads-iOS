@@ -59,6 +59,7 @@ class AdsManagerViewController: UIViewController {
         self.boostButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
         self.boostButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
 
+        self.viewModel.getAds()
         self.tableView.coreRefresh.addHeadRefresh(animator: FastAnimator()) {
             self.tableView.coreRefresh.resetNoMore()
             self.tableView.isScrollEnabled = false
@@ -68,14 +69,13 @@ class AdsManagerViewController: UIViewController {
         }
 
         self.tableView.coreRefresh.addFootRefresh(animator: NormalFooterAnimator()) {
-            if self.viewModel.adsCanLoad {
-                self.viewModel.getAds()
-            } else {
-                self.tableView.coreRefresh.noticeNoMoreData()
-            }
+            self.viewModel.getAds()
         }
 
         self.viewModel.didGetAdsFinish = {
+            if self.viewModel.meta.resultCount < self.viewModel.adsRequest.maxResults {
+                self.tableView.coreRefresh.noticeNoMoreData()
+            }
             self.tableView.coreRefresh.endHeaderRefresh()
             self.tableView.coreRefresh.endLoadingMore()
             self.tableView.isScrollEnabled = true
@@ -108,23 +108,19 @@ class AdsManagerViewController: UIViewController {
         let actionSheet = CCActionSheet()
         let allButton = CCAction(title: HistoryFilterType.all.rawValue, color: UIColor.Asset.lightBlue) {
             actionSheet.dismissActionSheet()
-            self.viewModel.filterType = .all
-            self.updateFilterLabel()
+            self.updateFilter(filter: .all)
         }
         let dayButton = CCAction(title: HistoryFilterType.day.rawValue) {
             actionSheet.dismissActionSheet()
-            self.viewModel.filterType = .day
-            self.updateFilterLabel()
+            self.updateFilter(filter: .day)
         }
         let weekButton = CCAction(title: HistoryFilterType.week.rawValue) {
             actionSheet.dismissActionSheet()
-            self.viewModel.filterType = .week
-            self.updateFilterLabel()
+            self.updateFilter(filter: .week)
         }
         let monthButton = CCAction(title: HistoryFilterType.month.rawValue) {
             actionSheet.dismissActionSheet()
-            self.viewModel.filterType = .month
-            self.updateFilterLabel()
+            self.updateFilter(filter: .month)
         }
         let cancelButton = CCAction(title: "Cancel", color: UIColor.Asset.denger) {
             actionSheet.dismissActionSheet()
@@ -134,11 +130,17 @@ class AdsManagerViewController: UIViewController {
         Utility.currentViewController().present(actionSheet, animated: true, completion: nil)
     }
 
-    private func updateFilterLabel() {
-        if self.viewModel.filterType == .all {
+    private func updateFilter(filter: HistoryFilterType) {
+        self.tableView.scrollToRow(at: NSIndexPath(row: 0, section: 0) as IndexPath, at: .top, animated: true)
+        self.viewModel.adsRequest.filter = filter
+        self.tableView.isScrollEnabled = false
+        self.viewModel.adsLoaded = false
+        self.tableView.reloadData()
+        self.viewModel.reloadData()
+        if self.viewModel.adsRequest.filter == .all {
             self.filterLabel.text = ""
         } else {
-            self.filterLabel.text = self.viewModel.filterType.rawValue
+            self.filterLabel.text = self.viewModel.adsRequest.filter.text
         }
     }
 
@@ -177,7 +179,8 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
                     return cell ?? AdsNoHistoryTableViewCell()
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsHistory, for: indexPath as IndexPath) as? AdsHistoryTableViewCell
-                    cell?.backgroundColor = UIColor.Asset.cellBackground
+                    cell?.backgroundColor = UIColor.clear
+                    cell?.configCell(ads: self.viewModel.ads[indexPath.row])
                     return cell ?? AdsHistoryTableViewCell()
                 }
             } else {
@@ -189,6 +192,12 @@ extension AdsManagerViewController: UITableViewDelegate, UITableViewDataSource {
             return cell ?? AdsHistoryFooterTableViewCell()
         default:
             return UITableViewCell()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == AdsManagerViewControllerSection.history.rawValue && self.viewModel.adsLoaded && !self.viewModel.ads.isEmpty {
+            Utility.currentViewController().navigationController?.pushViewController(AdsOpener.open(.adsDetail(AdDetailViewModel(ads: self.viewModel.ads[indexPath.row]))), animated: true)
         }
     }
 }

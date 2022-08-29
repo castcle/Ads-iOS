@@ -27,15 +27,17 @@
 
 import UIKit
 import Core
+import Networking
 
 public enum AdsScene {
     case adsManager
     case createAds
     case selectAdsPage(String)
     case selectAdsObjective(AdsObjective)
-    case selectAdsPayment(AdsPaymentType)
+    case selectAdsPayment(AdsPaymentType, Wallet)
     case selectDailyBidType(DailyBidType, Int)
     case adsPreview(AdsPreviewViewModel)
+    case adsDetail(AdDetailViewModel)
 }
 
 public struct AdsOpener {
@@ -59,10 +61,11 @@ public struct AdsOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsObjective) as? SelectAdsObjectiveViewController
             viewController?.oldSelect = oldSelect
             return viewController ?? SelectAdsObjectiveViewController()
-        case .selectAdsPayment(let oldSelect):
+        case .selectAdsPayment(let oldSelect, let wallet):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.selectAdsPayment) as? SelectAdsPaymentViewController
             viewController?.oldSelect = oldSelect
+            viewController?.wallet = wallet
             return viewController ?? SelectAdsPaymentViewController()
         case .selectDailyBidType(let oldSelect, let cost):
             let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
@@ -75,6 +78,11 @@ public struct AdsOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsPreview) as? AdsPreviewViewController
             viewController?.viewModel = viewModel
             return viewController ?? AdsPreviewViewController()
+        case .adsDetail(let viewModel):
+            let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsDetail) as? AdsDetailViewController
+            viewController?.viewModel = viewModel
+            return viewController ?? AdsDetailViewController()
         }
     }
 }
