@@ -66,8 +66,11 @@ class AdsDetailViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.registerFeedCell()
-        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsBudget)
-        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.confirmButton, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.confirmButton)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoName, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoName)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoStatus, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoStatus)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoBadget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoBadget)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoDate, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoDate)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoSingle, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoSingle)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -122,28 +125,53 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.viewModel.adsDetailSection.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if self.viewModel.adsPreviewSection[indexPath.row] == .confirm {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.confirmButton, for: indexPath as IndexPath) as? ConfirmButtonTableViewCell
-//            cell?.configCell(title: "Boost This Ad")
-//            cell?.delegate = self
-//            cell?.backgroundColor = UIColor.clear
-//            return cell ?? ConfirmButtonTableViewCell()
-//        } else if self.viewModel.adsPreviewSection[indexPath.row] == .header {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.headerFeed, for: indexPath as IndexPath) as? HeaderTableViewCell
-//            cell?.backgroundColor = UIColor.Asset.cellBackground
-//            cell?.configAdsPreViewCell(page: self.viewModel.page)
-//            return cell ?? HeaderTableViewCell()
-//        } else if self.viewModel.adsPreviewSection[indexPath.row] == .page {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: ComponentNibVars.TableViewCell.adsPage, for: indexPath as IndexPath) as? AdsPageTableViewCell
-//            cell?.backgroundColor = UIColor.Asset.cellBackground
-//            cell?.configAdsPreViewCell(page: self.viewModel.page, adsRequest: self.viewModel.adsRequest)
-//            return cell ?? AdsPageTableViewCell()
-//        } else {
+        if self.viewModel.adsDetailSection[indexPath.row] == .campaignName {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoName, for: indexPath as IndexPath) as? AdsInfoNameTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoNameTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .boostStatus {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoStatus, for: indexPath as IndexPath) as? AdsInfoStatusTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoStatusTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .dateCteate {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoSingle, for: indexPath as IndexPath) as? AdsInfoSingleTableViewCell
+            cell?.configCell(title: "Date Created", value: self.viewModel.ads.createdDisplay.dateToString())
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoSingleTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .budget {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoBadget, for: indexPath as IndexPath) as? AdsInfoBadgetTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoBadgetTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .startAndEndDate {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoDate, for: indexPath as IndexPath) as? AdsInfoDateTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoDateTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .budgetSpent {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoSingle, for: indexPath as IndexPath) as? AdsInfoSingleTableViewCell
+            let totalSpend: Double = (Double(self.viewModel.ads.duration) * self.viewModel.ads.dailyBudget)
+            cell?.configCell(title: "Budget spent", value: "$\(totalSpend)")
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoSingleTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .impression {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoSingle, for: indexPath as IndexPath) as? AdsInfoSingleTableViewCell
+            cell?.configCell(title: "Impression", value: "\(self.viewModel.ads.statistics.impression.organic + self.viewModel.ads.statistics.impression.paid)")
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoSingleTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .cmp {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoSingle, for: indexPath as IndexPath) as? AdsInfoSingleTableViewCell
+            cell?.configCell(title: "CPM", value: "$ \(self.viewModel.ads.statistics.cpm)")
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsInfoSingleTableViewCell()
+        } else {
             return UITableViewCell()
-//        }
+        }
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="61" id="KGk-i7-Jjw" customClass="AdsInfoSingleTableViewCell" customModule="Ads" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="61"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads Info Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5B-NI-aLy">
+                        <rect key="frame" x="20" y="20" width="95" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads Info Value" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oP2-2s-LjQ">
+                        <rect key="frame" x="208" y="21.5" width="92" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CId-dA-p2M">
+                        <rect key="frame" x="0.0" y="60" width="320" height="1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="WQn-5T-CkC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="CId-dA-p2M" secondAttribute="trailing" id="11f-3w-jSq"/>
+                    <constraint firstItem="Y5B-NI-aLy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="4Rj-ax-z1g"/>
+                    <constraint firstItem="CId-dA-p2M" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Psx-j8-b2X"/>
+                    <constraint firstItem="CId-dA-p2M" firstAttribute="top" secondItem="Y5B-NI-aLy" secondAttribute="bottom" constant="20" id="QZF-hf-JRX"/>
+                    <constraint firstAttribute="trailing" secondItem="oP2-2s-LjQ" secondAttribute="trailing" constant="20" id="bml-Z5-S0B"/>
+                    <constraint firstItem="oP2-2s-LjQ" firstAttribute="centerY" secondItem="Y5B-NI-aLy" secondAttribute="centerY" id="gCK-Pw-1dt"/>
+                    <constraint firstAttribute="bottom" secondItem="CId-dA-p2M" secondAttribute="bottom" id="lsk-rk-v6E"/>
+                    <constraint firstItem="Y5B-NI-aLy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="olb-tx-MUh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="infoLabel" destination="oP2-2s-LjQ" id="yJo-UE-qb5"/>
+                <outlet property="infoTitleLabel" destination="Y5B-NI-aLy" id="A2c-Yx-U21"/>
+                <outlet property="lineView" destination="CId-dA-p2M" id="VPJ-FF-fFI"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="107.47767857142857"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

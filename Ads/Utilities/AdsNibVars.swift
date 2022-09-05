@@ -65,6 +65,11 @@ public struct AdsNibVars {
         public static let dailyBid = "DailyBidTableViewCell"
         public static let dailyBidAuto = "DailyBidAutoTableViewCell"
         public static let dailyBidCostPerAccount = "DailyBidCostPerAccountTableViewCell"
+        public static let adsInfoName = "AdsInfoNameTableViewCell"
+        public static let adsInfoStatus = "AdsInfoStatusTableViewCell"
+        public static let adsInfoBadget = "AdsInfoBadgetTableViewCell"
+        public static let adsInfoDate = "AdsInfoDateTableViewCell"
+        public static let adsInfoSingle = "AdsInfoSingleTableViewCell"
     }
 
     // MARK: - CollectionViewCell

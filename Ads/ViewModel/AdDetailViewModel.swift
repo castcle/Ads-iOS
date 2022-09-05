@@ -36,12 +36,17 @@ public enum AdsDetailType {
 }
 
 public final class AdDetailViewModel {
-//    enum AdsDetailSection {
-//        case header
-//        case page
-//        case content
-//        case confirm
-//    }
+    enum AdsDetailSection {
+        case content
+        case campaignName
+        case boostStatus
+        case dateCteate
+        case budget
+        case startAndEndDate
+        case budgetSpent
+        case impression
+        case cmp
+    }
 //
 //    private var adsRepository: AdsRepository = AdsRepositoryImpl()
     var adsDetailType: AdsDetailType = .information
@@ -49,13 +54,13 @@ public final class AdDetailViewModel {
 //    let tokenHelper: TokenHelper = TokenHelper()
 //    var adsRequest: AdsRequest = AdsRequest()
 //    var page: PageRealm = PageRealm()
-//    var adsPreviewSection: [AdsPreviewSection] {
-//        if self.adsRequest.boostType == .user {
-//            return [.header, .page, .confirm]
-//        } else {
-//            return [.header, .content, .confirm]
-//        }
-//    }
+    var adsDetailSection: [AdsDetailSection] {
+        if self.adsDetailType == .information {
+            return [.content, .campaignName, .boostStatus, .dateCteate, .budget, .startAndEndDate, .budgetSpent, .impression, .cmp]
+        } else {
+            return []
+        }
+    }
 
     public init(ads: Ads = Ads()) {
         self.ads = ads

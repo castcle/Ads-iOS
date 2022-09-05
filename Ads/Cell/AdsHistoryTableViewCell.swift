@@ -81,7 +81,7 @@ class AdsHistoryTableViewCell: UITableViewCell {
         self.idLabel.text = ads.campaignCode
         self.detailLabel.text = ads.campaignMessage
         self.approvedLabel.text = ads.adStatus.display
-        self.statusLabel.text = ads.boostStatus.rawValue.capitalized
+        self.statusLabel.text = ads.boostStatus.display
         if ads.adStatus == .approved {
             self.approvedView.capsule(color: UIColor.Asset.trendUp)
         } else if ads.adStatus == .declinded {

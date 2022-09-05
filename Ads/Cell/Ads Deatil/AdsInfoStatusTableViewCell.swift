@@ -19,27 +19,47 @@
 //  Thailand 10160, or visit www.castcle.com if you need additional information
 //  or have any questions.
 //
-//  AdsInfomationTableViewCell.swift
+//  AdsInfoStatusTableViewCell.swift
 //  Ads
 //
-//  Created by Castcle Co., Ltd. on 26/8/2565 BE.
+//  Created by Castcle Co., Ltd. on 5/9/2565 BE.
 //
 
 import UIKit
 import Core
 import Networking
+import SwiftColor
 
-class AdsInfomationTableViewCell: UITableViewCell {
+class AdsInfoStatusTableViewCell: UITableViewCell {
+
+    @IBOutlet var statusTitleLabel: UILabel!
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var dotImage: UIImageView!
+    @IBOutlet var lineView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.statusTitleLabel.font = UIFont.asset(.regular, fontSize: .body)
+        self.statusTitleLabel.textColor = UIColor.Asset.white
+        self.statusLabel.font = UIFont.asset(.regular, fontSize: .overline)
+        self.statusLabel.textColor = UIColor.Asset.white
+        self.lineView.backgroundColor = UIColor.Asset.cellBackground
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     func configCell(ads: Ads) {
-        
+        self.statusLabel.text = ads.boostStatus.display
+        if ads.boostStatus == .running {
+            self.dotImage.image = UIColor.Asset.trendUp.toImage()
+        } else if ads.boostStatus == .pause {
+            self.dotImage.image = UIColor.Asset.lineGray.toImage()
+        } else if ads.boostStatus == .end {
+            self.dotImage.image = UIColor.Asset.trendDown.toImage()
+        } else {
+            self.dotImage.image = UIColor.Asset.warning.toImage()
+        }
     }
 }
