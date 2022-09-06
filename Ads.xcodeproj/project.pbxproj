@@ -15,6 +15,8 @@
 		B7167F8A27ACD6F400067DBD /* AdsHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */; };
 		B7167F8B27ACD6F400067DBD /* AdsHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */; };
 		B7167F8E27ACDBF900067DBD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7167F8D27ACDBF900067DBD /* Assets.xcassets */; };
+		B72C44EC28C75E8200674D0D /* AdsReportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72C44EA28C75E8200674D0D /* AdsReportTableViewCell.swift */; };
+		B72C44ED28C75E8200674D0D /* AdsReportTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B72C44EB28C75E8200674D0D /* AdsReportTableViewCell.xib */; };
 		B7534FC828C6088600C806B5 /* AdsInfoNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7534FC628C6088600C806B5 /* AdsInfoNameTableViewCell.swift */; };
 		B7534FC928C6088600C806B5 /* AdsInfoNameTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7534FC728C6088600C806B5 /* AdsInfoNameTableViewCell.xib */; };
 		B7534FCC28C608F100C806B5 /* AdsInfoStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7534FCA28C608F100C806B5 /* AdsInfoStatusTableViewCell.swift */; };
@@ -96,6 +98,8 @@
 		B7167F8827ACD6F400067DBD /* AdsHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		B7167F8927ACD6F400067DBD /* AdsHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		B7167F8D27ACDBF900067DBD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B72C44EA28C75E8200674D0D /* AdsReportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsReportTableViewCell.swift; sourceTree = "<group>"; };
+		B72C44EB28C75E8200674D0D /* AdsReportTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsReportTableViewCell.xib; sourceTree = "<group>"; };
 		B7534FC628C6088600C806B5 /* AdsInfoNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInfoNameTableViewCell.swift; sourceTree = "<group>"; };
 		B7534FC728C6088600C806B5 /* AdsInfoNameTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdsInfoNameTableViewCell.xib; sourceTree = "<group>"; };
 		B7534FCA28C608F100C806B5 /* AdsInfoStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsInfoStatusTableViewCell.swift; sourceTree = "<group>"; };
@@ -365,6 +369,8 @@
 				B7534FD328C60A6900C806B5 /* AdsInfoDateTableViewCell.xib */,
 				B7534FD628C60B1500C806B5 /* AdsInfoSingleTableViewCell.swift */,
 				B7534FD728C60B1500C806B5 /* AdsInfoSingleTableViewCell.xib */,
+				B72C44EA28C75E8200674D0D /* AdsReportTableViewCell.swift */,
+				B72C44EB28C75E8200674D0D /* AdsReportTableViewCell.xib */,
 			);
 			path = "Ads Deatil";
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				B76DD15A27BE37E70037A787 /* AdPreviewTableViewCell.xib in Resources */,
 				B7534FC928C6088600C806B5 /* AdsInfoNameTableViewCell.xib in Resources */,
 				B75E5B1927ABC15D00B6CC14 /* Ads.storyboard in Resources */,
+				B72C44ED28C75E8200674D0D /* AdsReportTableViewCell.xib in Resources */,
 				B7534FD128C609BB00C806B5 /* AdsInfoBadgetTableViewCell.xib in Resources */,
 				B76DD15627BE37D30037A787 /* DurationTableViewCell.xib in Resources */,
 				B76DD14A27BE34B50037A787 /* CampaignNameTableViewCell.xib in Resources */,
@@ -506,6 +513,7 @@
 			files = (
 				B76DD15527BE37D30037A787 /* DurationTableViewCell.swift in Sources */,
 				B76DD14D27BE34D50037A787 /* BoostMessageTableViewCell.swift in Sources */,
+				B72C44EC28C75E8200674D0D /* AdsReportTableViewCell.swift in Sources */,
 				B75E5B1527ABC0E700B6CC14 /* AdsNibVars.swift in Sources */,
 				B76DD14127BE34610037A787 /* ChoosePageTableViewCell.swift in Sources */,
 				B79F2B082857474C00B82989 /* SelectDailyBidTypeViewController.swift in Sources */,
