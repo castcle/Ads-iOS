@@ -70,6 +70,7 @@ public struct AdsNibVars {
         public static let adsInfoBadget = "AdsInfoBadgetTableViewCell"
         public static let adsInfoDate = "AdsInfoDateTableViewCell"
         public static let adsInfoSingle = "AdsInfoSingleTableViewCell"
+        public static let adsReport = "AdsReportTableViewCell"
     }
 
     // MARK: - CollectionViewCell

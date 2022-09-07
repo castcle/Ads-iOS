@@ -46,17 +46,19 @@ public final class AdDetailViewModel {
         case budgetSpent
         case impression
         case cmp
+        case report
     }
-//
+
 //    private var adsRepository: AdsRepository = AdsRepositoryImpl()
     var adsDetailType: AdsDetailType = .information
     var ads: Ads = Ads()
-//    let tokenHelper: TokenHelper = TokenHelper()
+    let tokenHelper: TokenHelper = TokenHelper()
 //    var adsRequest: AdsRequest = AdsRequest()
-//    var page: PageRealm = PageRealm()
     var adsDetailSection: [AdsDetailSection] {
         if self.adsDetailType == .information {
             return [.content, .campaignName, .boostStatus, .dateCteate, .budget, .startAndEndDate, .budgetSpent, .impression, .cmp]
+        } else if self.adsDetailType == .report {
+            return [.report]
         } else {
             return []
         }
@@ -64,7 +66,7 @@ public final class AdDetailViewModel {
 
     public init(ads: Ads = Ads()) {
         self.ads = ads
-//        self.tokenHelper.delegate = self
+        self.tokenHelper.delegate = self
     }
 
 //    func createAds() {
@@ -81,4 +83,8 @@ public final class AdDetailViewModel {
 //            }
 //        }
 //    }
+}
+
+extension AdDetailViewModel: TokenHelperDelegate {
+    public func didRefreshTokenFinish() {}
 }

@@ -71,6 +71,7 @@ class AdsDetailViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoBadget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoBadget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoDate, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoDate)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoSingle, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoSingle)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsReport, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsReport)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -104,18 +105,21 @@ class AdsDetailViewController: UIViewController {
         self.viewModel.adsDetailType = .information
         self.updateUi()
         self.customNavigationBar(.primary, title: "Infomation", leftBarButton: .back)
+        self.tableView.reloadData()
     }
 
     @IBAction func reportAction(_ sender: Any) {
         self.viewModel.adsDetailType = .report
         self.updateUi()
         self.customNavigationBar(.primary, title: "Report", leftBarButton: .back)
+        self.tableView.reloadData()
     }
 
     @IBAction func adSettingAction(_ sender: Any) {
         self.viewModel.adsDetailType = .adSetting
         self.updateUi()
         self.customNavigationBar(.primary, title: "Ad Setting", leftBarButton: .back)
+        self.tableView.reloadData()
     }
 }
 
@@ -170,6 +174,11 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.configCell(title: "CPM", value: "$ \(self.viewModel.ads.statistics.cpm)")
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsInfoSingleTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .report {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsReport, for: indexPath as IndexPath) as? AdsReportTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsReportTableViewCell()
         } else {
             return UITableViewCell()
         }
