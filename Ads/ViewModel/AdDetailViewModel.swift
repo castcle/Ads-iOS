@@ -47,6 +47,14 @@ public final class AdDetailViewModel {
         case impression
         case cmp
         case report
+        case page
+        case objective
+        case campaignNameSetting
+        case campaignMessage
+        case dailyBudget
+        case duration
+        case paymentMethod
+//        case adPreview
     }
 
 //    private var adsRepository: AdsRepository = AdsRepositoryImpl()
@@ -60,7 +68,7 @@ public final class AdDetailViewModel {
         } else if self.adsDetailType == .report {
             return [.report]
         } else {
-            return []
+            return [.page, .objective, .campaignNameSetting, .campaignMessage, .dailyBudget, .duration, .paymentMethod]
         }
     }
 

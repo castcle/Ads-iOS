@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 protocol DurationTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: DurationTableViewCell, duration: Int)
@@ -63,6 +64,12 @@ class DurationTableViewCell: UITableViewCell {
 
     private func getDayFromValue(value: Int) -> Int {
         return (value * 30) / 100
+    }
+
+    func configDisplayCell(ads: Ads) {
+        self.slider.isEnabled = false
+        self.slider.value = ((Float(ads.duration) / 30) * 100) / 100
+        self.dayLabel.text = "\(ads.duration) Day"
     }
 
     @IBAction func sliderValueChange(_ sender: Any) {

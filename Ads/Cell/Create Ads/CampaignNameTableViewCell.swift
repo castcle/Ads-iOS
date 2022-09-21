@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 protocol CampaignNameTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: CampaignNameTableViewCell, campaignName: String)
@@ -52,6 +53,11 @@ class CampaignNameTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configDisplayCell(ads: Ads) {
+        self.nameTextField.isEnabled = false
+        self.nameTextField.text = ads.campaignName
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {

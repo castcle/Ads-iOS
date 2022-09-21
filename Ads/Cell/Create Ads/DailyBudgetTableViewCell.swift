@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 
 protocol DailyBudgetTableViewCellDelegate: AnyObject {
     func didEditChange(_ cell: DailyBudgetTableViewCell, budget: Int)
@@ -64,6 +65,16 @@ class DailyBudgetTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configDisplayCell(ads: Ads) {
+        self.slider.isEnabled = false
+        self.slider.value = self.setValueSlider(dailyBudget: ads.dailyBudget)
+        self.amountLabel.text = "$\(ads.dailyBudget)"
+    }
+
+    private func setValueSlider(dailyBudget: Double) -> Float {
+        return Float(dailyBudget / 100.0)
     }
 
     @IBAction func sliderValueChange(_ sender: Any) {

@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 import UITextView_Placeholder
 
 protocol BoostMessageTableViewCellDelegate: AnyObject {
@@ -54,6 +55,11 @@ class BoostMessageTableViewCell: UITableViewCell, UITextViewDelegate {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+
+    func configDisplayCell(ads: Ads) {
+        self.massageTextView.isEditable = false
+        self.massageTextView.text = ads.campaignMessage
     }
 
     func textViewDidChange(_ textView: UITextView) {

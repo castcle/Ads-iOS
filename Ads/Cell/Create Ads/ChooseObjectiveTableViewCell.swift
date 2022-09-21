@@ -62,7 +62,8 @@ class ChooseObjectiveTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    public func configCell(objective: AdsObjective) {
+    public func configCell(objective: AdsObjective, isDisplay: Bool = false) {
+        self.nextImage.isHidden = isDisplay
         self.typeImage.image = objective.image
         self.typeLabel.text = objective.rawValue.capitalized
         self.detailLabel.text = objective.detail

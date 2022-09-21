@@ -72,6 +72,13 @@ class AdsDetailViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoDate, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoDate)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsInfoSingle, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsInfoSingle)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsReport, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsReport)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.choosePage, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.choosePage)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.chooseObjective, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.chooseObjective)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.campaignName, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.campaignName)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.boostMessage, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.boostMessage)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBudget)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -179,6 +186,41 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.configCell(ads: self.viewModel.ads)
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsReportTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .page {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configCell(userInfo: self.viewModel.ads.user)
+            return cell ?? ChoosePageTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .objective {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.chooseObjective, for: indexPath as IndexPath) as? ChooseObjectiveTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configCell(objective: self.viewModel.ads.objective, isDisplay: true)
+            return cell ?? ChooseObjectiveTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .campaignNameSetting {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.campaignName, for: indexPath as IndexPath) as? CampaignNameTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configDisplayCell(ads: self.viewModel.ads)
+            return cell ?? CampaignNameTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .campaignMessage {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.boostMessage, for: indexPath as IndexPath) as? BoostMessageTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configDisplayCell(ads: self.viewModel.ads)
+            return cell ?? BoostMessageTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .dailyBudget {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.dailyBudget, for: indexPath as IndexPath) as? DailyBudgetTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configDisplayCell(ads: self.viewModel.ads)
+            return cell ?? DailyBudgetTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .duration {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.duration, for: indexPath as IndexPath) as? DurationTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configDisplayCell(ads: self.viewModel.ads)
+            return cell ?? DurationTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .paymentMethod {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod, for: indexPath as IndexPath) as? AdsPaymentMethodTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configDisplayCell(adsPaymentType: self.viewModel.ads.payment, budget: (self.viewModel.ads.dailyBudget * Double(self.viewModel.ads.duration)))
+            return cell ?? AdsPaymentMethodTableViewCell()
         } else {
             return UITableViewCell()
         }

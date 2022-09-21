@@ -27,6 +27,7 @@
 
 import UIKit
 import Core
+import Networking
 import Kingfisher
 
 protocol ChoosePageTableViewCellDelegate: AnyObject {
@@ -71,6 +72,19 @@ class ChoosePageTableViewCell: UITableViewCell {
         self.displayNameLabel.text = page.displayName
         self.castcleIdLabel.text = page.castcleId
         if page.official {
+            self.verifyImage.isHidden = false
+        } else {
+            self.verifyImage.isHidden = true
+        }
+    }
+
+    public func configCell(userInfo: UserInfo) {
+        self.nextImage.isHidden = true
+        let userAvatar = URL(string: userInfo.images.avatar.thumbnail)
+        self.avatarImage.kf.setImage(with: userAvatar, placeholder: UIImage.Asset.userPlaceholder, options: [.transition(.fade(0.35))])
+        self.displayNameLabel.text = userInfo.displayName
+        self.castcleIdLabel.text = userInfo.castcleId
+        if userInfo.verified.official {
             self.verifyImage.isHidden = false
         } else {
             self.verifyImage.isHidden = true

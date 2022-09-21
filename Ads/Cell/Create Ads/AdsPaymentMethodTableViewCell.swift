@@ -72,6 +72,12 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
         }
     }
 
+    public func configDisplayCell(adsPaymentType: AdsPaymentType, budget: Double) {
+        self.adsIcon.image = adsPaymentType.image
+        self.adCreditTitleLabel.text = adsPaymentType.display
+        self.adCreditLabel.text = "\(budget) CAST"
+    }
+
     @IBAction func choosePageAction(_ sender: Any) {
         self.delegate?.didChoosePaymentMethod(self)
     }
