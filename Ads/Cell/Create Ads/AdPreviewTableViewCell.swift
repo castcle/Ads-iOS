@@ -40,6 +40,7 @@ class AdPreviewTableViewCell: UITableViewCell {
     var delegate: AdPreviewTableViewCellDelegate?
     private var adsRequest: AdsRequest = AdsRequest()
     private var wallet: Wallet = Wallet()
+    private var isCancelButton: Bool = false
     private var isValidated: Bool {
         if self.adsRequest.campaignName.isEmpty {
             return false
@@ -66,10 +67,19 @@ class AdPreviewTableViewCell: UITableViewCell {
         self.updateButton()
     }
 
+    func configCellCancelButton() {
+        self.isCancelButton = true
+        self.updateButton()
+    }
+
     private func updateButton() {
         self.adPreviewButton.titleLabel?.font = UIFont.asset(.regular, fontSize: .head4)
         self.adPreviewButton.setTitleColor(UIColor.Asset.white, for: .normal)
-        if self.isValidated {
+        if self.isCancelButton {
+            self.adPreviewButton.setTitle("Cancel", for: .normal)
+            self.adPreviewButton.setBackgroundImage(UIColor.Asset.warning.toImage(), for: .normal)
+            self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
+        } else if self.isValidated {
             self.adPreviewButton.setBackgroundImage(UIColor.Asset.lightBlue.toImage(), for: .normal)
             self.adPreviewButton.capsule(color: UIColor.clear, borderWidth: 1, borderColor: UIColor.clear)
         } else {
@@ -79,7 +89,9 @@ class AdPreviewTableViewCell: UITableViewCell {
     }
 
     @IBAction func adPreviewAction(_ sender: Any) {
-        if self.isValidated {
+        if self.isCancelButton {
+            self.delegate?.didConfirm(self)
+        } else if self.isValidated {
             self.delegate?.didConfirm(self)
         }
     }

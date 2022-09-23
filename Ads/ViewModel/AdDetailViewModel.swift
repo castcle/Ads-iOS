@@ -54,21 +54,30 @@ public final class AdDetailViewModel {
         case dailyBudget
         case duration
         case paymentMethod
-//        case adPreview
+        case cancel
     }
 
-//    private var adsRepository: AdsRepository = AdsRepositoryImpl()
+    private var adsRepository: AdsRepository = AdsRepositoryImpl()
     var adsDetailType: AdsDetailType = .information
     var ads: Ads = Ads()
     let tokenHelper: TokenHelper = TokenHelper()
 //    var adsRequest: AdsRequest = AdsRequest()
+    var state: State = .none
     var adsDetailSection: [AdsDetailSection] {
         if self.adsDetailType == .information {
             return [.content, .campaignName, .boostStatus, .dateCteate, .budget, .startAndEndDate, .budgetSpent, .impression, .cmp]
         } else if self.adsDetailType == .report {
             return [.report]
         } else {
-            return [.page, .objective, .campaignNameSetting, .campaignMessage, .dailyBudget, .duration, .paymentMethod]
+            var section: [AdsDetailSection] = [.page, .objective, .campaignNameSetting]
+            if !self.ads.campaignMessage.isEmpty {
+                section.append(.campaignMessage)
+            }
+            section.append(contentsOf: [.dailyBudget, .duration, .paymentMethod])
+            if self.ads.boostStatus == .unknown {
+                section.append(.cancel)
+            }
+            return section
         }
     }
 
@@ -77,22 +86,54 @@ public final class AdDetailViewModel {
         self.tokenHelper.delegate = self
     }
 
-//    func createAds() {
-//        self.adsRequest.castcleId = self.page.castcleId
-//        self.adsRepository.createAdsUser(adsRequest: self.adsRequest) { (success, _, isRefreshToken) in
-//            if success {
-//                self.didCreateAdsFinish?()
-//            } else {
-//                if isRefreshToken {
-//                    self.tokenHelper.refreshToken()
-//                } else {
-//                    self.didError?()
-//                }
-//            }
-//        }
-//    }
+    func getAdsDetail() {
+        self.state = .getAdsDetail
+        self.adsRepository.getAdsDetail(adsId: self.ads.id) { (success, response, isRefreshToken) in
+            if success {
+                do {
+                    let rawJson = try response.mapJSON()
+                    let json = JSON(rawJson)
+                    self.ads = Ads(json: json)
+                    self.didGetAdsDetailFinish?()
+                } catch {
+                    self.didError?()
+                }
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func cancelAds() {
+        self.state = .cancelAds
+        self.adsRepository.cancelAds(adsId: self.ads.id) { (success, _, isRefreshToken) in
+            if success {
+                self.didCancelFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    var didGetAdsDetailFinish: (() -> Void)?
+    var didCancelFinish: (() -> Void)?
+    var didError: (() -> Void)?
 }
 
 extension AdDetailViewModel: TokenHelperDelegate {
-    public func didRefreshTokenFinish() {}
+    public func didRefreshTokenFinish() {
+        if self.state == .getAdsDetail {
+            self.getAdsDetail()
+        } else if self.state == .cancelAds {
+            self.cancelAds()
+        }
+    }
 }

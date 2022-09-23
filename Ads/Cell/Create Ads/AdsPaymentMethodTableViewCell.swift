@@ -73,6 +73,7 @@ class AdsPaymentMethodTableViewCell: UITableViewCell {
     }
 
     public func configDisplayCell(adsPaymentType: AdsPaymentType, budget: Double) {
+        self.nextImage.isHidden = true
         self.adsIcon.image = adsPaymentType.image
         self.adCreditTitleLabel.text = adsPaymentType.display
         self.adCreditLabel.text = "\(budget) CAST"

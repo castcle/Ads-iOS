@@ -28,6 +28,7 @@
 import UIKit
 import Core
 import Networking
+import Component
 
 class AdsDetailViewController: UIViewController {
 
@@ -51,6 +52,19 @@ class AdsDetailViewController: UIViewController {
         self.reportLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.adSettingLabel.font = UIFont.asset(.regular, fontSize: .body)
         self.updateUi()
+        CCLoading.shared.show(text: "Loading")
+        self.viewModel.getAdsDetail()
+        self.viewModel.didGetAdsDetailFinish = {
+            CCLoading.shared.dismiss()
+            self.tableView.reloadData()
+        }
+        self.viewModel.didCancelFinish = {
+            CCLoading.shared.dismiss()
+            Utility.currentViewController().navigationController?.popViewController(animated: true)
+        }
+        self.viewModel.didError = {
+            CCLoading.shared.dismiss()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +93,7 @@ class AdsDetailViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.dailyBudget, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.dailyBudget)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -221,8 +236,21 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.backgroundColor = UIColor.clear
             cell?.configDisplayCell(adsPaymentType: self.viewModel.ads.payment, budget: (self.viewModel.ads.dailyBudget * Double(self.viewModel.ads.duration)))
             return cell ?? AdsPaymentMethodTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .cancel {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adPreview, for: indexPath as IndexPath) as? AdPreviewTableViewCell
+            cell?.backgroundColor = UIColor.clear
+            cell?.configCellCancelButton()
+            cell?.delegate = self
+            return cell ?? AdPreviewTableViewCell()
         } else {
             return UITableViewCell()
         }
+    }
+}
+
+extension AdsDetailViewController: AdPreviewTableViewCellDelegate {
+    func didConfirm(_ cell: AdPreviewTableViewCell) {
+        CCLoading.shared.show(text: "Canceling")
+        self.viewModel.cancelAds()
     }
 }
