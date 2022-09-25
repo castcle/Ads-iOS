@@ -58,9 +58,8 @@ class AdsDetailViewController: UIViewController {
             CCLoading.shared.dismiss()
             self.tableView.reloadData()
         }
-        self.viewModel.didCancelFinish = {
-            CCLoading.shared.dismiss()
-            Utility.currentViewController().navigationController?.popViewController(animated: true)
+        self.viewModel.didAdsActionFinish = {
+            self.viewModel.getAdsDetail()
         }
         self.viewModel.didError = {
             CCLoading.shared.dismiss()
@@ -94,6 +93,8 @@ class AdsDetailViewController: UIViewController {
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.duration, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.duration)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsPaymentMethod, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsPaymentMethod)
         self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adPreview, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adPreview)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsStatus, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsStatus)
+        self.tableView.register(UINib(nibName: AdsNibVars.TableViewCell.adsUser, bundle: ConfigBundle.ads), forCellReuseIdentifier: AdsNibVars.TableViewCell.adsUser)
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 100
     }
@@ -155,7 +156,12 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.viewModel.adsDetailSection[indexPath.row] == .campaignName {
+        if self.viewModel.adsDetailSection[indexPath.row] == .content {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsUser, for: indexPath as IndexPath) as? AdsUserTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            return cell ?? AdsUserTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .campaignName {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsInfoName, for: indexPath as IndexPath) as? AdsInfoNameTableViewCell
             cell?.configCell(ads: self.viewModel.ads)
             cell?.backgroundColor = UIColor.clear
@@ -201,6 +207,12 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
             cell?.configCell(ads: self.viewModel.ads)
             cell?.backgroundColor = UIColor.clear
             return cell ?? AdsReportTableViewCell()
+        } else if self.viewModel.adsDetailSection[indexPath.row] == .status {
+            let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.adsStatus, for: indexPath as IndexPath) as? AdsStatusTableViewCell
+            cell?.configCell(ads: self.viewModel.ads)
+            cell?.backgroundColor = UIColor.clear
+            cell?.delegate = self
+            return cell ?? AdsStatusTableViewCell()
         } else if self.viewModel.adsDetailSection[indexPath.row] == .page {
             let cell = tableView.dequeueReusableCell(withIdentifier: AdsNibVars.TableViewCell.choosePage, for: indexPath as IndexPath) as? ChoosePageTableViewCell
             cell?.backgroundColor = UIColor.clear
@@ -246,11 +258,76 @@ extension AdsDetailViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
     }
+
+    private func cancelAds() {
+        CCLoading.shared.show(text: "Canceling")
+        self.viewModel.cancelAds()
+    }
+
+    private func endAds() {
+        CCLoading.shared.show(text: "Ending")
+        self.viewModel.endAds()
+    }
+
+    private func runAds() {
+        CCLoading.shared.show(text: "Running")
+        self.viewModel.runAds()
+    }
+
+    private func pauseAds() {
+        CCLoading.shared.show(text: "Pausing")
+        self.viewModel.pauseAds()
+    }
 }
 
 extension AdsDetailViewController: AdPreviewTableViewCellDelegate {
     func didConfirm(_ cell: AdPreviewTableViewCell) {
-        CCLoading.shared.show(text: "Canceling")
-        self.viewModel.cancelAds()
+        let viewController = AdsOpener.open(.adsPopup(false)) as? AdsPopupViewController
+        viewController?.delegate = self
+        Utility.currentViewController().presentPanModal(viewController ?? AdsPopupViewController())
+    }
+}
+
+extension AdsDetailViewController: AdsStatusTableViewCellDelegate {
+    func didChangeStatus(_ cell: AdsStatusTableViewCell) {
+        if self.viewModel.ads.boostStatus == .running || self.viewModel.ads.boostStatus == .pause {
+            let actionSheet = CCActionSheet()
+            let pauseButton = CCAction(title: "Pause", color: UIColor.Asset.white) {
+                actionSheet.dismissActionSheet()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.pauseAds()
+                }
+            }
+            let runningButton = CCAction(title: "Renning", color: UIColor.Asset.white) {
+                actionSheet.dismissActionSheet()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.runAds()
+                }
+            }
+            let endButton = CCAction(title: "End", color: UIColor.Asset.white) {
+                actionSheet.dismissActionSheet()
+                let viewController = AdsOpener.open(.adsPopup(true)) as? AdsPopupViewController
+                viewController?.delegate = self
+                Utility.currentViewController().presentPanModal(viewController ?? AdsPopupViewController())
+            }
+            if self.viewModel.ads.boostStatus == .running {
+                actionSheet.addActions([pauseButton, endButton])
+            } else if self.viewModel.ads.boostStatus == .pause {
+                actionSheet.addActions([runningButton, endButton])
+            }
+            Utility.currentViewController().present(actionSheet, animated: true, completion: nil)
+        }
+    }
+}
+
+extension AdsDetailViewController: AdsPopupViewControllerDelegate {
+    func adsPopupViewController(didAction view: AdsPopupViewController, isEnd: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if isEnd {
+                self.endAds()
+            } else {
+                self.cancelAds()
+            }
+        }
     }
 }

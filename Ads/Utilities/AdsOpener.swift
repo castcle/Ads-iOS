@@ -38,6 +38,7 @@ public enum AdsScene {
     case selectDailyBidType(DailyBidType, Int)
     case adsPreview(AdsPreviewViewModel)
     case adsDetail(AdDetailViewModel)
+    case adsPopup(Bool)
 }
 
 public struct AdsOpener {
@@ -83,6 +84,11 @@ public struct AdsOpener {
             let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsDetail) as? AdsDetailViewController
             viewController?.viewModel = viewModel
             return viewController ?? AdsDetailViewController()
+        case .adsPopup(let isEnd):
+            let storyboard: UIStoryboard = UIStoryboard(name: AdsNibVars.Storyboard.ads, bundle: ConfigBundle.ads)
+            let viewController = storyboard.instantiateViewController(withIdentifier: AdsNibVars.ViewController.adsPopup) as? AdsPopupViewController
+            viewController?.isEnd = isEnd
+            return viewController ?? AdsPopupViewController()
         }
     }
 }

@@ -36,6 +36,7 @@ public struct AdsNibVars {
         public static let selectDailyBidType = "SelectDailyBidTypeViewController"
         public static let adsPreview = "AdsPreviewViewController"
         public static let adsDetail = "AdsDetailViewController"
+        public static let adsPopup = "AdsPopupViewController"
     }
 
     // MARK: - View
@@ -71,6 +72,8 @@ public struct AdsNibVars {
         public static let adsInfoDate = "AdsInfoDateTableViewCell"
         public static let adsInfoSingle = "AdsInfoSingleTableViewCell"
         public static let adsReport = "AdsReportTableViewCell"
+        public static let adsStatus = "AdsStatusTableViewCell"
+        public static let adsUser = "AdsUserTableViewCell"
     }
 
     // MARK: - CollectionViewCell

@@ -47,6 +47,7 @@ public final class AdDetailViewModel {
         case impression
         case cmp
         case report
+        case status
         case page
         case objective
         case campaignNameSetting
@@ -61,7 +62,6 @@ public final class AdDetailViewModel {
     var adsDetailType: AdsDetailType = .information
     var ads: Ads = Ads()
     let tokenHelper: TokenHelper = TokenHelper()
-//    var adsRequest: AdsRequest = AdsRequest()
     var state: State = .none
     var adsDetailSection: [AdsDetailSection] {
         if self.adsDetailType == .information {
@@ -69,7 +69,7 @@ public final class AdDetailViewModel {
         } else if self.adsDetailType == .report {
             return [.report]
         } else {
-            var section: [AdsDetailSection] = [.page, .objective, .campaignNameSetting]
+            var section: [AdsDetailSection] = [.status, .page, .objective, .campaignNameSetting]
             if !self.ads.campaignMessage.isEmpty {
                 section.append(.campaignMessage)
             }
@@ -112,7 +112,52 @@ public final class AdDetailViewModel {
         self.state = .cancelAds
         self.adsRepository.cancelAds(adsId: self.ads.id) { (success, _, isRefreshToken) in
             if success {
-                self.didCancelFinish?()
+                self.didAdsActionFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func endAds() {
+        self.state = .endAds
+        self.adsRepository.endAds(adsId: self.ads.id) { (success, _, isRefreshToken) in
+            if success {
+                self.didAdsActionFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func runAds() {
+        self.state = .runAds
+        self.adsRepository.runAds(adsId: self.ads.id) { (success, _, isRefreshToken) in
+            if success {
+                self.didAdsActionFinish?()
+            } else {
+                if isRefreshToken {
+                    self.tokenHelper.refreshToken()
+                } else {
+                    self.didError?()
+                }
+            }
+        }
+    }
+
+    func pauseAds() {
+        self.state = .pauseAds
+        self.adsRepository.pauseAds(adsId: self.ads.id) { (success, _, isRefreshToken) in
+            if success {
+                self.didAdsActionFinish?()
             } else {
                 if isRefreshToken {
                     self.tokenHelper.refreshToken()
@@ -124,7 +169,7 @@ public final class AdDetailViewModel {
     }
 
     var didGetAdsDetailFinish: (() -> Void)?
-    var didCancelFinish: (() -> Void)?
+    var didAdsActionFinish: (() -> Void)?
     var didError: (() -> Void)?
 }
 
